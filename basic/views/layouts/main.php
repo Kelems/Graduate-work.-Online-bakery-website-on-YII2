@@ -45,7 +45,7 @@ AppAsset::register($this);
 		]);
 		echo Nav::widget([
 //			'options' => ['class' => 'skyblue mepanel'], // стили ul
-			'options' => ['class' => 'nav-pills'], // стили ul
+			'options' => ['class' => 'nav-custom'], // стили ul
 			'items' => [
 				['label' => 'ГЛАВНАЯ', 'url' => ['/site/index']],
 				['label' => 'ПРОДУКЦИЯ', 'items' => [
@@ -56,25 +56,24 @@ AppAsset::register($this);
         ],],
 				['label' => 'КОНТАКТЫ', 'url' => ['/site/contact']],
 //				['label' => 'Таблицы', 'url' => ['/site/contact']], //доступ при правах.
-//				['label' => 'Корзина', 'url' => ['/site/contact']], //оформить в виде кнопки с иконкой
 				Yii::$app->user->isGuest ? // Если пользователь гость, показыаем ссылку "Вход", если он авторизовался "Выход"
 	        ['label' => 'Вход', 'url' => ['/site/login']] :
           ['label' => 'Профиль (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/profile'],],
-				['label' => Html::img('@web/img/cart-1.png'),'url' => ['/site/cart'], 'encode' => false], //оформить в виде кнопки с иконкой
+					['label' => Html::img('@web/img/cart-1.png'),'url' => ['/site/cart'], 'encode' => false], //оформить в виде кнопки с иконкой
 			],
 		  'encodeLabels' =>false,
 		]);
 		NavBar::end();
   ?>
-<section class="">
 
+	<!-- content Section -->
+<section class="">
 
 		<?= $content ?>
 
-
 </section>
 
-  <!-- Footer Section -->
+	<!-- Footer Section -->
   <footer class="footer w3layouts">
 		<div class="container">
 	<div class="footer-top-at w3">

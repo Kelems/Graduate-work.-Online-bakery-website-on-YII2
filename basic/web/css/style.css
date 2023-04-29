@@ -300,7 +300,16 @@ i.inst:hover{
 	background-size: cover;
 
 	width:100%;
-	min-height: 560px;
+	min-height: 500px;
+	  position: relative;
+}
+
+.small-banner{
+	background: url(../img/1.jpg) no-repeat ;
+	background-size: cover;
+
+	width:100%;
+	min-height: 200px;
 	  position: relative;
 }
 /*--- slider-css --*/
@@ -386,9 +395,9 @@ height: 35px;
   right: 0;
  }
 .banner-text{
- padding:14em 0 1em;
- color:#fff;
-   width: 50%;
+	padding:15% 0% 0% 5%;
+	color:#fff;
+	width: 50%;
 }
 /*-- agileits --*/
 .banner-text h3 {
@@ -418,7 +427,7 @@ height: 35px;
 
 
 .banner-text-center{
- padding:14em 0 1em;
+ padding:1.5% 0% 0% 40%;
  color:#fff;
    width: 50%;
 	 text-align: center;
@@ -465,7 +474,7 @@ height: 35px;
     position: absolute;
     top: -62px;
     background-color: #fff;
-    padding: 2em;
+    padding: 1.5%;
 }
 .content-top h1{
 	color:#000;
@@ -476,7 +485,7 @@ height: 35px;
 }
 .content-top {
 	text-align:center;
-	padding:4em 0;
+	padding: 2% 1% 2% 1%;
 }
 .grid-top img{
 	width:100%;
@@ -848,7 +857,7 @@ ul.social li i:hover{
 	padding: 3em 0;
 }
 .address-more {
-  padding: 0 0 2em;
+  padding: 15% 0% 0% 25%;
 }
 .contact-in p{
 	font-size:1.2em;
@@ -2067,13 +2076,7 @@ ul.qty li p{
 
 }
 @media(max-width:1024px){
-.banner-text {
-  width: 70%;
-  margin: 0 0 0 3em;
-}
-.banner {
-  min-height: 492px;
-}
+
 .b-animate span {
   padding-top: 4em;
 }
@@ -2157,9 +2160,7 @@ p.tun {
 .total-item h4 {
     margin-right: 4em;
 }
-.banner-text {
-    padding: 12em 0 1em;
-}
+
 .amet-sed input[type="submit"] {
     width: 39%;
 }
@@ -2168,10 +2169,7 @@ p.tun {
 .h_menu4 {
   width: 60%;
 }
-.banner-text {
-  width: 90%;
-  margin: 0 0 0 3em;
-}
+
 .banner-text h3 {
   font-size: 2.5em;
 }
@@ -2360,9 +2358,7 @@ a.cpns {
 }
 }
 @media(max-width:640px){
-.banner-text {
-  padding: 7em 0 1em;
-}
+
 .grid-top p {
   font-size: 0.9em;
 }
@@ -2384,9 +2380,7 @@ a.cpns {
 .b-animate span {
   padding-top: 2.5em;
 }
-.banner {
-  min-height: 400px;
-}
+
 ul.callbacks_tabs.callbacks1_tabs {
   left: 42%;
 }
@@ -2458,12 +2452,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 .banner-text p {
   font-size: 1em;
 }
-.banner {
-  min-height: 294px;
-}
-.banner-text {
-    padding: 5em 0 1em;
-}
+
 .grid-top {
   width: 100%;
     margin-bottom: 1em;
@@ -2484,9 +2473,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 .product-price {
   width: 63%;
 }
-.banner-text {
-  margin: 0 0 0 2em;
-}
+
 .pro-grid span {
   font-size: 0.9em;
 }
@@ -2688,9 +2675,7 @@ a.item_add p.number {
   font-size: 0.9em;
   padding: 0.3em 0.5em;
 }
-.banner {
-  min-height: 158px;
-}
+
 .content-top h1 {
   font-size: 1.3em;
     margin-bottom: 0.8em;
@@ -2727,16 +2712,11 @@ ul.nav-bottom li a {
 .grid-top p {
   font-size: 1.1em;
 }
-.banner-text {
-  padding: 4em 0 1em;
-  margin: 0 0 0 1em;
-}
+
 ul.callbacks_tabs.callbacks1_tabs {
   left: 36%;
 }
-.banner {
-  min-height: 203px;
-}
+
 ul.callbacks_tabs.callbacks1_tabs {
   bottom: 8%;
 }
