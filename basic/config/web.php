@@ -20,8 +20,8 @@ $config = [
   'components' => [
     'request' => [
     // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-      'cookieValidationKey' => '1234',
-    //    'baseUrl' => '',
+      'cookieValidationKey' => '.....',
+      'baseUrl' => '',
     ],
     'cache' => [
       'class' => 'yii\caching\FileCache',
@@ -56,21 +56,23 @@ $config = [
     'urlManager' => [
       'enablePrettyUrl' => true,
       'showScriptName' => false,
-      'enableStrictParsing' => true,
+//      'enableStrictParsing' => false,
       'rules' => [
-
-        '/' => 'site/index',
-
+        /*
+//      'posts' => 'post/index',
+//      'post/<id:\d+>' => 'post/view',
+//        'web/' => 'web/index.php/site/',
         //causes an error - Вызывает ошибку:
         //Cannot use yii\web\Controller as Controller because the name is already in use
-        //  '/' => 'admin/default/index',
-        '<action:\w+>' => 'site/<action>',
-        '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-
+//        '/' => 'admin/default/index',
+//        '<action:\w+>' => 'site/<action>',
+//        '<action:\w+>' => 'fund/<action>',
+//        '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+      */
       ],
     ],
-
   ],
+
   'params' => $params,
   'language' => 'ru-RU',
 ];
