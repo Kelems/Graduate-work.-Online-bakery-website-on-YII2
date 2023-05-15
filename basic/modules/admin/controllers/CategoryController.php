@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 class CategoryController extends Controller
-{
+{ 
   public function behaviors(){
     return array_merge(
             parent::behaviors(),

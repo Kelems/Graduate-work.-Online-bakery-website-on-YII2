@@ -13,11 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
 
+  <div class="container">
     <h1><?= Html::encode($this->title) ?></h1>
+  </div>
 
+  <div class="container">
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'category_id' => $model->category_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'category_id' => $model->category_id], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id, 'category_id' => $model->category_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id, 'category_id' => $model->category_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -44,5 +47,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'calorific',
         ],
     ]) ?>
-
+  </div>
 </div>

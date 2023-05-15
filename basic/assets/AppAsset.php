@@ -4,8 +4,10 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
-namespace app\assets;
-use yii\web\AssetBundle;
+ namespace app\assets;
+
+ use yii\web\AssetBundle;
+ use yii\web\View;
 /**
  * Main application asset bundle.
  *
@@ -35,6 +37,7 @@ class AppAsset extends AssetBundle
     'js/responsiveslides.min.js',
     'js/simpleCart.min.js',
     'js/uisearch.js',
+    'js/accordion.js',
   ];
 
   public $depends = [
@@ -42,4 +45,5 @@ class AppAsset extends AssetBundle
     'yii\bootstrap4\BootstrapAsset',
     'yii\bootstrap4\BootstrapPluginAsset',
   ];
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\basic\models;
+namespace app\modules\admin\models;
 
 use Yii;
 /**
@@ -36,12 +36,15 @@ class Category extends \yii\db\ActiveRecord
             'image' => 'Путь к фото',
         ];
     }
+
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
+
     public function getCategory($id)
     {
         return $this->hasOne($id);
     }
+
 }

@@ -1,67 +1,66 @@
 <?php
 namespace app\controllers;
+
 use Yii;
+
 use yii\db\Query;
+
 use yii\web\Controller;
 use yii\web\Response;
+
 use yii\data\Pagination;
+
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
-use app\models\User;
+//use app\models\User;
 
-class SiteController extends Controller
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
+use app\models\Category;
+//use app\models\Brand;
+use app\models\Product;
+//Controller
+class SiteController extends Controller{
+//work behaviors
+  public function behaviors(){
+    return [
+      'access' => [
+        'class' => AccessControl::className(),
+        'only' => ['logout'],
+        'rules' => [
+          [
+            'actions' => ['logout'],
+            'allow' => true,
+            'roles' => ['@'],
+          ],
+        ],
+      ],
+      'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+          'logout' => ['post'],
+        ],
+      ],
+    ];
+  }
+
+//I do not remember. need to watch
+  public function actions(){
+    return [
+      'error' => [
+        'class' => 'yii\web\ErrorAction',
+      ],
+      'captcha' => [
+        'class' => 'yii\captcha\CaptchaAction',
+        'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+      ],
+    ];
+  }
+
+//base page
+  public function actionIndex(){
 	  /* debug(Yii::$app->request->post());
 	   $model = new OnelForm();
 	   if ($model->load(Yii::$app->request->post())) {
@@ -72,43 +71,57 @@ class SiteController extends Controller
 			   Yii::$app->session->setFlash ('error', 'Ошибка');
 		   }
 	   }*/
-	   return $this->render('index');
-    }
+//    $root = Category::find()->all();
+    return $this->render('index');
+  }
+//Category page
+  public function actionCategory($id) {
+    $id = (int)$id; //получаем id категории
+    $temp = new Category(); //
+    $category = $temp->getCategory($id); //получаем данные о категории
+    $products = $temp->getCategoryproduct($id);
+    return $this->render(
+      'category',
+      compact('category', 'products')
+    );
+  }
 
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-          return $this->goHome();
-        }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-          return $this->goBack();
-        }
-        $model->password = '';
-        return $this->render('login', ['model' => $model,]);
+//log in to your account
+  public function actionLogin(){
+    if (!Yii::$app->user->isGuest) {
+      return $this->goHome();
     }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-        return $this->goHome();
+    $model = new LoginForm();
+    if ($model->load(Yii::$app->request->post()) && $model->login()) {
+      return $this->goBack();
     }
+    $model->password = '';
+    return $this->render('login', ['model' => $model,]);
+  }
 
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-          Yii::$app->session->setFlash('contactFormSubmitted');
-          return $this->refresh();
-        }
-        return $this->render('contact', ['model' => $model,]);
+//log out of your account
+  public function actionLogout(){
+    Yii::$app->user->logout();
+    return $this->goHome();
+  }
+
+//contact page
+  public function actionContact(){
+    $model = new ContactForm();
+    if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+      Yii::$app->session->setFlash('contactFormSubmitted');
+      return $this->refresh();
     }
+    return $this->render('contact', ['model' => $model,]);
+  }
 
-	public function actionTables()
-    {
-        return $this->render('tables');
-    }
+//administration panel
+	public function actionTables(){
+    return $this->render('tables');
+  }
 
+//entry.. page? I do not remember. need to watch
+/*
 	public function actionEntry()
     {
         $model = new EntryForm();
@@ -121,7 +134,10 @@ class SiteController extends Controller
             return $this->render('entry', ['model' => $model]);
         }
     }
+*/
 
+//Signup page
+/*
   public function actionSignup() {
     if (!Yii::$app->user->isGuest) {
       return $this->goHome();
@@ -137,5 +153,5 @@ class SiteController extends Controller
     }
     return $this->render('signup', compact('model'));
   }
-
+*/
 }

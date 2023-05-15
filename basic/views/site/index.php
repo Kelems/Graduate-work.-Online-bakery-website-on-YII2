@@ -6,6 +6,7 @@
 <!-- Intro Section end -->
 <section class="banner">
   <div class="container">
+    <!--
     <script src="js/responsiveslides.min.js"></script>
     <script>
       $(function () {
@@ -18,30 +19,29 @@
         });
       });
     </script>
-    <div  id="top" class="callbacks_container">
-      <ul class="rslides" id="slider">
-        <li>
-          <div class="banner-text">
-            <h3>Наша миссия</h3>
-            <p>Возрождаем русские пекарные традиции, чтобы вы могли каждый день наслаждаться натуральным полезным вкусным хлебом</p>
-          </div>
-        </li>
-      </ul>
+-->
+    <div class="callbacks_container" id="top"> <!-- the banner goes up a little bit -->
+      <div class="carousel slide" id="slider" data-ride="carousel"> <!-- carousel slider  -->
+        <div class="banner-text"> <!-- banner content -->
+          <h3>Наша миссия</h3>
+          <p>Возрождаем русские пекарные традиции, чтобы вы могли каждый день наслаждаться натуральным полезным вкусным хлебом</p>
+        </div>
+      </div >
     </div>
   </div>
 </section>
 
 <!--content-->
-<section class="banner1">
-  <div class="container">
-    <div class="cont">
-      <div class="content">
+<section class="banner1"> <!-- orange background -->
+  <div class="container"> <!-- centering the block -->
+    <div class="cont">  <!-- centering the block -->
+      <div class="content"> <!-- highlighting a block on top of a backdrop -->
         <div class="content-top-bottom">
           <h2>О нас</h2>
           <!-- left block -->
           <div class="col-md-6 men">
-            <a href="#" class="b-link-stripe b-animate-go  thickbox">
-              <img class="img-responsive" src="img/t1.jpg" alt="">
+            <a href="#" class="b-link-stripe b-animate-go thickbox">
+              <img class="img-responsive" src="img/products/medium/t1.jpg" >
                 <div class="b-wrapper">
                   <h3 class="b-animate b-from-top top-in   b-delay03 ">
                     <span>
@@ -58,7 +58,7 @@
             <!-- middle up image -->
               <div class="col-md1 ">
                 <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                  <img class="img-responsive" src="img/t2.jpg" alt="">
+                  <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
                     <div class="b-wrapper">
                       <h3 class="b-animate b-from-top top-in1   b-delay03 ">
                         <span>
@@ -74,7 +74,7 @@
               <div class="col-md2">
                 <div class="col-md-6 men1">
                   <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/t3.jpg" alt="">
+                    <img class="img-responsive" src="img/products/medium/t3.jpg" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
                           <span><b>Торты и десерты</b></span>
@@ -86,7 +86,7 @@
               <!-- small right image -->
                 <div class="col-md-6 men2">
                   <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/t4.jpg" alt="">
+                    <img class="img-responsive" src="img/products/medium/t4.jpg" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
                           <span>Сытные</span>
@@ -107,7 +107,7 @@
               <div class="col-md-3 grid-top simpleCart_shelfItem">
             <!-- 1 small block -->
                 <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                  <img class="img-responsive" src="img/pi.jpg"></img>
+                  <img class="img-responsive" src="img/products/medium/pi.jpg"></img>
                 </a>
               <p>Наполеон</p>
 
@@ -118,7 +118,7 @@
             </div>
             <div class="col-md-3 grid-top simpleCart_shelfItem">
               <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/pi1.jpg" alt="">
+                <img class="img-responsive" src="img/products/medium/pi1.jpg" alt="">
 
 <!-- animated panel
                 <div class="b-wrapper">
@@ -138,7 +138,7 @@
 
             <div class="col-md-3 grid-top simpleCart_shelfItem">
               <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/pi2.jpg" alt="">
+                <img class="img-responsive" src="img/products/medium/pi2.jpg" alt="">
 <!--
                 <div class="b-wrapper">
                   <h3 class="b-animate b-from-left    b-delay03 ">
@@ -154,7 +154,7 @@
           <!-- 4 small block -->
             <div class="col-md-3 grid-top">
               <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/pi4.jpg" alt="">
+                <img class="img-responsive" src="img/products/medium/pi4.jpg" alt="">
 <!--
                 <div class="b-wrapper">
                   <h3 class="b-animate b-from-left    b-delay03 ">

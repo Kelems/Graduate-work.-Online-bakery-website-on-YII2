@@ -12,7 +12,7 @@
   <div class="container" style="text-align:center">
     <h1><?= Html::encode($this->title) ?></h1>
   </div>
-<!-- grow -->
+<!-- grow --> 
 
   <div class="container">
     <?= Html::a('Внести категорию', ['create'], ['class' => 'btn btn-success']) ?>

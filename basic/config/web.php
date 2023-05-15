@@ -58,6 +58,7 @@ $config = [
       'showScriptName' => false,
 //      'enableStrictParsing' => false,
       'rules' => [
+        'site/category/<id:\d+>' => 'site/category'
         /*
 //      'posts' => 'post/index',
 //      'post/<id:\d+>' => 'post/view',

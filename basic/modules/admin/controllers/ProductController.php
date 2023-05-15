@@ -69,7 +69,6 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
-
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id, 'category_id' => $model->category_id]);

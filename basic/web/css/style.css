@@ -296,7 +296,7 @@ i.inst:hover{
 /*--banner--*/
 /*-- agileits --*/
 .banner{
-	background: url(../img/1.jpg) no-repeat ;
+	background: url(../img/products/banner/main.jpg) no-repeat ;
 	background-size: cover;
 
 	width:100%;
@@ -305,12 +305,12 @@ i.inst:hover{
 }
 
 .small-banner{
-	background: url(../img/1.jpg) no-repeat ;
+	background: url(../img/products/banner/main.jpg) no-repeat ;
 	background-size: cover;
 
 	width:100%;
-	min-height: 200px;
 	  position: relative;
+		top: 10px;
 }
 /*--- slider-css --*/
 .banner1{
@@ -2275,7 +2275,7 @@ a.cpns {
   font-size: 0.7em;
 }
 .men {
-  margin-bottom: 2em;
+  margin-bottom: 10em;
 }
 .cont {
     min-height: 106em;
@@ -2397,7 +2397,7 @@ ul.callbacks_tabs.callbacks1_tabs {
   min-height: 214px;
 }
 .top-in1 span {
-    padding: 5em 0 0;
+    padding: 1em 0em 0em 0em;
 }
 .top-in2 span {
     padding: 4em 0 0;

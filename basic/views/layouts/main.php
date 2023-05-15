@@ -72,10 +72,10 @@ AppAsset::register($this);
 		'items' => [
 			['label' => 'КОНТАКТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/contact')],
 			['label' => 'ПРОДУКЦИЯ', 'items' => [
-				['label' => 'ХЛЕБА', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')],
-				['label' => 'ПИРОГИ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')],
-				['label' => 'ДЕСЕРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')],
-				['label' => 'ТОРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')],
+				['label' => 'ХЛЕБА', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=1')],
+				['label' => 'ПИРОГИ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=2')],
+				['label' => 'ДЕСЕРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=3')],
+				['label' => 'ТОРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=4')],
       ],],
 				Yii::$app->user->isGuest ? // Если пользователь гость, показыаем ссылку "Вход", если он авторизовался "Выход"
 			['label' => 'КАБИНЕТ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')] :

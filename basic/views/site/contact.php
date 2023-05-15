@@ -30,7 +30,6 @@
 									</div>
 								</form>
 							</div>
-
 							<div class="col-md-4 contact-in">
 								<div class="address-more">
 									<h4>Адрес</h4>
