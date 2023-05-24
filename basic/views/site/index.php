@@ -1,7 +1,7 @@
 <?php
-
-/** @var yii\web\View $this */
-
+  /** @var yii\web\View $this */
+  use yii\bootstrap4\Modal;
+  use yii\bootstrap4\BootstrapWidgetTrait;
 ?>
 <!-- Intro Section end -->
 <section class="banner">
@@ -19,7 +19,7 @@
         });
       });
     </script>
--->
+    -->
     <div class="callbacks_container" id="top"> <!-- the banner goes up a little bit -->
       <div class="carousel slide" id="slider" data-ride="carousel"> <!-- carousel slider  -->
         <div class="banner-text"> <!-- banner content -->
@@ -103,72 +103,57 @@
       <!-- lower block -->
           <div class="content-top">
             <h1>Акции</h1>
-            <div class="grid-in">
-              <div class="col-md-3 grid-top simpleCart_shelfItem">
-            <!-- 1 small block -->
-                <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                  <img class="img-responsive" src="img/products/medium/pi.jpg"></img>
-                </a>
-              <p>Наполеон</p>
 
-            <!-- 2 small block -->
-              <a href="#" class="item_add">
-                <p class="number item_price"><i></i>$000.00</p>
-              </a>
+            <!--
+              вставить модуль с акциями -V
+           -->
+           <div class="col-sm-9">
+             <?php if (!empty($hits)): ?>
+               <h2>Лидеры продаж</h2>
+                <div class="row">
+                  <?php foreach ($hits as $hit): ?>
+                    <div class="col-sm-4">
+                      <div class="product-wrapper text-center">
+                        <?=
+                          Html::img(
+                            '@web/img/products/medium/'.$hit['image'],
+                            ['alt' => $hit['name'], 'class' => 'img-responsive']
+                          );
+                        ?>
+                        <h2><?= $hit['price']; ?> руб.</h2>
+                        <p>
+                          <a href="<?= Url::to(['catalog/product', 'id' => $hit['id']]); ?>">
+                            <?= Html::encode($hit['name']); ?>
+                          </a>
+                        </p>
+                        <a href="#" class="btn btn-warning">
+                         <i class="fa fa-shopping-cart"></i>
+                         Добавить в корзину
+                        </a>
+                        <?php
+                          if ($hit['sale']) { // распродажа?
+                            echo Html::img(
+                              '@web/images/home/sale.png',
+                              ['alt' => 'Распродажа', 'class' => 'sale']
+                            );
+                          }
+                        ?>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
             </div>
-            <div class="col-md-3 grid-top simpleCart_shelfItem">
-              <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/products/medium/pi1.jpg" alt="">
 
-<!-- animated panel
-                <div class="b-wrapper">
-                  <h3 class="b-animate b-from-left b-delay03 ">
-                    <span>Ручная работа</span>
-                  </h3>
-                </div>
--->
-                </img>
-              </a>
-              <p>Меренговый рулет</p>
-              <a href="#" class="item_add">
-                <p class="number item_price"><i> </i>$000.00</p>
-              </a>
-            </div>
-          <!-- 3 small block -->
+<?php
+Modal::begin([
+  'title' => '<h2>Hello world</h2>',
+  'footer' => 'Низ окна',
+]);
+ ?>
 
-            <div class="col-md-3 grid-top simpleCart_shelfItem">
-              <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/products/medium/pi2.jpg" alt="">
-<!--
-                <div class="b-wrapper">
-                  <h3 class="b-animate b-from-left    b-delay03 ">
-                    <span>Бездрожжевой</span>
-                  </h3>
-                </div>
--->
-                </img>
-              </a>
-                <p>Пшенично - ржаной</p>
-              <a href="#" class="item_add"><p class="number item_price"><i> </i>$000.00</p></a>
-            </div>
-          <!-- 4 small block -->
-            <div class="col-md-3 grid-top">
-              <a href="#" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="img/products/medium/pi4.jpg" alt="">
-<!--
-                <div class="b-wrapper">
-                  <h3 class="b-animate b-from-left    b-delay03 ">
-                    <span>С нежным сладковатым вкусом</span>
-                  </h3>
-                </div>
--->
-                </img>
-              </a>
-              <p>ВЕНСКИЙ батон</p>
-              <a href="#" class="item_add"><p class="number item_price"><i> </i>$000.00</p></a>
-            </div>
-          <div class="clearfix"> </div>
-          </div>
+          <!-- -->
+
         </div>
       </div>
     </div>

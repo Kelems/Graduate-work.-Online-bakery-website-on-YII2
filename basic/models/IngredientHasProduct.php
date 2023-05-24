@@ -1,6 +1,6 @@
 <?php
+namespace app\models;
 
-namespace app\modules\admin\models;
 
 use Yii;
 
@@ -18,8 +18,7 @@ class IngredientHasProduct extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName(){
         return 'ingredient_has_product';
     }
 
@@ -27,7 +26,7 @@ class IngredientHasProduct extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
     public function rules()
-    {
+{
         return [
             [['ingredient_id', 'product_id'], 'required'],
             [['ingredient_id', 'product_id'], 'integer'],
@@ -40,12 +39,11 @@ class IngredientHasProduct extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
-        return [
-            'ingredient_id' => 'ID ингредиента',
-            'product_id' => 'ID продукции',
-        ];
+    public function attributeLabels(){
+      return [
+        'ingredient_id' => 'ID ингредиента',
+        'product_id' => 'ID продукции',
+      ];
     }
 
     /**
@@ -53,8 +51,7 @@ class IngredientHasProduct extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIngredient()
-    {
+    public function getIngredient(){
         return $this->hasOne(Ingredient::className(), ['id' => 'ingredient_id']);
     }
 
@@ -63,8 +60,9 @@ class IngredientHasProduct extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
-    {
+    public function getProduct(){
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+
+
 }

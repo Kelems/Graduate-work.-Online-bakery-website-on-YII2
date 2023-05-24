@@ -16,14 +16,17 @@ use yii\filters\AccessControl;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
-//use app\models\User;
 
+//use app\models\User;
 use app\models\Category;
-//use app\models\Brand;
 use app\models\Product;
+use app\models\Ingredient;
+use app\models\IngredientHasProduct;
+
 //Controller
 class SiteController extends Controller{
-//work behaviors
+
+  //work behaviors
   public function behaviors(){
     return [
       'access' => [
@@ -46,7 +49,7 @@ class SiteController extends Controller{
     ];
   }
 
-//I do not remember. need to watch
+  //I do not remember. need to watch
   public function actions(){
     return [
       'error' => [
@@ -59,34 +62,55 @@ class SiteController extends Controller{
     ];
   }
 
-//base page
+  //base page
   public function actionIndex(){
-	  /* debug(Yii::$app->request->post());
-	   $model = new OnelForm();
-	   if ($model->load(Yii::$app->request->post())) {
-		   if ($model->validate()) {
-			   Yii::$app->session->setFlash ('SUCCESS', 'Лабораторная работа №1');
-		   }
-		   else {
-			   Yii::$app->session->setFlash ('error', 'Ошибка');
-		   }
-	   }*/
-//    $root = Category::find()->all();
-    return $this->render('index');
+    // получаем товары по скидке. доработать
+    $saleProducts = Yii::$app->cache->get('sale-products');
+    if ($saleProducts === false) {
+      $saleProducts = Product::find()->where(['old_price'] > '1')->limit(3)->asArray()->all();
+      Yii::$app->cache->set('sale-products', $saleProducts);
+    }
+
+    return $this->render('index', compact('saleProducts'));
   }
-//Category page
+
+  //Category page
   public function actionCategory($id) {
     $id = (int)$id; //получаем id категории
-    $temp = new Category(); //
+    $temp = new Category(); // категори
+    list($products, $pages) = $temp->getCategoryProduct($id);
+
     $category = $temp->getCategory($id); //получаем данные о категории
-    $products = $temp->getCategoryproduct($id);
     return $this->render(
       'category',
-      compact('category', 'products')
+      compact('category', 'products', 'pages')
     );
   }
 
-//log in to your account
+  //Product page
+  public function actionProduct($id) {
+    $id = (int)$id; //получаем id товара
+
+    $data = Yii::$app->cache->get('product-'.$id);  // пробуем извлечь данные продукта из кеша
+    if ($data === false) {                          // данных нет в кеше, получаем их заново
+      $product = (new Product())->getProduct($id);  //данные о продукте
+
+      //list($ingredients) = $temp->getIngredientproduct($id);//допилить
+      //$ingredients = (new Ingredient())->getIngredientproduct($id);
+
+      $data = [$product, $ingredients];                     // сохраняем список для кэша
+      Yii::$app->cache->set('product-'.$id, $data);         // сохраняем полученные данные в кеше
+    }
+    list($product,$ingredients) = $data; //подготавливаем данные
+
+    return $this->render(
+      'product',
+      //'ingredients', //доделать вывод ингредиентов используемых в товаре
+      compact('product','ingredients')
+    );
+  }
+
+  //log in to your account
   public function actionLogin(){
     if (!Yii::$app->user->isGuest) {
       return $this->goHome();
@@ -99,13 +123,13 @@ class SiteController extends Controller{
     return $this->render('login', ['model' => $model,]);
   }
 
-//log out of your account
+  //log out of your account
   public function actionLogout(){
     Yii::$app->user->logout();
     return $this->goHome();
   }
 
-//contact page
+  //contact page
   public function actionContact(){
     $model = new ContactForm();
     if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
@@ -115,7 +139,7 @@ class SiteController extends Controller{
     return $this->render('contact', ['model' => $model,]);
   }
 
-//administration panel
+  //administration panel
 	public function actionTables(){
     return $this->render('tables');
   }

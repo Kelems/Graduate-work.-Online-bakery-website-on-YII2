@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use app\modules\admin\models\Category;
+
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Product */
 
@@ -33,7 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'category_id',
+//            'category_id',
+            [
+              'attribute' => 'category_id',
+              'filter' => category::find()->select(['name','id'])->indexBy('id')->orderBy('id')->column(),
+              'value' => function($data){
+                return $data->category->name;
+              },
+            ],
             'name',
             'content',
             'price',

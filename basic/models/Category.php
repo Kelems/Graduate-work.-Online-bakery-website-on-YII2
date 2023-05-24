@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 use yii\db\ActiveRecord;
 
 /**
@@ -55,29 +56,21 @@ class Category extends ActiveRecord
 */
 
 public function getCategoryproduct($id) {
-    // получаем массив идентификаторов всех потомков категории
-    $ids = $this->getProducts($id)->all();
-    $ids[] = $id;
-    return Product::find()->where(['in', 'category_id', $ids])->all();
+  $query = Product::find()->where(['in', 'category_id', $id]);
+  $pages = new Pagination([
+    'totalCount' => $query->count(),
+    'pageSize' => 4,//Yii::$app->params['pageSize'],  // кол-во товаров на странице
+    'forcePageParam' => false,
+    'pageSizeParam' => false
+  ]);
+  $products = $query
+    ->offset($pages->offset)
+    ->limit($pages->limit)
+    ->asArray()
+    ->all();
+  return [$products, $pages];
 }
 
-/*
- * Возвращает массив идентификаторов всех потомков категории $id,
- * т.е. дочерние, дочерние дочерних и так далее
-
-protected function getAllChildIds($id) {
-    $children = [];
-    $ids = $this->getChildIds($id);
-    foreach ($ids as $item) {
-        $children[] = $item;
-        $c = $this->getAllChildIds($item);
-        foreach ($c as $v) {
-            $children[] = $v;
-        }
-    }
-    return $children;
-}
-*/
 
 /*
  * Возвращает массив идентификаторов дочерних категорий (прямых

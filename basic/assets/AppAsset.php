@@ -29,9 +29,11 @@ class AppAsset extends AssetBundle
 
   public $js = [
     'js/classie.js',
-    'js/imagezoom.js',
+    'js/add-to-dasket.js',
+
+//    'js/imagezoom.js',
     'js/jquery.flexslider.js',
-    'js/jquery.min.js',
+//    'js/jquery.min.js',
     'js/main.js',
     'js/memenu.js',
     'js/responsiveslides.min.js',

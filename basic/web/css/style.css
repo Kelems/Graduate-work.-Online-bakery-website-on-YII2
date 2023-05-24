@@ -113,17 +113,20 @@ a.item_add {
 .header-left ul li a:hover{
 		color:  #EF5F21;
 }
+
+/*--logo--*/
 .logo{
 	float: left;
-}
-.head-top {
-  padding: 1em 0;
-
 }
 .logo h1 a {
     color: #FFF;
     font-size: 1.4em;
     text-decoration: none;
+}
+
+.head-top {
+  padding: 1em 0;
+
 }
 /*start search*/
 .sb-search {
@@ -207,7 +210,7 @@ a.item_add {
 .sb-search.sb-search-open .sb-search-submit,.no-js .sb-search .sb-search-submit {
 	z-index: 90;
 }
-/*-- search-ends --*/
+/*-- facebok --*/
 i.facebok {
     width: 34px;
     height: 34px;
@@ -218,7 +221,7 @@ i.facebok {
 i.facebok:hover{
 	opacity:0.5;
 }
-/*-- w3layouts --*/
+/*-- twiter --*/
 i.twiter {
     width: 34px;
     height: 34px;
@@ -229,6 +232,7 @@ i.twiter {
 i.twiter:hover{
 	opacity:0.5;
 }
+/*-- goog --*/
 i.goog {
     width: 34px;
     height: 34px;
@@ -239,6 +243,7 @@ i.goog {
 i.goog:hover{
 	opacity:0.5;
 }
+/*-- inst --*/
 i.inst {
     width: 34px;
     height: 34px;
@@ -249,6 +254,7 @@ i.inst {
 i.inst:hover{
 	opacity:0.5;
 }
+
 .social {
     float: right;
     margin: 5em ;
@@ -300,8 +306,8 @@ i.inst:hover{
 	background-size: cover;
 
 	width:100%;
-	min-height: 500px;
-	  position: relative;
+	min-height: 20em;
+	position: relative;
 }
 
 .small-banner{
@@ -309,9 +315,19 @@ i.inst:hover{
 	background-size: cover;
 
 	width:100%;
-	  position: relative;
-		top: 10px;
+	position: relative;
+	min-height: 13em;
 }
+
+.main-banner{
+	background: url(../img/products/banner/main.jpg) no-repeat ;
+	background-size: cover;
+
+	width:100%;
+	  position: relative;
+
+}
+
 /*--- slider-css --*/
 .banner1{
 	background: #ffa500;
@@ -395,9 +411,9 @@ height: 35px;
   right: 0;
  }
 .banner-text{
-	padding:15% 0% 0% 5%;
+	padding:5% 0% 0% 5%;
 	color:#fff;
-	width: 50%;
+	width: 75%;
 }
 /*-- agileits --*/
 .banner-text h3 {
@@ -425,12 +441,11 @@ height: 35px;
 	background: #fff;
 }
 
-
 .banner-text-center{
- padding:1.5% 0% 0% 40%;
+ /* padding:1.5% 0% 0% 40%; */
  color:#fff;
-   width: 50%;
-	 text-align: center;
+ width: 100%;
+ text-align: center;
 }
 /*-- agileits --*/
 .banner-text-center h3 {
@@ -439,13 +454,14 @@ height: 35px;
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
   letter-spacing: 6px;
-  line-height: 1.2em;
+  line-height: 2em;
 	text-align: center;
 }
 .banner-text-center p{
-	font-size:1.2em;
-	margin: 1.3em 0 1em;
+	font-size: 1.5em;
+	margin: 0% 10% 10% 0%;
 	text-align: center;
+	width: 100%;
 }
 .banner-text-center a{
 	text-decoration: none;
@@ -472,9 +488,9 @@ height: 35px;
 }
 .content {
     position: absolute;
-    top: -62px;
+    top: -5%;
     background-color: #fff;
-    padding: 1.5%;
+    padding: 1%;
 }
 .content-top h1{
 	color:#000;
@@ -556,12 +572,12 @@ height: 35px;
 }
 .content-top-bottom h2{
 	  color: #000;
-  font-size: 1.7em;
+  font-size: 2em;
   font-family: 'Lato', sans-serif;
-  font-weight: 600;
-  margin-bottom: 1.5em;
+  font-weight: 750;
+  margin-bottom: 1em;
   text-align: center;
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 .b-link-stripe{
 	position:relative;
@@ -704,7 +720,7 @@ height: 35px;
 	margin-top: 20px;
 }
 .footer-top-at {
-    padding: 6em 0 4em;
+    padding: 3em 0 3em;
 }
  ul.nav-bottom li{
 	list-style:none;
@@ -2342,10 +2358,7 @@ a.cpns {
     right: 250px;
 }
 }
-@media(max-width:768px){
-.h_menu4 {
-  width: 50%;
-}
+
 }
 @media(max-width:736px){
 .cont {

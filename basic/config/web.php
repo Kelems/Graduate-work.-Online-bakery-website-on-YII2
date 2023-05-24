@@ -14,10 +14,20 @@ $config = [
   'modules' => [
     'admin' => [
       'class' => 'app\modules\admin\Module',
+      'layout' => 'main'
     ],
   ],
 
   'components' => [
+    'mailer' => [ //для отправки на почту
+      'class' => 'yii\swiftmailer\Mailer',
+      // send all mails to a file by default. You have to set
+      // 'useFileTransport' to false and configure a transport
+      // for the mailer to send real emails.
+      'useFileTransport' => true,
+      'htmlLayout' => 'layouts/html',
+    ],
+
     'request' => [
     // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
       'cookieValidationKey' => '.....',
@@ -52,23 +62,24 @@ $config = [
       ],
     ],
     'db' => $db,
-
     'urlManager' => [
       'enablePrettyUrl' => true,
       'showScriptName' => false,
-//      'enableStrictParsing' => false,
+      //      'enableStrictParsing' => false,
       'rules' => [
-        'site/category/<id:\d+>' => 'site/category'
+        'catalog/category/<id:\d+>/page/<page:\d+>' => 'catalog/category',
+        'site/category/<id:\d+>' => 'site/category',
+        'catalog/category/<id:\d+>' => 'catalog/category',
         /*
-//      'posts' => 'post/index',
-//      'post/<id:\d+>' => 'post/view',
-//        'web/' => 'web/index.php/site/',
+        //'posts' => 'post/index',
+        //'post/<id:\d+>' => 'post/view',
+        //'web/' => 'web/index.php/site/',
         //causes an error - Вызывает ошибку:
         //Cannot use yii\web\Controller as Controller because the name is already in use
-//        '/' => 'admin/default/index',
-//        '<action:\w+>' => 'site/<action>',
-//        '<action:\w+>' => 'fund/<action>',
-//        '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+        //'/' => 'admin/default/index',
+        //'<action:\w+>' => 'site/<action>',
+        //'<action:\w+>' => 'fund/<action>',
+        //'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
       */
       ],
     ],

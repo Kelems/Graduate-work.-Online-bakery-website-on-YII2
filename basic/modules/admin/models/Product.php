@@ -51,7 +51,7 @@ class Product extends \yii\db\ActiveRecord
     {
       return [
         'id' => 'ID',
-        'category_id' => 'ID категории',
+        'category_id' => 'Категория',
         'name' => 'Название продукта',
         'content' => 'Описание',
         'price' => 'Цена',

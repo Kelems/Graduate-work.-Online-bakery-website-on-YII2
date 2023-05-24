@@ -7,8 +7,11 @@ use yii\helpers\Url;
 //use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
-use yii\modules\admin;
 use yii\bootstrap4\NavBar;
+use yii\bootstrap4\Modal;
+use yii\bootstrap4\BootstrapWidgetTrait;
+
+use yii\modules\admin;
 use yii\widgets\Menu;
 
 AppAsset::register($this);
@@ -18,7 +21,6 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-	<title>Хлебная душа</title>
 	<meta charset="<?= Yii::$app->charset ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,54 +44,50 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
+
 <!-- page header -->
+<header>
 <?php
 // Label contents
 	NavBar::begin([ // отрываем виджет
 		'options' => [
-			'class' => 'navbar navbar-fixed ', // site header style.
+			'class' => 'navbar navbar-fixed', // site header style.
 			'role' => 'navigation',
 		],
 		'renderInnerContainer' => false,
-		'innerContainerOptions' => [
-			'class' => 'container'
-		],
+		'innerContainerOptions' => ['class' => 'container'],
 		'brandLabel' => 'Хлебная Душа',	//Yii::$app->homeUrl, // название организации
 		'brandUrl' => Yii::$app->homeUrl,//['basic/web/index.php'], // link
 	]);
-	$menuItems = [
-		[
-			'label' => 'Home',
-			'url' => ['controllers\SiteController']
-		],
-	];
 	echo Nav::widget([
-/*
+		/*
+		'options' => ['class' => 'navbar-nav navbar-right'],
 		'options' => ['class' => 'skyblue mepanel'], // стили ul
 		'options' => ['class' => 'nav-custom'], // стили ul
-*/
+		*/
 		'options' => ['class' => 'navbar-right'],
 		'items' => [
 			['label' => 'КОНТАКТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/contact')],
 			['label' => 'ПРОДУКЦИЯ', 'items' => [
 				['label' => 'ХЛЕБА', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=1')],
+				['label' => 'БАГЕТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=3')],
 				['label' => 'ПИРОГИ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=2')],
-				['label' => 'ДЕСЕРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=3')],
-				['label' => 'ТОРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=4')],
+				['label' => 'ДЕСЕРТЫ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/category?id=4')],
       ],],
 				Yii::$app->user->isGuest ? // Если пользователь гость, показыаем ссылку "Вход", если он авторизовался "Выход"
 			['label' => 'КАБИНЕТ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#')] :
       ['label' => 'КАБИНЕТ (' . Yii::$app->user->identity->username . ')', 'url' => Yii::$app->urlManager->createAbsoluteUrl('#'),],
-			['label' => Html::img('@web/img/cart.png'),'url' => Yii::$app->urlManager->createAbsoluteUrl('#'), 'encode' => false], //оформить в виде кнопки с иконкой
+			['label' => Html::img('@web/img/cart.png'),'url' => Yii::$app->urlManager->createAbsoluteUrl('/basket/index'), 'encode' => false], //оформить в виде кнопки с иконкой
 			['label' => Html::img('@web/img/tick1.png'), 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/tables') , 'encode' => false], //оформить в виде кнопки с иконкой
 		],
 		'encodeLabels' =>false,
 	]);
 	NavBar::end();
 ?>
+</header>
 
 	<!-- content Section -->
-<section class="">
+<section>
 
 		<?= $content ?>
 
@@ -98,37 +96,57 @@ AppAsset::register($this);
 	<!-- Footer Section -->
   <footer class="footer w3layouts">
 		<div class="container">
-	<div class="footer-top-at w3">
+			<div class="footer-top-at w3">
 
-		<div class="col-md-3 amet-sed w3l">
-		<h4>Адрес</h4>
-		<ul class="nav-bottom">
-				<li>ДГТУ</li>
-				<li>+7 (800) 100-19-30</li>
-				<li>Сайт: www.donstu.ru</li>
-				<li>площадь Гагарина, 1</li>
-			</ul>
+				<div class="col-md-3 amet-sed w3l">  <!-- Первая колонка подвала-->
+					<h4>Адрес</h4>
+					<ul class="nav-bottom">
+						<li>ДГТУ</li>
+						<li>+7 (800) 100-19-30</li>
+						<li>Сайт: www.donstu.ru</li>
+						<li>площадь Гагарина, 1</li>
+					</ul>
+				</div>
+				<div class="col-md-3 amet-sed w3ls"> <!-- вторая колонка подвала-->
+					<h4>НАТУРАЛЬНЫЙ ВКУСНЫЙ ХЛЕБ</h4>
+					<h4>Честность</h4>
+					<h4>ручная работа</h4>
+					<ul class="nav-bottom">	</ul>
+				</div>
+				<div class="social"> <!-- соц.сети -->
+					<ul>
+						<li><a href="#"><i class="facebok"> </i></a></li>
+						<li><a href="#"><i class="twiter"> </i></a></li>
+						<li><a href="#"><i class="inst"> </i></a></li>
+						<li><a href="#"><i class="goog"> </i></a></li>
+							<div class="clearfix"></div>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
 		</div>
-		<div class="col-md-3 amet-sed w3ls">
-			<h4>НАТУРАЛЬНЫЙ ВКУСНЫЙ ХЛЕБ</h4>
-			<h4>Честность</h4>
-			<h4>ручная работа</h4>
-			<ul class="nav-bottom">	</ul>
-		</div>
-
-		<div class="social">
-			<ul>
-				<li><a href="#"><i class="facebok"> </i></a></li>
-				<li><a href="#"><i class="twiter"> </i></a></li>
-				<li><a href="#"><i class="inst"> </i></a></li>
-				<li><a href="#"><i class="goog"> </i></a></li>
-					<div class="clearfix"></div>
-			</ul>
-		</div>
-
-		<div class="clearfix"> </div>
   </footer>
   <!-- Footer Section end -->
+
+	<?php
+		$footer =
+		<<<FOOTER
+		<button type="button" class="btn btn-default" data-dismiss="modal">
+			Продолжить покупки
+		</button>
+		<button type="button" class="btn btn-warning">
+			Оформить заказ
+		</button>
+		FOOTER;
+		Modal::begin([
+			'title' => '<h2>Корзина</h2>',
+			'id' => 'basket-modal',
+			'size'=>'modal-lg',
+			'footer' => $footer
+		]);
+		Modal::end();
+		unset($footer);
+	?>
 
 	<?php $this->endBody() ?>
 	</body>

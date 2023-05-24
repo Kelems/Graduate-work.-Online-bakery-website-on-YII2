@@ -1,9 +1,11 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models;
 
 use Yii;
-
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 /**
  * This is the model class for table "order".
  *
@@ -39,15 +41,37 @@ class Order extends \yii\db\ActiveRecord
      */
     public function rules()  {
         return [
-            [['user_id', 'address', 'comment', 'date_order', 'date_status'], 'required'],
+            [['user_id', 'phone', 'email','name', 'date_order', 'date_status', 'pickup'], 'required'],
             [['user_id', 'order_status', 'pickup'], 'integer'],
             [['cost'], 'number'],
-            [['date_order', 'date_status'], 'safe'],
+            [
+              'phone',
+              'match',
+              'pattern' => '~^\+7\s\[0-9]{10}$~',
+              'message' => 'Введите номер телефона для связи +7 1234567890'
+            ],
+            [['date_order', 'comment','address', 'date_status'], 'safe'],
             [['name', 'email', 'address', 'comment'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 20],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
+
+  public function behaviors(){
+    return [
+      [
+        'class' => TimestampBehavior::class,
+        'attributes' => [
+        // при вставке новой записи присвоить атрибутам created и updated значение метки времени UNIX
+          ActiveRecord::EVENT_BEFORE_INSERT => ['date_order', 'date_status'],
+          // при обновлении существующей записи  присвоить атрибуту updated значение метки времени UNIX
+          ActiveRecord::EVENT_BEFORE_UPDATE => ['date_status'],
+        ],
+        // если вместо метки времени UNIX используется DATETIME
+        'value' => new Expression('NOW()'),
+      ],
+    ];
+  }
 
     /**
      * {@inheritdoc}
@@ -57,10 +81,10 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'ID пользователя',
-            'name' => 'Название',
+            'name' => 'Имя обращения',
             'email' => 'Email',
             'phone' => 'Телефон',
-            'address' => 'Адресс',
+            'address' => 'Адрес при доставке',
             'comment' => 'Комментарий для заказа',
             'cost' => 'Цена',
             'date_order' => 'Дата заказа',

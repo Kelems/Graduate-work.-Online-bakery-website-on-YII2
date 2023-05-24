@@ -65,28 +65,32 @@ class Product extends \yii\db\ActiveRecord
       ];
     }
 
-    public function getCategory()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    public function getCategory(){
+      return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     public function getIngredienthasproducts()
     {
-        return $this->hasMany(Ingredienthasproduct::className(), ['product_id' => 'id']);
+      return $this->hasMany(Ingredienthasproduct::className(),
+      ['product_id' => 'id']);
     }
 
     public function getIngredients()
     {
-        return $this->hasMany(Ingredient::className(), ['id' => 'ingredient_id'])->viaTable('ingredient_has_product', ['product_id' => 'id']);
+      return $this->hasMany(Ingredient::className(),
+      ['id' => 'ingredient_id'])->viaTable('ingredient_has_product', ['product_id' => 'id']);
     }
 
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItem::className(), ['product_id' => 'id']);
+      return $this->hasMany(OrderItem::className(), ['product_id' => 'id']);
     }
 
-    public function getOrders()
-    {
-        return $this->hasMany(Order::className(), ['id' => 'order_id'])->viaTable('order_item', ['product_id' => 'id']);
+    public function getOrders(){
+      return $this->hasMany(Order::className(), ['id' => 'order_id'])->viaTable('order_item', ['product_id' => 'id']);
+    }
+
+    public function getProduct($id) {
+      return self::find()->where(['id' => $id])->asArray()->one();
     }
 }

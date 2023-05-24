@@ -1,10 +1,11 @@
 <?php
-/** @var yii\web\View $this */
+	/** @var yii\web\View $this */
+	$this->title = "Контакты";
 ?>
 	<!-- grow -->
 	<section class="small-banner">
 		<div class="container">
-	    <div  id="top" class="callbacks_container">
+	  	<div  id="top" class="callbacks_container">
 				<li>
 					<div class="banner-text-center"> <h3>Контакты</h3> </div>
 				</li>
@@ -13,13 +14,14 @@
 	</section>
 
 	<!--content-->
-	<section class="banner1">
-		<div class="container">
-			<div class="cont">
-				<div class="content">
+	<section class="banner1"> <!-- orange back -->
+		<div class="container"> <!-- center -->
+			<div class="cont"> <!-- -->
+				<div class="content"> <!-- white back -->
 					<div class="container">
+						<h1 style="text-align: center;">CВЯЖИТЕСЬ С НАМИ</h1>
 						<div class="contact-form">
-							<div class="col-md-8 contact-grid">
+							<div class="col-md-7 contact-grid">
 								<form action="#" method="post" style="text-align:center; "> <!-- центрировать -->
 									<input type="text" value="ФИО" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Name';}">
 									<input type="text" value="Email" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Email';}">

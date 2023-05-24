@@ -17,7 +17,7 @@ class IngredienthasproductSearch extends IngredientHasProduct
     public function rules()
     {
         return [
-            [['ingredient_id', 'product_id', 'quantity'], 'integer'],
+            [['ingredient_id', 'product_id'], 'integer'],
         ];
     }
 
@@ -59,7 +59,6 @@ class IngredienthasproductSearch extends IngredientHasProduct
         $query->andFilterWhere([
             'ingredient_id' => $this->ingredient_id,
             'product_id' => $this->product_id,
-            'quantity' => $this->quantity,
         ]);
 
         return $dataProvider;
