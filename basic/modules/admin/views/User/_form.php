@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'address')->textarea(['rows' => 2]) ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 

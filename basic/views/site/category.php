@@ -76,7 +76,7 @@
                             Добавить в корзину
                           </button>
                         </form>
-                        
+
                       </div>
                     </div>
                   <?php endforeach; ?>

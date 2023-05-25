@@ -22,6 +22,7 @@ use app\models\Category;
 use app\models\Product;
 use app\models\Ingredient;
 use app\models\IngredientHasProduct;
+use app\models\User;
 
 //Controller
 class SiteController extends Controller{
@@ -74,6 +75,16 @@ class SiteController extends Controller{
     return $this->render('index', compact('saleProducts'));
   }
 
+  //contact page
+  public function actionContact(){
+    $model = new ContactForm();
+    if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+      Yii::$app->session->setFlash('contactFormSubmitted');
+      return $this->refresh();
+    }
+    return $this->render('contact', ['model' => $model,]);
+  }
+
   //Category page
   public function actionCategory($id) {
     $id = (int)$id; //получаем id категории
@@ -110,6 +121,40 @@ class SiteController extends Controller{
     );
   }
 
+
+  //Signup page
+  public $Password;
+
+  public function actionSignup() {
+    /*
+    if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
+      return $this->goHome();
+    }else{
+    */
+
+    $registration = new User(); //создаем модель из бд
+    $registration->scenario = 'registration'; //проводит по сценарию
+
+    if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
+      $this->Password = $registration->password;
+
+      $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
+
+      if ($registration->save()) {
+        Yii::$app->session->setFlash('success','Вы внесены в систему');
+        return $this->goHome();
+      }
+      else {
+        $registration->password = $this->password;
+
+        Yii::$app->session->setFlash('dismissible','Произошла ошибка');
+        return $this->render('signup', compact('registration'));
+      }
+    }
+    return $this->render('signup', compact('registration'));
+  }
+
+
   //log in to your account
   public function actionLogin(){
     if (!Yii::$app->user->isGuest) {
@@ -127,16 +172,6 @@ class SiteController extends Controller{
   public function actionLogout(){
     Yii::$app->user->logout();
     return $this->goHome();
-  }
-
-  //contact page
-  public function actionContact(){
-    $model = new ContactForm();
-    if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-      Yii::$app->session->setFlash('contactFormSubmitted');
-      return $this->refresh();
-    }
-    return $this->render('contact', ['model' => $model,]);
   }
 
   //administration panel
@@ -160,22 +195,4 @@ class SiteController extends Controller{
     }
 */
 
-//Signup page
-/*
-  public function actionSignup() {
-    if (!Yii::$app->user->isGuest) {
-      return $this->goHome();
-    }
-    $model = new SignupForm();
-    if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
-      $user = new User();
-      $user->username = $model->username;
-      $user->password = \Yii::$app->security->generatePasswordHash($model->password);
-      if ($user->save()) {
-        return $this->goHome();
-      }
-    }
-    return $this->render('signup', compact('model'));
-  }
-*/
 }
