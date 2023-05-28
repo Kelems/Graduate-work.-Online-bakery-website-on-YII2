@@ -19,7 +19,7 @@
 			<div class="cont"> <!-- -->
 				<div class="content"> <!-- white back -->
 					<div class="container">
-						<h1 style="text-align: center;">CВЯЖИТЕСЬ С НАМИ</h1>
+						<h2 style="text-align: center;">CВЯЖИТЕСЬ С НАМИ</h2>
 						<div class="contact-form">
 							<div class="col-md-7 contact-grid">
 								<form action="#" method="post" style="text-align:center; "> <!-- центрировать -->

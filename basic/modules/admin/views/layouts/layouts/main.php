@@ -82,7 +82,7 @@ AppAsset::register($this);
 				['label' => 'КАБИНЕТ (' . Yii::$app->user->identity->email . ')', 'url' => ['basic/web/index.php/site/profile', 'id' => $user['id']], 'visible' => !Yii::$app->user->isGuest],
 				['label' => 'ВЫЙТИ', 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/logout'), 'visible' => !Yii::$app->user->isGuest],
 			['label' => Html::img('@web/img/cart.png'),'url' => Yii::$app->urlManager->createAbsoluteUrl('/basket/index'), 'encode' => false], //оформить в виде кнопки с иконкой
-			['label' => Html::img('@web/img/tick1.png'), 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/tables'), 'visible' => !Yii::$app->user->isGuest , 'encode' => false], //оформить в виде кнопки с иконкой
+			['label' => Html::img('@web/img/tick1.png'), 'url' => Yii::$app->urlManager->createAbsoluteUrl('basic/web/index.php/site/tables') , 'encode' => false], //оформить в виде кнопки с иконкой
 		],
 		'encodeLabels' =>false,
 	]);

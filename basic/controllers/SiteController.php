@@ -44,7 +44,7 @@ class SiteController extends Controller{
       'verbs' => [
         'class' => VerbFilter::className(),
         'actions' => [
-          'logout' => ['post'],
+          'logout' => ['post', 'get'],
         ],
       ],
     ];
@@ -62,6 +62,8 @@ class SiteController extends Controller{
       ],
     ];
   }
+
+
 
   //base page
   public function actionIndex(){
@@ -82,7 +84,7 @@ class SiteController extends Controller{
       Yii::$app->session->setFlash('contactFormSubmitted');
       return $this->refresh();
     }
-    return $this->render('contact', ['model' => $model,]);
+    return $this->render('contact', ['model' => $model]);
   }
 
   //Category page
@@ -121,54 +123,91 @@ class SiteController extends Controller{
     );
   }
 
-
-  //Signup page
+  //Registration page
   public $Password;
-
-  public function actionSignup() {
-    /*
+  public function actionRegistration() {
     if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
       return $this->goHome();
-    }else{
-    */
+    }
 
     $registration = new User(); //создаем модель из бд
     $registration->scenario = 'registration'; //проводит по сценарию
 
-    if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
-      $this->Password = $registration->password;
-
-      $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
-
-      if ($registration->save()) {
-        Yii::$app->session->setFlash('success','Вы внесены в систему');
-        return $this->goHome();
-      }
-      else {
-        $registration->password = $this->password;
-
-        Yii::$app->session->setFlash('dismissible','Произошла ошибка');
-        return $this->render('signup', compact('registration'));
-      }
-    }
-    return $this->render('signup', compact('registration'));
-  }
+    /*
+    $login = new User(); //создаем модель из бд
+    $login->scenario = 'login'; //проводит по сценарию
 
 
-  //log in to your account
-  public function actionLogin(){
-    if (!Yii::$app->user->isGuest) {
+    if ($login->load(Yii::$app->request->post()) && $login->login() ) {
       return $this->goHome();
     }
-    $model = new LoginForm();
-    if ($model->load(Yii::$app->request->post()) && $model->login()) {
-      return $this->goBack();
-    }
-    $model->password = '';
-    return $this->render('login', ['model' => $model,]);
-  }
+    */
 
-  //log out of your account
+      if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
+        //        if(!find()->where(['email'=>$registration->email])->limit(1)->all()){
+
+          $this->Password = $registration->password;
+          $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
+
+          if ($registration->save()) {
+            Yii::$app->session->setFlash('success','Вы внесены в систему');
+            return $this->goHome();
+          }
+          else {
+            $registration->password = $this->password;
+          //  Yii::$app->session->setFlash('dismissible','Произошла ошибка');
+            return $this->render('regist', compact('registration'));
+          }
+          /*
+        }else {
+          Yii::$app->session->setFlash('info','Такой пользователь существует!');
+          return $this->goHome();
+        }
+        */
+      }
+      return $this->render('regist', compact('registration'));
+    }
+
+    //страница авторизации
+    public function actionLogin(){
+      if (!Yii::$app->user->isGuest) {
+        return $this->goHome();
+      }
+
+      $model = new SignupForm();
+      if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        return $this->goBack();
+      }
+
+      $model->password = '';
+      return $this->render('login', ['model' => $model,]);
+    }
+
+    //страница профиля
+    public function actionProfileView($email){
+      return $this->render('profile', ['model' => $this->findModel($email)]);
+    }
+
+    //страница обновления данных Профиля
+    public function actionProfileUpdate($email){
+      $model = $this->findModel($email);
+
+      if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        return $this->redirect(['profile-view', 'email' => $model->email]);
+      }
+
+      return $this->render('update', ['model' => $model,]);
+    }
+
+    //поиск по модели
+    protected function findModel($email){
+        if (($model = User::findOne(['email' => $email])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
   public function actionLogout(){
     Yii::$app->user->logout();
     return $this->goHome();
@@ -179,20 +218,5 @@ class SiteController extends Controller{
     return $this->render('tables');
   }
 
-//entry.. page? I do not remember. need to watch
-/*
-	public function actionEntry()
-    {
-        $model = new EntryForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // данные в $model удачно проверены
-            // делаем что-то полезное с $model ...
-             return $this->render('entry-confirm', ['model' => $model]);
-        } else {
-            // либо страница отображается первый раз, либо есть ошибка в данных
-            return $this->render('entry', ['model' => $model]);
-        }
-    }
-*/
 
 }
