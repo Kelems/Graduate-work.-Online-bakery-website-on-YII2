@@ -65,20 +65,32 @@ class Product extends \yii\db\ActiveRecord
       ];
     }
 
+    public function getSale(){
+      return self::find()->where(['>','old_price', 0])
+                        ->limit(3)
+                        ->asArray()
+                        ->all();
+    }
+
     public function getCategory(){
       return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     public function getIngredienthasproducts()
     {
-      return $this->hasMany(Ingredienthasproduct::className(),
-      ['product_id' => 'id']);
+      return $this->hasMany(Ingredienthasproduct::className(), ['product_id' => 'id']);
     }
 
-    public function getIngredients()
+    public function getIngredientItems()
     {
-      return $this->hasMany(Ingredient::className(),
-      ['id' => 'ingredient_id'])->viaTable('ingredient_has_product', ['product_id' => 'id']);
+      return $this->hasMany(Ingredient::className(),['id' => 'ingredient_id'])
+            ->viaTable('ingredient_has_product', ['product_id' => 'id']);
+    }
+
+    public function getItems()
+    {
+      return $this->hasMany(Ingredient::className(),['id' => 'ingredient_id'])
+            ->via('ingredienthasproducts');
     }
 
     public function getOrderItems()

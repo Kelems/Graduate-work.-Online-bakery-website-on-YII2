@@ -20,7 +20,7 @@ use yii\helpers\Html;
   </div>
 </section>
 <!-- котент -->
-<section class="banner1">
+<section class="background">
   <div class="container"> <!-- center white -->
     <div class="cont">
       <div class="content" style="border: 15px solid white"> <!-- white part -->
@@ -43,8 +43,9 @@ use yii\helpers\Html;
                 <div style="padding: 0px 0px 20px 0px;" >
                   <div class="row">Состав:</div>
                   <?php if (!empty($ingredients)): ?>
+
                     <?php foreach ($ingredients as $ingredient): ?>
-                      <?= Html::encode($ingredient['name']); ?>
+                      <a>  <?= Html::encode($ingredient['name'].', '); ?> </a>
                     <?php endforeach; ?>
                   <?php else: ?>
                     <p>Состав товара, на данный момент, не внесен.</p>

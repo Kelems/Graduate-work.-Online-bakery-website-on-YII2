@@ -24,6 +24,9 @@ class User extends ActiveRecord implements IdentityInterface{
   */
 
 
+  const ROLE_USER = 1;
+  const ROLE_ADMIN = 2;
+
   public $rememberMe = true;
   public $_user = false;
 
@@ -85,6 +88,7 @@ class User extends ActiveRecord implements IdentityInterface{
           return $this->hasOne(Role::className(), ['id' => 'role_id']);
       }
     */
+
     public static function findIdentity($id){
       return static ::findOne($id);
     }

@@ -43,6 +43,7 @@
 		<?php $this->head() ?>
 		<!-- переменная для ссылки на профиль-->
 		<?php $user = Yii::$app->user->identity->email; ?>
+		<?php $role_id = Yii::$app->user->identity->role_id; ?>
 	</head>
 
 	<body>
@@ -69,7 +70,9 @@
 								<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/registration">РЕГИСТРАЦИЯ</a></li>
 							<?php endif; ?>
 						<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basket/index"><img src="/img/cart.png" alt=""></a></li>
-						<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/tables"><img src="/img/tick1.png" alt=""></a></li>
+						<?php if (Yii::$app->user->identity->role_id === 3): ?>
+							<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/tables"><img src="/img/tick1.png" alt=""></a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</nav>
@@ -77,7 +80,7 @@
 
 		<!-- content Section -->
 		<section>
-
+		<?php /* echo */ Yii::$app->user->identity->role_id; ?>
 			<?= $content ?>
 
 		</section>

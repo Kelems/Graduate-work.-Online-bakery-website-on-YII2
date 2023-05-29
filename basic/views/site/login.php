@@ -3,7 +3,7 @@
   use yii\bootstrap4\ActiveForm;
  ?>
 
-<section class="banner1"> <!-- orange back -->
+<section class="background"> <!-- orange back -->
   <div class="container"> <!-- center -->
     <div class="cont"> <!-- -->
       <div class="content-down"> <!-- white back -->

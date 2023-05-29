@@ -13,6 +13,8 @@ use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+use app\components\AccessRule;
+
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
@@ -32,15 +34,39 @@ class SiteController extends Controller{
     return [
       'access' => [
         'class' => AccessControl::className(),
-        'only' => ['logout'],
+        // We will override the default rule config with the new AccessRule class
+        'ruleConfig' => [
+          'class' => AccessRule::className(),
+        ],
+        'only' => ['create', 'update', 'delete'],
         'rules' => [
           [
-            'actions' => ['logout'],
+            'actions' => ['create'],
             'allow' => true,
-            'roles' => ['@'],
+            // Allow users, moderators and admins to create
+            'roles' => [
+                User::ROLE_USER,
+                User::ROLE_ADMIN
+            ],
+          ],
+          [
+            'actions' => ['update'],
+            'allow' => true,
+            // Allow moderators and admins to update
+            'roles' => [
+              User::ROLE_ADMIN
+            ],
+        ],
+        [
+          'actions' => ['delete'],
+          'allow' => true,
+          // Allow admins to delete
+          'roles' => [
+            User::ROLE_ADMIN
           ],
         ],
       ],
+    ],
       'verbs' => [
         'class' => VerbFilter::className(),
         'actions' => [
@@ -63,18 +89,43 @@ class SiteController extends Controller{
     ];
   }
 
-
+  //поиск по модели
+  protected function findModel($email){
+    if (($model = User::findOne(['email' => $email])) !== null) {
+      return $model;
+    }
+    throw new NotFoundHttpException('The requested page does not exist.');
+  }
+  /*
+    protected function findRole($role_id){
+      if (($role_id = User::findOne(['role_id' => $role_id])) !== null) {
+        return $model;
+      }
+      throw new NotFoundHttpException('The requested page does not exist.');
+    }
+  */
 
   //base page
   public function actionIndex(){
     // получаем товары по скидке. доработать
-    $saleProducts = Yii::$app->cache->get('sale-products');
-    if ($saleProducts === false) {
-      $saleProducts = Product::find()->where(['old_price'] > '1')->limit(3)->asArray()->all();
-      Yii::$app->cache->set('sale-products', $saleProducts);
-    }
+    $discounts = (new Product())->getSale(); // модель продукта
+    /*
+      // проверка вывода данных о товаре
+      echo "<pre>";
+      print_r($temp);
+      echo "</pre>";
+      //    echo "эх.. = $ingredients";
+    */
 
-    return $this->render('index', compact('saleProducts'));
+    /*
+      $saleProducts = Yii::$app->cache->get('sale-products');
+      if ($saleProducts === false) {
+        $saleProducts = Product::find()->where(['old_price'] > '1')->limit(3)->asArray()->all();
+        Yii::$app->cache->set('sale-products', $saleProducts);
+      }
+    */
+    return $this->render('index',
+    compact('discounts'));
   }
 
   //contact page
@@ -90,7 +141,7 @@ class SiteController extends Controller{
   //Category page
   public function actionCategory($id) {
     $id = (int)$id; //получаем id категории
-    $temp = new Category(); // категори
+    $temp = new Category(); // модель категории
     list($products, $pages) = $temp->getCategoryProduct($id);
 
     $category = $temp->getCategory($id); //получаем данные о категории
@@ -103,22 +154,27 @@ class SiteController extends Controller{
   //Product page
   public function actionProduct($id) {
     $id = (int)$id; //получаем id товара
-
-    $data = Yii::$app->cache->get('product-'.$id);  // пробуем извлечь данные продукта из кеша
-    if ($data === false) {                          // данных нет в кеше, получаем их заново
-      $product = (new Product())->getProduct($id);  //данные о продукте
-
-      //list($ingredients) = $temp->getIngredientproduct($id);//допилить
-      //$ingredients = (new Ingredient())->getIngredientproduct($id);
-
+    $product = (new Product())->getProduct($id);  //данные о продукте
+    $ingredients = Product::findOne($id)->items;  //данные о ингридентах товара
+    /*
+      $data = Yii::$app->cache->get('product-'.$id);  // пробуем извлечь данные продукта из кеша
+      $ingredients = $product->ingredients;
+      if ($data === false) {                          // данных нет в кеше, получаем их заново
       $data = [$product, $ingredients];                     // сохраняем список для кэша
       Yii::$app->cache->set('product-'.$id, $data);         // сохраняем полученные данные в кеше
     }
-    list($product,$ingredients) = $data; //подготавливаем данные
+        list($product,$ingredients) = $data;          //подготавливаем данные
+    */
+
+    /* проверка вывода данных о товаре
+      echo "<pre>";
+      print_r($ingredients->);
+      echo "</pre>";
+      echo "эх.. = $ingredients";
+    */
 
     return $this->render(
       'product',
-      //'ingredients', //доделать вывод ингредиентов используемых в товаре
       compact('product','ingredients')
     );
   }
@@ -145,19 +201,18 @@ class SiteController extends Controller{
 
       if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
         //        if(!find()->where(['email'=>$registration->email])->limit(1)->all()){
+        $this->Password = $registration->password;
+        $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
 
-          $this->Password = $registration->password;
-          $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
-
-          if ($registration->save()) {
-            Yii::$app->session->setFlash('success','Вы внесены в систему');
-            return $this->goHome();
-          }
-          else {
-            $registration->password = $this->password;
+        if ($registration->save()) {
+          Yii::$app->session->setFlash('success','Вы внесены в систему');
+          return $this->goHome();
+        }
+        else {
+          $registration->password = $this->password;
           //  Yii::$app->session->setFlash('dismissible','Произошла ошибка');
-            return $this->render('regist', compact('registration'));
-          }
+          return $this->render('regist', compact('registration'));
+        }
           /*
         }else {
           Yii::$app->session->setFlash('info','Такой пользователь существует!');
@@ -185,28 +240,24 @@ class SiteController extends Controller{
 
     //страница профиля
     public function actionProfileView($email){
-      return $this->render('profile', ['model' => $this->findModel($email)]);
+      if (Yii::$app->user->identity->role_id >0) {
+        return $this->render('profile', ['model' => $this->findModel($email)]);
+      }else {
+        return $this->render('index', compact('saleProducts'));
+      }
     }
 
     //страница обновления данных Профиля
     public function actionProfileUpdate($email){
-      $model = $this->findModel($email);
-
-      if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-        return $this->redirect(['profile-view', 'email' => $model->email]);
-      }
-
-      return $this->render('update', ['model' => $model,]);
-    }
-
-    //поиск по модели
-    protected function findModel($email){
-        if (($model = User::findOne(['email' => $email])) !== null) {
-            return $model;
+      if (Yii::$app->user->identity->role_id >0) {
+        $model = $this->findModel($email);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+          return $this->redirect(['profile-view', 'email' => $model->email]);
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+        return $this->render('update', ['model' => $model,]);
+      }
     }
+
 
   public function actionLogout(){
     Yii::$app->user->logout();

@@ -21,7 +21,7 @@
 </section>
 
 <!-- контент -->
-<section class="banner1"> <!-- orange back -->
+<section class="background"> <!-- orange back -->
   <div class="container"> <!-- orange back -->
     <div class="cont">
 

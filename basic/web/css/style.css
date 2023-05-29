@@ -329,9 +329,16 @@ i.inst:hover{
 }
 
 /*--- slider-css --*/
-.banner1{
+.background{
 	background: #ffa500;
+	min-height: 550em;
 }
+
+.background-index{
+	background: #ffa500;
+	min-height: 70em;
+}
+
 
 .rslides {
   position: relative;
@@ -483,9 +490,14 @@ height: 35px;
 /*-- w3layouts --*/
 .cont {
     position: relative;
-    min-height: 66em;
-
+    min-height: 44em;
 }
+
+.cont-index {
+    position: relative;
+    min-height: 75em;
+}
+
 .content {
     position: absolute;
     top: -5%;
