@@ -41,16 +41,18 @@ class Order extends \yii\db\ActiveRecord
      */
     public function rules()  {
         return [
-            [['user_id', 'phone', 'email','name', 'date_order', 'date_status', 'pickup'], 'required'],
+            [['user_id', 'name', 'email', 'phone', 'pickup'], 'required'],
             [['user_id', 'order_status', 'pickup'], 'integer'],
             [['cost'], 'number'],
+/*
             [
               'phone',
               'match',
               'pattern' => '~^\+7\s\[0-9]{10}$~',
               'message' => 'Введите номер телефона для связи +7 1234567890'
             ],
-            [['date_order', 'comment','address', 'date_status'], 'safe'],
+*/
+            [['date_order', 'date_status','date_order', 'comment','address', 'date_status'], 'safe'],
             [['name', 'email', 'address', 'comment'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 20],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -76,8 +78,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels(){
         return [
             'name' => 'Ваше имя',
             'email' => 'Email',
@@ -121,4 +122,21 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public function addItems($basket) {
+      // получаем товары в корзине
+      $products = $basket['products'];
+      // добавляем товары по одному
+      foreach ($products as $product_id => $product) {
+        $item = new OrderItem();
+        $item->order_id = $this->id;
+        $item->product_id = $product_id;
+        $item->count = $product['count'];
+//        $item->name = $product['name'];
+        $item->price = $product['price'];
+        $item->cost = $product['price'] * $product['count'];
+        $item->insert();
+      }
+    }
+
 }

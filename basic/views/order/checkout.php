@@ -17,7 +17,6 @@ use yii\helpers\Url;
         <div id="checkout">
           <?php $form = ActiveForm::begin(['id' => 'checkout-form', 'class' => 'form-horizontal']);?>
           <?= $form->field($order, 'name')->textInput(); ?>
-          <?= $form->field($order, 'email')->input('email'); ?>
           <?= $form->field($order, 'phone')->textInput(); ?>
           <?= $form->field($order, 'pickup')->radioList(['0' => 'Самовывоз','1' => 'Доставка']); ?>
           <?= $form->field($order, 'address')->textarea(['rows' => 2]); ?>
@@ -25,7 +24,6 @@ use yii\helpers\Url;
           <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'style' => "text-align: center"]); ?>
           <?php ActiveForm::end(); ?>
         </div>
-        <div class="col-sm-2"></div>
       </div>
     </div>
   </div>

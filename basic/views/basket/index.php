@@ -14,11 +14,11 @@ use yii\helpers\Url;
         <h1 class="text-center">Корзина</h1>
         <div id="basket-content">
         <?php if (!empty($basket)): ?>
-          <p  class="text-center">
-            <a href="<?= Url::to(['basket/clear']); ?>" class="text-danger">
-              Очистить корзину
-            </a>
-          </p>
+
+          <?php echo "<pre>";
+          print_r($basket);
+          echo "</pre>";?>
+
           <div class="table-responsive">
             <form action="<?= Url::to(['basket/update']); ?>" method="post">
               <?=
@@ -30,7 +30,7 @@ use yii\helpers\Url;
               <!-- таблица названий -->
               <table class="table table-bordered text-center">
                 <tr>
-                  <th class="text-center"></th>
+                  <th class="text-center">Изображение</th>
                   <th class="text-center">Наименование</th>
                   <th class="text-center">Количество, шт.</th>
                   <th class="text-center">Цена, руб.</th>
@@ -40,25 +40,28 @@ use yii\helpers\Url;
               <!-- наши данные в корзине -->
                 <?php foreach ($basket['products'] as $id => $item): ?>
                 <tr>
+                  <!-- Изображение -->
                   <td></td>
+                  <!-- название товара с ссылкой -->
                   <td>
                     <a href="<?= Url::to(['/site/product', 'id' => $id]); ?>">
                       <?= Html::encode($item['name']); ?>
                     </a>
                   </td>
+                  <!-- количество -->
                   <td>
-                    <?=
-                      Html::input(
-                        'text',
-                        'count['.$id.']',
-                        $item['count'],
-                        ['style' => 'width: 50%; text-align: center;']
-                      );
-                    ?>
+                    <?=Html::input(
+                      'text',
+                      'count['.$id.']',
+                      $item['count'],
+                      ['style' => 'width: 50%; text-align: center;']
+                    );?>
                   </td>
+                  <!-- цена за штуку -->
                   <td ><?= $item['price']; ?></td>
+                  <!-- цена всего -->
                   <td ><?= $item['price'] * $item['count']; ?></td>
-                    <!-- кнопка удаления -->
+                  <!-- кнопка удаления -->
                   <td>
                     <a href="<?= Url::to(['basket/remove', 'id' => $id]); ?>" class="text-danger">
                       <i class="fa fa-times" aria-hidden="true">Удалить</i>
@@ -69,16 +72,23 @@ use yii\helpers\Url;
                 <?php endforeach; ?>
                 <!-- перерасчет и итоги -->
                 <tr>
+                  <!-- перерасчет -->
                   <td>
                     <button type="submit"
                       class="btn btn-primary">
                       <i class="fa fa-refresh" aria-hidden="true"></i>
-                      Пересчитать
+                      Изменить данные
                     </button>
                   </td>
-                  <td colspan="3" >Итого</td>
+                   <!-- слово "итого" -->
+                  <td colspan="3">Итого</td>
+                  <!-- итоговое значение всего-->
                   <td ><?= $basket['amount']; ?></td>
-                  <td></td>
+                  <td>
+                    <a href="<?= Url::to(['basket/clear']); ?>" class="text-danger">
+                      Очистить корзину
+                    </a>
+                  </td>
                 </tr>
               </table>
             </form>

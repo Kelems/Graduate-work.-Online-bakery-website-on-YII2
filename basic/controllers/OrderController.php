@@ -11,31 +11,46 @@ use yii\web\Response;
 use app\models\Order;
 use app\models\OrderItem;
 use app\models\User;
+use app\models\Basket;
+
 
 class OrderController extends Controller {
     public $defaultAction = 'checkout';
 
     public function actionCheckout() {
       $order = new Order();
+      //данные о текущем пользователе
+      $model = Yii::$app->user->identity;
+      //передача необходимых данных в заказ
+      $order->name = $model->name;
+      $order->user_id = $model->id;
+      $order->email = $model->email;
+      $order->phone = $model->phone;
+      $order->address = $model->address;
+/*
+      echo "<pre>";
+      print_r($model);
+      echo "</pre>";
+*/
+
       if ($order->load(Yii::$app->request->post())) {
-            // ...и проверяем эти данные
-            if ( ! $order->validate()) {
-                // данные не прошли валидацию, отмечаем этот факт
-                Yii::$app->session->setFlash(
-                    'checkout-success',
-                    false
-                );
-                // сохраняем в сессии введенные пользователем данные
-                Yii::$app->session->setFlash(
-                    'checkout-data',
-                    [
-                        'name' => $order->name,
-                        'email' => $order->email,
-                        'phone' => $order->phone,
-                        'address' => $order->address,
-                        'comment' => $order->comment
-                    ]
-                );
+        // проверяем эти данные
+        if ( ! $order->validate()) {
+          // данные не прошли валидацию, отмечаем этот факт
+          Yii::$app->session->setFlash('checkout-success',false);
+          // сохраняем в сессии введенные пользователем данные
+          Yii::$app->session->setFlash(
+            'checkout-data',
+            [
+              'name' => $order->name,
+              'email' => $order->email,
+              'phone' => $order->phone,
+              'address' => $order->address,
+              'pickup' => $order->pickup,
+              'address' => $order->address,
+              'comment' => $order->comment,
+            ]
+          );
                 /*
                  * Сохраняем в сессии массив сообщений об ошибках. Массив имеет вид
                  * [
@@ -48,62 +63,48 @@ class OrderController extends Controller {
                  *     ]
                  * ]
                  */
-                Yii::$app->session->setFlash(
-                    'checkout-errors',
-                    $order->getErrors()
-                );
-            } else {
+          Yii::$app->session->setFlash(
+            'checkout-errors',
+            $order->getErrors()
+          );
+        } else {
                 /*
                  * Заполняем остальные поля модели — те которые приходят
                  * не из формы, а которые надо получить из корзины. Кроме
                  * того, поля created и updated будут заполнены с помощью
                  * метода Order::behaviors().
                  */
-                $basket = new Basket();
-                $content = $basket->getBasket();
-                $order->amount = $content['amount'];
-                // сохраняем заказ в базу данных
-                $order->insert();
-                $order->addItems($content);
-                // отправляем письмо покупателю
-                $mail = Yii::$app->mailer->compose(
-                    'order',
-                    ['order' => $order]
-                );
-                $mail->setFrom(Yii::$app->params['senderEmail'])
-                    ->setTo($order->email)
-                    ->setSubject('Заказ в магазине № ' . $order->id)
-                    ->send();
-                // очищаем содержимое корзины
-                $basket->clearBasket();
-                // данные прошли валидацию, заказ успешно сохранен
-                Yii::$app->session->setFlash(
-                    'checkout-success',
-                    true
-                );
-            }
-            // выполняем редирект, чтобы избежать повторной отправки формы
-            return $this->refresh();
+          $basket = new Basket();
+          $content = $basket->getBasket();
+          $order->cost = $content['amount'];
+          // сохраняем заказ в базу данных
+          $order->insert();
+          $order->addItems($content);
+          /*
+          // отправляем письмо покупателю
+          $mail = Yii::$app->mailer->compose(
+            'order',
+            ['order' => $order]
+          );
+          //отправка почты
+          $mail->setFrom(Yii::$app->params['senderEmail'])
+                ->setTo($order->email)
+                ->setSubject('Заказ в магазине № ' . $order->id)
+                ->send();
+          */
+
+          // очищаем содержимое корзины
+          $basket->clearBasket();
+          // данные прошли валидацию, заказ успешно сохранен
+          Yii::$app->session->setFlash(
+            'checkout-success',
+            true
+          );
         }
-        return $this->render('checkout', ['order' => $order]);
-    }
-
-    public function addItems($basket) {
-      // получаем товары в корзине
-      $products = $basket['products'];
-      // добавляем товары по одному
-      foreach ($products as $product_id => $product) {
-        $item = new OrderItem();
-        $item->order_id = $this->id;
-        $item->product_id = $product_id;
-        $item->name = $product['name'];
-        $item->price = $product['price'];
-        $item->quantity = $product['count'];
-        $item->cost = $product['price'] * $product['count'];
-        $item->insert();
+        // выполняем отправку на главную страницу при успешном внесении данных
+        return $this->goHome();
       }
-    }
-
-
+    return $this->render('checkout', ['order' => $order]);
+  }
 
 }
