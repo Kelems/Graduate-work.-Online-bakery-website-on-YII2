@@ -42,6 +42,7 @@
     <div class="container"> <!-- centering the block -->
       <div class="cont-index">  <!-- centering the block -->
         <div class="content"> <!-- highlighting a block on top of a backdrop -->
+
           <article class="content-top-bottom">
             <h2>О нас</h2>
             <!-- left block -->
@@ -108,6 +109,7 @@
               </div>
             </div>
           </article>
+
           <div class="clearfix"> </div>
 
           <!-- discount block -->

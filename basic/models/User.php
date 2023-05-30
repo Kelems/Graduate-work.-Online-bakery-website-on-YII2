@@ -46,7 +46,7 @@ class User extends ActiveRecord implements IdentityInterface{
       [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::className(), 'targetAttribute' => ['role_id' => 'id']],
     ];
   }
-/*
+ /*
   public function sendCongrimilationLink(){
     $congrimilationLinkURL = URL::to(['site/confirmemail','email' => $this->email, $this->code])
   }

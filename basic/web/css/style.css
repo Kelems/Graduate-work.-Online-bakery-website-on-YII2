@@ -20,6 +20,33 @@ body{
     border: 2px solid black;
   }
 
+.text-center
+{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-names
+{
+    font-family: 'Vardana';
+    font-size: 17pt;
+}
+
+.table-center
+{
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.table-text
+{
+    font-family: 'Vardana';
+    font-size: 15pt;
+
+    color: black;
+}
+
  a{
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;

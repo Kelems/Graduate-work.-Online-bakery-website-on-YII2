@@ -3,6 +3,8 @@
  * Страница корзины покупателя, файл views/basket/index.php
  */
 
+
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
@@ -15,10 +17,6 @@ use yii\helpers\Url;
         <div id="basket-content">
         <?php if (!empty($basket)): ?>
 
-          <?php echo "<pre>";
-          print_r($basket);
-          echo "</pre>";?>
-
           <div class="table-responsive">
             <form action="<?= Url::to(['basket/update']); ?>" method="post">
               <?=
@@ -28,22 +26,24 @@ use yii\helpers\Url;
                 );
               ?>
               <!-- таблица названий -->
-              <table class="table table-bordered text-center">
-                <tr>
-                  <th class="text-center">Изображение</th>
-                  <th class="text-center">Наименование</th>
-                  <th class="text-center">Количество, шт.</th>
-                  <th class="text-center">Цена, руб.</th>
-                  <th class="text-center">Сумма, руб.</th>
+              <table class="table table-bordered text-center" >
+                <tr class="text-center table-center table-names">
+                  <th >Изображение</th>
+                  <th >Наименование</th>
+                  <th >Количество, шт.</th>
+                  <th >Цена, руб.</th>
+                  <th >Сумма, руб.</th>
                   <th></th>
                 </tr>
               <!-- наши данные в корзине -->
                 <?php foreach ($basket['products'] as $id => $item): ?>
-                <tr>
+                <tr class="text-center table-center table-text">
                   <!-- Изображение -->
-                  <td></td>
-                  <!-- название товара с ссылкой -->
                   <td>
+                    <?=Html::img('@web/img/products/medium/'.$item['image'], ['width' => '128']);?>
+                  </td>
+                  <!-- название товара с ссылкой -->
+                  <td >
                     <a href="<?= Url::to(['/site/product', 'id' => $id]); ?>">
                       <?= Html::encode($item['name']); ?>
                     </a>
@@ -77,7 +77,7 @@ use yii\helpers\Url;
                     <button type="submit"
                       class="btn btn-primary">
                       <i class="fa fa-refresh" aria-hidden="true"></i>
-                      Изменить данные
+                      Изменить данныe
                     </button>
                   </td>
                    <!-- слово "итого" -->
@@ -106,4 +106,5 @@ use yii\helpers\Url;
         </div>
       </div>
     </div>
+
 </section>
