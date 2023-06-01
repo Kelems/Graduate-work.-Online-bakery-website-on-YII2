@@ -21,7 +21,7 @@ class ProductController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'verbs' => [
+                'verbs' => [ 
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],

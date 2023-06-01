@@ -29,7 +29,7 @@
 		-->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<!-- Favicon / Logo -->
-		<link href="img/bread.png" rel="shortcut icon"/>
+		<link href="img/Favicon.ico" rel="shortcut icon"/>
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -54,23 +54,52 @@
 			<nav id="w1" class="navbar navbar-fixed navbar" role="navigation">
 				<a class="navbar-brand" href="/">Хлебная Душа</a>
 				<div id="w1-collapse">
-					<ul id="w2" class="navbar-right nav"><li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/contact">КОНТАКТЫ</a></li>
-						<li class="dropdown nav-item"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ПРОДУКЦИЯ</a><div id="w3" class="dropdown-menu"><a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=1">ХЛЕБА</a>
-							<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=3">БАГЕТЫ</a>
-							<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=2">ПИРОГИ</a>
-							<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=4">ДЕСЕРТЫ</a></div>
+					<ul id="w2" class="navbar-right nav">
+						<li class="nav-item">
+							<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/contact">КОНТАКТЫ</a>
+						</li>
+						<li class="dropdown nav-item">
+							<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ПРОДУКЦИЯ</a>
+							<div id="w3" class="dropdown-menu">
+								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=1">
+									ХЛЕБА
+								</a>
+								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=2">
+									БАГЕТЫ
+								</a>
+								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=3">
+									ПИРОГИ
+								</a>
+								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=4">
+									ДЕСЕРТЫ
+								</a>
+							</div>
 						</li>
 							<?php if (!Yii::$app->user->isGuest): ?> <!--!Yii::$app->user->isGuest не гость -->
-								<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/profile-view?email=<?php echo "$user"?>">
-									КАБИНЕТ (<?php echo "$user"?>)
-								</a></li>
-								<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/logout">ВЫЙТИ</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/profile-view?email=<?php echo "$user"?>">
+										КАБИНЕТ (<?php echo "$user"?>)
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/logout">
+										ВЫЙТИ
+									</a>
+								</li>
 							<?php else: ?>
-								<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/login">ВОЙТИ</a></li>
-								<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/registration">РЕГИСТРАЦИЯ</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/login">
+										ВОЙТИ
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/registration">
+										РЕГИСТРАЦИЯ
+									</a>
+								</li>
 							<?php endif; ?>
 						<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basket/index"><img src="/img/cart.png" alt=""></a></li>
-						<?php if (Yii::$app->user->identity->role_id === 3): ?>
+						<?php if (Yii::$app->user->identity->role_id === 2): ?>
 							<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/tables"><img src="/img/tick1.png" alt=""></a></li>
 						<?php endif; ?>
 					</ul>
@@ -81,6 +110,7 @@
 		<!-- content Section -->
 		<section>
 		<?php /* echo */ Yii::$app->user->identity->role_id; ?>
+
 			<?= $content ?>
 
 		</section>

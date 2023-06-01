@@ -15,8 +15,8 @@
 
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
-            <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($model, 'email')->textInput(['autofocus' => true])->label('Почта') ?>
+            <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
             <div class="form-group">
               <div class="offset-lg-1 col-lg-11" style="text-align:center;">

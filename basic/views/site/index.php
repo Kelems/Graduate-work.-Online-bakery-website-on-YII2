@@ -13,18 +13,18 @@
   <section class="banner">
     <div class="container">
       <!--
-      <script src="js/responsiveslides.min.js"></script>
-      <script>
-        $(function () {
-          $("#slider").responsiveSlides({
-            auto: true,
-            nav: true,
-            speed: 500,
-            namespace: "callbacks",
-            pager: true,
+        <script src="js/responsiveslides.min.js"></script>
+        <script>
+          $(function () {
+            $("#slider").responsiveSlides({
+              auto: true,
+              nav: true,
+              speed: 500,
+              namespace: "callbacks",
+              pager: true,
+            });
           });
-        });
-      </script>
+        </script>
       -->
       <div class="callbacks_container" id="top"> <!-- the banner goes up a little bit -->
         <div class="carousel slide" id="slider" data-ride="carousel"> <!-- carousel slider  -->
@@ -39,20 +39,21 @@
 
   <!--content-->
   <section class="background"> <!-- orange background -->
-    <div class="container"> <!-- centering the block -->
+    <div class="container"> <!-- centering block and 50% for all site -->
       <div class="cont-index">  <!-- centering the block -->
-        <div class="content"> <!-- highlighting a block on top of a backdrop -->
+      
+        <div class="content"> <!-- highlighting a block on top of a white backdrop -->
 
           <article class="content-top-bottom">
             <h2>О нас</h2>
             <!-- left block -->
             <div class="col-md-6 men">
-              <a href="#" class="b-link-stripe b-animate-go thickbox">
+              <a href="http://192.168.1.39/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
                 <img class="img-responsive" src="img/products/medium/t1.jpg" >
                   <div class="b-wrapper">
                     <h3 class="b-animate b-from-top top-in   b-delay03 ">
                       <span>
-                        <b>Традиции</b>
+                        <b>Хлеба</b>
                         <br>Мы печем по старым рецептам на закваске, артезианской воде и грубой муке</br>
                       </span>
                     </h3>
@@ -60,12 +61,13 @@
                 </img>
               </a>
             </div>
+
             <!-- right block -->
             <div class="col-md-6">
 
               <!-- middle up image -->
               <div class="col-md1">
-                <a href="#" class="b-link-stripe b-animate-go  thickbox">
+                <a href="http://192.168.1.39/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
                   <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
                     <div class="b-wrapper">
                       <h3 class="b-animate b-from-top top-in1   b-delay03 ">
@@ -83,11 +85,11 @@
               <div class="col-md2">
                 <!-- small left image -->
                 <div class="col-md-6 men1">
-                  <a href="#" class="b-link-stripe b-animate-go  thickbox">
+                  <a href="http://192.168.1.39/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="img/products/medium/t3.jpg" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                          <span><b>Торты и десерты</b></span>
+                          <span><b>Десерты</b></span>
                         </h3>
                       </div>
                     </img>
@@ -96,25 +98,26 @@
 
                 <!-- small right image -->
                 <div class="col-md-6 men1">
-                  <a href="#" class="b-link-stripe b-animate-go  thickbox">
+                  <a href="http://192.168.1.39/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="img/products/medium/t4.jpg" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                          <span>Сытные</span>
+                          <span>Багеты</span>
                         </h3>
                       </div>
                     </img>
                   </a>
                 </div>
               </div>
+
             </div>
           </article>
 
           <div class="clearfix"> </div>
 
           <!-- discount block -->
-          <article style="text-align: center;">
-            <h1>Акции</h1>
+          <article class="content-top-bottom">
+            <h2>Акции</h2>
             <div class="col-sm-12 ">
               <!-- список продуктов -->
               <?php if (!empty($discounts)): ?>
@@ -165,6 +168,8 @@
               <?php endif; ?>
             </div>
           </article>
+
+          <div class="clearfix"> </div>
 
         </div>
 

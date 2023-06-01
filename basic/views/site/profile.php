@@ -9,21 +9,29 @@ use yii\widgets\DetailView;
 $this->title = 'Профиль пользователя: '.$model->email;
 \yii\web\YiiAsset::register($this);
 ?>
-<div>
+  
+<section class="background"> <!-- orange background -->
 
-    <h1 style="text-align: center;"> <?= Html::encode($this->title) ?></h1>
+    <div class="container"> <!-- centering block and 50% for all site -->
+        <div class="cont-index">  <!-- centering the block -->
+            <div class="content-profile"> <!-- white part -->
+                <h1 style="text-align: center;"> <?= Html::encode($this->title) ?></h1>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'email',
-            'name',
-            'phone',
-            'address',
-        ],
-    ]) ?>
-    <p style="text-align: center;">
-      <?= Html::a('Обновить данные', ['profile-update', 'email' => $model->email], ['class' => 'btn btn-success']) ?>
-    </p>
-
-</div>
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        'email',
+                        'name',
+                        'phone',
+                        'address',
+                    ],
+                ]) ?>
+            
+                <p style="text-align: center;">
+                    <?= Html::a('Обновить данные', ['profile-update', 'email' => $model->email], ['class' => 'btn btn-success']) ?>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</section>

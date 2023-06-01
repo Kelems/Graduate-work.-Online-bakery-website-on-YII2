@@ -8,7 +8,7 @@
     <div class="cont"> <!-- -->
       <div class="content-down"> <!-- white back -->
         <div class="col-md-12">
-        <div class="container">
+          <div class="container">
 
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -18,17 +18,15 @@
               <?= $form->field($registration, 'phone')->widget(\yii\widgets\MaskedInput::className(),['mask'=> '+7 (999) 999 99 99'])->label('Номер телефона');?>
               <?= $form->field($registration, 'password')->passwordInput()->label('Пароль');?>
 
-              <div class ="form-group">
+              <div class ="form-group" style="text-align:center;">
                 <?= Html::submitButton('Регистрация', ['class' => 'btn btn-success']) ?>
               </div>
-              <?php ActiveForm::end() ?>
+                <?php ActiveForm::end() ?>
             </div>
 
-
-            </div>
-
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </section>

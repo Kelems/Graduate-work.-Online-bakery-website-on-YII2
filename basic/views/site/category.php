@@ -4,6 +4,7 @@
   use yii\helpers\Url;
   use yii\models\Category;
   use yii\widgets\LinkPager;
+  use yii\bootstrap4\ActiveForm;
 
   //$this->title = 'Интернет-магазин';
   $this->title = $category['name'];
@@ -20,21 +21,42 @@
   </div>
 </section>
 
-<!-- контент -->
-<section class="background"> <!-- orange back -->
-  <div class="container"> <!-- orange back -->
-    <div class="cont">
+  <!--content-->
+  <section class="background"> <!-- orange background -->
+
+    <div class="container"> <!-- centering block and 50% for all site -->
+      <div class="cont-index">  <!-- centering the block -->
 
       <div class="content" style="border: 15px solid white"> <!-- white part -->
-        <div class="row">
-          <div class="col-sm-12 ">
+        <article class="row">
+
+          <!-- Поиск -->
+          <div class="col-3"></div>
+          
+          <div class="col-6">
+            <form method="get" action="<?= Url::to(['basic/web/index.php/site/search']); ?>" >
+              <div class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Найти по названию">
+                  <div class="input-group-btn">
+                  </div>
+              </div>
+            </form>
+          </div>
+          
+          <div class="col-3"></div>
+
+          <div class="col-12 ">
+
             <!-- список продуктов -->
             <?php if (!empty($products)): ?>
+              
               <div class="row">
                 <?php foreach ($products as $product): ?>
-                  <div class="col-sm-3" style="padding: 1em 1em 0em 1em;"> <!-- вид размещения товаров -->
-                    <!-- img -->
+                  <div class="col-3" style="padding: 1em 0.5em 0em 0.5em;"> <!-- вид размещения товаров -->
+                    
                     <div class="product-wrapper text-center"> <!-- white part -->
+                    
+                      <!-- img -->                    
                       <?=
                         Html::img(
                           '@web/img/products/medium/'.$product['image'],
@@ -43,57 +65,66 @@
                       ?>
 
                       <!-- name -->
-                      <h3 style="padding: 0em">
+                      <h3>
                         <a style="color: black;" href="<?= Url::to(['basic/web/index.php/site/product', 'id' => $product['id']]); ?>">
                           <?= Html::encode($product['name']); ?>
                         </a>
                       </h3>
 
-                        <!-- price -->
-                      <h3 style="color: black;" class="col-sm-15">
-                        <?= $product['price'];  ?> р. <!-- now price -->
+                      <!-- price -->
+                      <h3 style="color: black;" class="col-sm-18">
+                        <!-- now price -->
+                        <?= $product['price'];  ?> р. 
+                        <!-- old price -->
                         <?php
-                          if ($product['old_price'] > '1') { // old price
-                            Html::removeCssClass($options,'btn-default');
-                            Html::addCssClass($options,'style="grey";');
-                            echo Html::tag('s', $product['old_price'].' р.', $options);
+                          if ($product['old_price'] > '1') { 
+                            echo Html::tag('s', $product['old_price'].' р.');
                           }
                         ?>
                       </h3>
 
-                      <form method="post"
-                      action="<?= Url::to(['basket/add']); ?>">
-                        <input type="hidden" name="id"
-                        value="<?= $product['id']; ?>">
+                      <form method="post" action="<?= Url::to(['basket/add']); ?>">
+                        <input type="hidden" name="id" value="<?= $product['id']; ?>">
                           <?=
                             Html::hiddenInput(
                               Yii::$app->request->csrfParam,
                               Yii::$app->request->csrfToken
                             );
                           ?>
-                          <button type="submit" class="btn btn-warning">
-                            <i class="fa fa-shopping-cart"></i>
-                            Добавить в корзину
-                          </button>
-                        </form>
+                        <button type="submit" class="btn btn-warning">
+                          Добавить в корзину
+                        </button>
+                      </form>
 
-                      </div>
                     </div>
-                  <?php endforeach; ?>
-                </div>
-                <?= LinkPager::widget(
-                  /* постраничная навигация */
-                  ['pagination' => $pages,
-                  //'options' => [],
-                  //'linkOptions' => ['class' => 'page-link']
+
+                  </div>
+                <?php endforeach; ?>
+              </div>
+              
+              <!-- постраничная навигация -->
+              <?= LinkPager::widget(
+                ['pagination' => $pages,
+                  'options' => [
+                    'class' => 'pagination mb-0'
+                  ],
                 ]
-                ); ?>
-              <?php else: ?>
+              ); ?>
+    
+              <?php else: ?> <!-- если ничего нет -->
                 <p>Нет товаров в этой категории.</p>
               <?php endif; ?>
-            </div>
+
+              <div class="clearfix"> </div>
+            </article>
+
           </div>
+
         </div>
       </div>
+    
     </div>
+
+    <div class="clearfix"> </div>
+
 </section>
