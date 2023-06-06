@@ -14,7 +14,7 @@ $this->title = 'Обнновление данных аккаунта: ' . $model
 
     <div class="container"> <!-- centering block and 50% for all site -->
         <div class="cont-index">  <!-- centering the block -->
-            <div class="content"> <!-- white part -->
+            <div class="content-profile"> <!-- white part -->
 
                 <h1><?= Html::encode($this->title) ?></h1>
 

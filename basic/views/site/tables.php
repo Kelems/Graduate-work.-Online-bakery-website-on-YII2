@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <div class="container content-container">
 	<div class="default-index">
 		<!-- grow -->
-		<div class="container" style="text-align:center">
+		<div class="container" style="text-align:center; padding: 2em 0px 5em 0px; ">
 			<h1 class="border-bottom pb-3 mb-3">Таблицы</h1>
 		</div>
 		<!-- grow -->

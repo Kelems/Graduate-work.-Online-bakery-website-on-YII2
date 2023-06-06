@@ -30,17 +30,21 @@ use yii\helpers\Url;
                 <table class="table table-bordered text-center" >
                   <!-- первая таблица именований -->
                   <tr>
-                    <th >Изображение</th>
-                    <th >Наименование</th>
-                    <th >Количество, шт.</th>
-                    <th >Цена, руб.</th>
-                    <th >Сумма, руб.</th>
+                    <td >Изображение</td>
+                    <td >Наименование</td>
+                    <td >Количество, шт.</td>
+                    <td >Цена, руб.</td>
+                    <td >Сумма, руб.</td>
+                    <td style="vertical-align: middle;">
+                      <a href="<?= Url::to(['basket/clear']); ?>" class="text-danger">
+                        Очистить корзину
+                      </a>
+                    </td>
                   </tr>
 
                   <!-- наши данные в корзине -->
                   <?php foreach ($basket['products'] as $id => $item): ?>
                     <tr>
-
                       <!-- Изображение -->
                       <td class="text-center table-center table-names">
                         <?=Html::img('@web/img/products/medium/'.$item['image'], ['width' => '128']);?>
@@ -95,15 +99,17 @@ use yii\helpers\Url;
 
                     <!-- слово "итого" -->
                     <td class="text-center table-center table-names" colspan="3" style="vertical-align: middle;">Итого</td>
+                    
                     <!-- итоговое значение всего-->
                     <td class="text-center table-center table-names" style="vertical-align: middle;">
                       <?= $basket['amount']; ?>  
                     </td>
 
                     <td style="vertical-align: middle;">
-                      <a href="<?= Url::to(['basket/clear']); ?>" class="text-danger">
-                        Очистить корзину
-                      </a>
+
+                      <?php if ($disc > 0): ?> <!-- проверка есть ли скидка -->
+                      <?= Html::encode('Скидка: '. $disc * 100 .'%'); ?> <!-- демонстрация пользователю наличие скидки -->
+                      <?php endif ?>
                     </td>
                   </tr>
                 </table>
@@ -114,17 +120,31 @@ use yii\helpers\Url;
               <h1 class="text-center" style="padding:3em 1em 3em 1em">Ваша корзина ещё пуста</h1>
             <?php endif; ?>
           </div>
+          
           <div style="padding:2.5% 0px 2.5% 0px">
             <?php if (!empty($basket)): ?>
-              <a href="<?= Url::to(['order/checkout']); ?>"
-              class="btn btn-warning col-12" style="padding: 10px">
-                Оформить заказ
-              </a>    
+              <?php if (!Yii::$app->user->isGuest): ?>
+                <a href="<?= Url::to(['order/checkout']); ?>"
+                class="btn btn-warning col-12" style="padding: 10px">
+                  Оформить заказ
+                </a>
+              <?php else:  ?>
+                <!-- -->
+                <button type="button" class="btn btn-warning col-12" style="padding: 10px" onclick=" window.myDialog.show();"> Оформить заказ </button>
+                
+                <dialog id="myDialog" style="border: 0px;">  
+                  <p>Для оформления заказа вам нужно авторизоваться в системе!</p>    
+                </dialog>
+
+              <?php endif; ?>
+              <!-- -->    
             <?php endif; ?>
+
           </div>
         </div>
 
       </div>
 
     </div>
+
 </section>

@@ -51,7 +51,7 @@ class Category extends ActiveRecord
     $query = Product::find()->where(['in', 'category_id', $id]);
     $pages = new Pagination([
       'totalCount' => $query->count(),
-      'pageSize' => 4,//Yii::$app->params['pageSize'],  // кол-во товаров на странице
+      'pageSize' => 8,//Yii::$app->params['pageSize'],  // кол-во товаров на странице
       'forcePageParam' => false,
       'pageSizeParam' => false
     ]);

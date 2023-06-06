@@ -9,12 +9,44 @@ use yii\web\Controller;
 use yii\web\Response;
 
 use app\models\Basket;
+use app\models\Discount;
 
 class BasketController extends Controller {
   //страница корзины
   public function actionIndex() {
     $basket = (new Basket())->getBasket();
-    return $this->render('index', ['basket' => $basket]);
+    //проверка пустая ли корзина
+    if(!empty($basket)){
+
+      // раз в корзине что-то есть, то проверяем сколько у пользователя всего было потрачено
+      $total = Yii::$app->user->identity->total_of_all_order;
+      //ищем наибольший процент
+      $query = (new yii\db\Query())
+        ->select('max(percent) AS perc')
+        ->from('discount')
+        ->where(['<=','required_value', $total])
+        ->all();
+    
+      //сохраняем наибольший процент скидки пользователя в переменную
+      $temp = $query[0];
+      $disc = $temp['perc'];
+
+      if ($disc > 0) {
+        $value['amount'] = $basket['amount'] - ($basket['amount'] * $disc);
+        $basket['amount'] = $value['amount'];
+      }
+    }
+    
+    /*
+      echo "<pre>";
+        print_r($basket);
+      echo "</pre>";
+    */
+    
+    return $this->render('index', [
+      'basket' => $basket,
+      'disc' => $disc
+     ]);
   }
 
   //добавление в корзину
@@ -43,8 +75,8 @@ class BasketController extends Controller {
     } else { // без использования AJAX
             return $this->redirect(Yii::$app->request->referrer);
       //      return $this->redirect(['basket/index']);
+      }
     }
-  }
 
   //очищаем корзину
   public function actionRemove($id) {
@@ -80,6 +112,9 @@ class BasketController extends Controller {
   public function actionUpdate() {
     $basket = new Basket();
     /* Данные должны приходить методом POST; если это не так — просто показываем корзину */
+
+    // проверка вывода данных о товаре
+     
     if (!Yii::$app->request->isPost) {
       return $this->redirect(['basket/index']);
     }

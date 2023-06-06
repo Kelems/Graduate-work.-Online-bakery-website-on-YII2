@@ -9,7 +9,7 @@ use yii\helpers\Url;
 ?>
 
 <section>
-  <div class="container">
+  <div class="container" style="padding: 4em 0px 3em 0em">
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
