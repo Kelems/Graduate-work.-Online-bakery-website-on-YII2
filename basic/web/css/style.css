@@ -3081,6 +3081,43 @@ a.item_add p.number {
 }
 
 
+.stripe-button-el {
+  overflow: hidden;
+  display: inline-block;
+  visibility: visible !important;
+  background-image: -webkit-linear-gradient(#28a0e5,#015e94);
+  background-image: -moz-linear-gradient(#28a0e5,#015e94);
+  background-image: -ms-linear-gradient(#28a0e5,#015e94);
+  background-image: -o-linear-gradient(#28a0e5,#015e94);
+  background-image: -webkit-linear-gradient(#28a0e5,#015e94);
+  background-image: -moz-linear-gradient(#28a0e5,#015e94);
+  background-image: -ms-linear-gradient(#28a0e5,#015e94);
+  background-image: -o-linear-gradient(#28a0e5,#015e94);
+  background-image: linear-gradient(#28a0e5,#015e94);
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+  padding: 1px;
+  text-decoration: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  -ms-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  -o-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
 /* */
 
 /* */

@@ -6,6 +6,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use ruskid\stripe\StripeCheckout;
 ?>
 
 <section>
@@ -21,10 +22,11 @@ use yii\helpers\Url;
           <?= $form->field($order, 'pickup')->radioList(['0' => 'Самовывоз','1' => 'Доставка']); ?>
           <?= $form->field($order, 'address')->textarea(['rows' => 2]); ?>
           <?= $form->field($order, 'comment')->textarea(['rows' => 1]); ?>
-          <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'style' => "text-align: center"]); ?>
+          <?= Html::submitButton('Завершить заказ', ['class' => 'btn btn-primary col-12', 'style' => "text-align: center"]); ?>
           <?php ActiveForm::end(); ?>
         </div>
       </div>
     </div>
   </div>
+
 </section>

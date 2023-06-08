@@ -6,10 +6,10 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\searchs\DiscountSearch */
+/* @var $searchModel app\modules\admin\searchs\CommentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Скидки';
+$this->title = 'Комментарии';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
   <div class="container" style="text-align:center">
@@ -18,31 +18,29 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- grow --> 
 
   <div class="container">
-        <?= Html::a('Создать скидку', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать комментарий', ['create'], ['class' => 'btn btn-success']) ?>
   </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
  <div class="container">
-    <?= GridView::widget([ 
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-      //      ['class' => 'yii\grid\SerialColumn'],
+   //         ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'percent',
-            'required_value',
+            'product_id',
+            'user_id',
+            'message',
+            'date_message',
             [
                 'class' => ActionColumn::className(),
-             /*
-                'urlCreator' => function ($action, Discount $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                'urlCreator' => function ($action, Comment $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'product_id' => $model->product_id, 'user_id' => $model->user_id]);
                  }
-            */
             ],
         ],
     ]); ?>
-</div>
 
 
 </div>

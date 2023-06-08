@@ -5,6 +5,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use ruskid\stripe\StripeCheckout;
+
 ?>
 
 <section>
@@ -121,16 +123,21 @@ use yii\helpers\Url;
             <?php endif; ?>
           </div>
           
-          <div style="padding:2.5% 0px 2.5% 0px">
+          <div class = "table-center" style="padding:2.5% 0px 2.5% 0px">
             <?php if (!empty($basket)): ?>
               <?php if (!Yii::$app->user->isGuest): ?>
-                <a href="<?= Url::to(['order/checkout']); ?>"
-                class="btn btn-warning col-12" style="padding: 10px">
-                  Оформить заказ
-                </a>
+
+               <!-- <button type="button" class="btn btn-warning col-12" style="padding: 10px";"> -->
+                <?= StripeCheckout::widget([
+                  'action' => '/order/checkout',
+                  'name' => 'Хлебная душа',
+                  'description' => 'Прямо из печи',
+                  'amount' => ($order->cost / 81.28 * 100),
+                ])?>
+              <!--  </button> -->
               <?php else:  ?>
                 <!-- -->
-                <button type="button" class="btn btn-warning col-12" style="padding: 10px" onclick=" window.myDialog.show();"> Оформить заказ </button>
+                <button type="button" class="stripe-button-el" style="padding: 10px" onclick=" window.myDialog.show();"> Оформить заказ </button>
                 
                 <dialog id="myDialog" style="border: 0px;">  
                   <p>Для оформления заказа вам нужно авторизоваться в системе!</p>    

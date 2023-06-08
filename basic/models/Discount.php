@@ -39,9 +39,9 @@ class Discount extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'percent' => 'Percent',
-            'required_value' => 'Required Value',
+            'id' => 'id скидки',
+            'percent' => 'Процент скидки',
+            'required_value' => 'минимальная сумма скидки',
         ];
     }
 

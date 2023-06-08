@@ -92,6 +92,24 @@ use yii\helpers\Url;
 							<a class="btn btn-warning" href="/admin/user"> К таблице »</a>
 						</p>
 					</div>
+					<div class="generator col-lg-4">
+						<h3>comment</h3>
+						<p>
+							Данная таблица содержит данные о комментариях пользователей
+						</p>
+						<p>
+							<a class="btn btn-warning" href="/admin/comment"> К таблице »</a>
+						</p>
+					</div>
+					<div class="generator col-lg-4">
+						<h3>Discount</h3>
+						<p>
+							Данная таблица содержит данные о пользователях
+						</p>
+						<p>
+							<a class="btn btn-warning" href="/admin/discount"> К таблице »</a>
+						</p>
+					</div>
 				</div>
 			</div>
 		<div class="clearfix"> </div>

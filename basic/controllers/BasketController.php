@@ -18,22 +18,24 @@ class BasketController extends Controller {
     //проверка пустая ли корзина
     if(!empty($basket)){
 
-      // раз в корзине что-то есть, то проверяем сколько у пользователя всего было потрачено
-      $total = Yii::$app->user->identity->total_of_all_order;
-      //ищем наибольший процент
-      $query = (new yii\db\Query())
-        ->select('max(percent) AS perc')
-        ->from('discount')
-        ->where(['<=','required_value', $total])
-        ->all();
-    
-      //сохраняем наибольший процент скидки пользователя в переменную
-      $temp = $query[0];
-      $disc = $temp['perc'];
+      if (!Yii::$app->user->isGuest) {
+        // раз в корзине что-то есть, то проверяем сколько у пользователя всего было потрачено
+        $total = Yii::$app->user->identity->total_of_all_order;
+        //ищем наибольший процент
+        $query = (new yii\db\Query())
+          ->select('max(percent) AS perc')
+          ->from('discount')
+          ->where(['<=','required_value', $total])
+          ->all();
+      
+        //сохраняем наибольший процент скидки пользователя в переменную
+        $temp = $query[0];
+        $disc = $temp['perc'];
 
-      if ($disc > 0) {
-        $value['amount'] = $basket['amount'] - ($basket['amount'] * $disc);
-        $basket['amount'] = $value['amount'];
+        if ($disc > 0) {
+          $value['amount'] = $basket['amount'] - ($basket['amount'] * $disc);
+          $basket['amount'] = $value['amount'];
+        }
       }
     }
     
