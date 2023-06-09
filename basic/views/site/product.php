@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\CommentForm;
 use app\models\Comment;
+use yii\imagine\Image;
 
   $this->title = $product['name'];
 
@@ -27,16 +28,6 @@ use app\models\Comment;
   <div class="container"> <!-- center white -->
     <div class="content-product row" style="border: 15px solid white"> <!-- white part -->
       <div class="col-sm-12 row">
-
-        <!-- изображение -->
-        <div class="col-sm-5" style="padding: 0px 20px 0px 0px;">
-          <?=
-            Html::img(
-            '@web/img/products/medium/'.$product['image'], //сделать большим
-            ['alt' => $product['name'], 'class' => 'img-responsive']
-            );
-          ?>
-        </div>
         <!-- контент -->
         <div class="col-sm-7" >
           <!-- состав -->
@@ -51,8 +42,11 @@ use app\models\Comment;
             <?php endif; ?>
           </div>
 
+          <!-- данные из самой таблицы товара -->
+          <p><b>Цена: </b><span><?= $product['price'] . " рублей" ?></span> </p>
+
           <!-- форма заказа -->
-          <form
+          <form style="padding-bottom:30px;"
             method="post"
             action="<?= Url::to(['basket/add']); ?>"
             class="add-to-basket">
@@ -70,8 +64,6 @@ use app\models\Comment;
               Добавить в корзину
             </button>
           </form>
-          <!-- данные из самой таблицы товара -->
-          <p><b>Цена: </b><span><?= $product['price'] . " рублей" ?></span> </p>
           <p><b>Вес: </b><span><?= $product['weight'] ." грамм." ?></span> </p>
           <p><b>Срок годности: </b><span><?= $product['expiration_date'] ." дня."; ?></span>  </p>
           <p><b>Белков в 100 граммах: </b><span><?= $product['protein'] ." гр."; ?></span> </p>
@@ -79,8 +71,22 @@ use app\models\Comment;
           <p><b>Углеводы в 100 граммах: </b><span><?= $product['carbohydrate'] ." гр."; ?></span> </p>
           <p><b>кКал в 100 граммах: </b><span><?= $product['calorific'] ." кДж."; ?></span> </p>
         <!-- описание товара -->
-          <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>        
+          <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>     
+
+
         </div>
+        <!-- изображение -->
+        <div class="col-sm-5" style="padding: 0px 20px 0px 0px;">
+          <?=
+          //          $image = Yii::getAlias('@web/img/products/medium/'.$product['image']);,
+
+            Html::img(
+            '@web/img/products/medium/'.$product['image'],
+            ['alt' => $product['name'], 'class' => 'img-responsive']
+            );
+          ?>
+        </div>
+      
       </div>
     </div>
   </div>
