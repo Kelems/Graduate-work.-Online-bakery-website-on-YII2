@@ -103,9 +103,12 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function getProduct($id) {
-      return self::find()->where(['id' => $id])->asArray()->one();
+        return self::find()->where(['id' => $id])->asArray()->one();
     }
 
+    public function getComments(){
+        return $this->hasMany(Comment::className(),['product_id' => 'id']);
+    }
 
     public function getSearchResult($search, $page) {
         $search = $this->cleanSearchString($search);

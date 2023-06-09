@@ -126,15 +126,14 @@ use ruskid\stripe\StripeCheckout;
           <div class = "table-center" style="padding:2.5% 0px 2.5% 0px">
             <?php if (!empty($basket)): ?>
               <?php if (!Yii::$app->user->isGuest): ?>
+                <?php $amount = $basket['amount'] / 81.28 * 100 ?>
 
-               <!-- <button type="button" class="btn btn-warning col-12" style="padding: 10px";"> -->
                 <?= StripeCheckout::widget([
                   'action' => '/order/checkout',
                   'name' => 'Хлебная душа',
                   'description' => 'Прямо из печи',
-                  'amount' => ($order->cost / 81.28 * 100),
+                  'amount' => $amount,
                 ])?>
-              <!--  </button> -->
               <?php else:  ?>
                 <!-- -->
                 <button type="button" class="stripe-button-el" style="padding: 10px" onclick=" window.myDialog.show();"> Оформить заказ </button>

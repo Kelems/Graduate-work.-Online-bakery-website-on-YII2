@@ -562,6 +562,7 @@ height: 35px;
     min-height: 44em;
 }
 
+
 .cont-index {
     position: relative;
     min-height: 75em;
@@ -572,6 +573,13 @@ height: 35px;
     top: -5%;
     background-color: #fff;
     padding: 1%;
+}
+
+.content-product {
+    position: static;
+/*    top: -5%; */
+    background-color: #fff;
+/*    padding: 1%; */
 }
 
 .content-profile {
@@ -3078,6 +3086,14 @@ a.item_add p.number {
 }
 .amet-sed {
     width: 100%;
+}
+
+
+.container-comment
+{
+    margin: 0 3.39% 0 3.39%;
+    padding: 0 15px 0 15px;
+    border: 10px inset grey;
 }
 
 

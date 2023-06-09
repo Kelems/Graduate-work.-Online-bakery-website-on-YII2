@@ -5,6 +5,8 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\CommentForm;
+use app\models\Comment;
 
   $this->title = $product['name'];
 
@@ -19,155 +21,105 @@ use yii\helpers\Html;
     </div>
   </div>
 </section>
-<!-- котент -->
-<section class="background">
+
+<!-- контент -->
+<section class="background" style="padding-bottom: 1em;">
   <div class="container"> <!-- center white -->
-    <div class="cont">
+    <div class="content-product row" style="border: 15px solid white"> <!-- white part -->
+      <div class="col-sm-12 row">
 
-      <div class="content" style="border: 15px solid white"> <!-- white part -->
-        <div class="row">
-          <div class="col-sm-12">
-              <div class="row">
-                <!-- изображение -->
-                <div class="col-sm-5" style="padding: 0px 1px 20px 0px;">
-                  <?=
-                    Html::img(
-                      '@web/img/products/medium/'.$product['image'], //сделать большим
-                      ['alt' => $product['name'], 'class' => 'img-responsive']
-                    );
-                  ?>
-                </div>
-                <!-- контент -->
-              <div class="col-sm-7" >
-
-                <!-- состав -->
-                <div style="padding: 0px 0px 20px 0px;" >
-                  <div class="row">Состав:</div>
-                  <?php if (!empty($ingredients)): ?>
-
-                    <?php foreach ($ingredients as $ingredient): ?>
-                      <a>  <?= Html::encode($ingredient['name'].', '); ?> </a>
-                    <?php endforeach; ?>
-                  <?php else: ?>
-                    <p>Состав товара, на данный момент, не внесен.</p>
-                  <?php endif; ?>
-                </div>
-
-                <!-- данные из самой таблицы товара -->
-                <p> Цена: <span><?= $product['price']; ?></span> </p>
-                <p> Вес: <span><?= $product['weight']; ?></span> </p>
-                <p> Срок годности: <span><?= $product['expiration_date']; ?></span>  </p>
-                <p> Протеинов в 100 граммах: <span><?= $product['protein']; ?></span> </p>
-                <p> Жиров в 100 граммах: <span><?= $product['fat']; ?></span> </p>
-                <p> Углеводы в 100 граммах: <span><?= $product['carbohydrate']; ?></span> </p>
-                <p> кКал в 100 граммах: <span><?= $product['calorific']; ?></span> </p>
-
-                <!-- форма заказа -->
-                <form
-                method="post"
-                action="<?= Url::to(['basket/add']); ?>"
-                class="add-to-basket">
-                  <label>Количество</label>
-                  <input name="count" type="text" value="1" />
-                  <input type="hidden" name="id" value="<?= $product['id']; ?>">
-                    <?=
-                      Html::hiddenInput(
-                        Yii::$app->request->csrfParam,
-                        Yii::$app->request->csrfToken
-                      );
-                    ?>
-                  <button type="submit"
-                  class="btn btn-warning"
-                  >
-                    Добавить в корзину
-                  </button>
-                </form>
-
-              </div>
-
-            <!-- описание товара -->
-          </div>
-          <div class="product-descr">
-            <?= $product['content']; ?>
+        <!-- изображение -->
+        <div class="col-sm-5" style="padding: 0px 20px 0px 0px;">
+          <?=
+            Html::img(
+            '@web/img/products/medium/'.$product['image'], //сделать большим
+            ['alt' => $product['name'], 'class' => 'img-responsive']
+            );
+          ?>
+        </div>
+        <!-- контент -->
+        <div class="col-sm-7" >
+          <!-- состав -->
+          <div style="padding: 0px 0px 20px 0px;" >
+            <p><b>Состав:</b></p>
+            <?php if (!empty($ingredients)): ?>
+              <?php foreach ($ingredients as $ingredient): ?>
+                <a>  <?= Html::encode($ingredient['name'].', '); ?> </a>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <b>Состав товара, на данный момент, не внесен.</b>
+            <?php endif; ?>
           </div>
 
-          </div>
+          <!-- форма заказа -->
+          <form
+            method="post"
+            action="<?= Url::to(['basket/add']); ?>"
+            class="add-to-basket">
+            <label>Количество</label>
+            <input name="count" type="text" value="1" />
+            <input type="hidden" name="id" value="<?= $product['id']; ?>">
+            <?=
+              Html::hiddenInput(
+              Yii::$app->request->csrfParam,
+              Yii::$app->request->csrfToken
+              );
+            ?>
+            <button type="submit"
+              class="btn btn-warning">
+              Добавить в корзину
+            </button>
+          </form>
+          <!-- данные из самой таблицы товара -->
+          <p><b>Цена: </b><span><?= $product['price'] . " рублей" ?></span> </p>
+          <p><b>Вес: </b><span><?= $product['weight'] ." грамм." ?></span> </p>
+          <p><b>Срок годности: </b><span><?= $product['expiration_date'] ." дня."; ?></span>  </p>
+          <p><b>Белков в 100 граммах: </b><span><?= $product['protein'] ." гр."; ?></span> </p>
+          <p><b>Жиров в 100 граммах: </b><span><?= $product['fat'] ." гр."; ?></span> </p>
+          <p><b>Углеводы в 100 граммах: </b><span><?= $product['carbohydrate'] ." гр."; ?></span> </p>
+          <p><b>кКал в 100 граммах: </b><span><?= $product['calorific'] ." кДж."; ?></span> </p>
+        <!-- описание товара -->
+          <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>        
         </div>
       </div>
-
-
-      <div class="content" style="border: 15px solid white"> <!-- white part -->
-        <div class="row">
-          <div class="col-sm-12">
-              <div class="row">
-                <!-- изображение -->
-                <div class="col-sm-5" style="padding: 0px 1px 20px 0px;">
-                  <?=
-                    Html::img(
-                      '@web/img/products/medium/'.$product['image'], //сделать большим
-                      ['alt' => $product['name'], 'class' => 'img-responsive']
-                    );
-                  ?>
-                </div>
-                <!-- контент -->
-              <div class="col-sm-7" >
-
-                <!-- состав -->
-                <div style="padding: 0px 0px 20px 0px;" >
-                  <div class="row">Состав:</div>
-                  <?php if (!empty($ingredients)): ?>
-
-                    <?php foreach ($ingredients as $ingredient): ?>
-                      <a>  <?= Html::encode($ingredient['name'].', '); ?> </a>
-                    <?php endforeach; ?>
-                  <?php else: ?>
-                    <p>Состав товара, на данный момент, не внесен.</p>
-                  <?php endif; ?>
-                </div>
-
-                <!-- данные из самой таблицы товара -->
-                <p> Цена: <span><?= $product['price']; ?></span> </p>
-                <p> Вес: <span><?= $product['weight']; ?></span> </p>
-                <p> Срок годности: <span><?= $product['expiration_date']; ?></span>  </p>
-                <p> Протеинов в 100 граммах: <span><?= $product['protein']; ?></span> </p>
-                <p> Жиров в 100 граммах: <span><?= $product['fat']; ?></span> </p>
-                <p> Углеводы в 100 граммах: <span><?= $product['carbohydrate']; ?></span> </p>
-                <p> кКал в 100 граммах: <span><?= $product['calorific']; ?></span> </p>
-
-                <!-- форма заказа -->
-                <form
-                method="post"
-                action="<?= Url::to(['basket/add']); ?>"
-                class="add-to-basket">
-                  <label>Количество</label>
-                  <input name="count" type="text" value="1" />
-                  <input type="hidden" name="id" value="<?= $product['id']; ?>">
-                    <?=
-                      Html::hiddenInput(
-                        Yii::$app->request->csrfParam,
-                        Yii::$app->request->csrfToken
-                      );
-                    ?>
-                  <button type="submit"
-                  class="btn btn-warning"
-                  >
-                    Добавить в корзину
-                  </button>
-                </form>
-
-              </div>
-
-            <!-- описание товара -->
-          </div>
-          <div class="product-descr">
-            <?= $product['content']; ?>
-          </div>
-
-          </div>
-        </div>
-      </div>
-
-
     </div>
   </div>
+
+  <?php if (!Yii::$app->user->isGuest) :  ?> <!-- авторизовался ли пользователь -->
+
+    <?php $query = (new Comment())->getCommentuser(Yii::$app->user->id, $product['id']); ?>
+    <?php if (empty($query)): ?> <!-- писал ли он отзыв данному товару? -->
+
+      <div class="container" style=" padding: 0px 0% 0px 0%;  border: 10px inset grey;"> <!-- center white -->
+        <div class="content-product"> <!-- white part -->
+
+            <!-- форма для комментариев-->
+            <?php $form = \yii\widgets\ActiveForm::begin([
+              'action' => ['site/comment', 'id'=>$product['id']],
+              'options' => [ 'role'=>'form']]) ?>
+
+              <div class="form-group" style="padding: 5px 5px 0px 5px">
+                  <?= $form->field($commentForm, 'message')->textarea(['class'=>'form-control', 'style'=>'display:inlinflex','placeholder'=> 'Место под ваш комментарий!'])->label(false) ?>
+              </div>
+            <button type="submit" class="btn btn-warning" style='margin-left:40%; margin-bottom: 1em;'>Сохранить комментарий</button>
+            <?php \yii\widgets\ActiveForm::end() ?>
+
+        </div>
+      </div>
+
+    <?php endif; ?>
+  <?php endif; ?>
+
+  <!-- отзывы -->
+  <?php if(!empty($comments)): ?>
+    <?php foreach($comments as $comment): ?>
+      <div class="content-product container" style=" padding: 0px 0% 0px 0%;  border: 10px inset grey;"> <!-- center white -->
+        <p>
+          <h5 style="padding: 0px 0px 0px 10px"><b><?= $comment->user['name']; ?></b></h5> 
+            <span style="color: grey; padding: 0px 0px 0px 10px"><?= substr($comment['date_message'],0, 10); ?></span>
+          </p>
+        <p><span style="padding: 0px 0px 0px 30px"><?= $comment['message']; ?></span>  </p>
+      </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
 </section>

@@ -21,11 +21,12 @@ use app\models\SignupForm;
 
 //use app\models\User;
 use app\models\Category;
+use app\models\Comment;
 use app\models\Product;
 use app\models\Ingredient;
 use app\models\IngredientHasProduct;
 use app\models\User;
-
+use app\models\CommentForm;
 
 //Controller
 class SiteController extends Controller{
@@ -100,7 +101,6 @@ class SiteController extends Controller{
 
   //base page
   public function actionIndex(){
-    // получаем товары по скидке. доработать
     $discounts = (new Product())->getSale(); // модель продукта
   // $searchModel = new ProductSearch();
     /*
@@ -155,6 +155,13 @@ class SiteController extends Controller{
     $product = (new Product())->getProduct($id);  //данные о продукте
     $ingredients = Product::findOne($id)->items;  //данные о ингридентах товара
  
+    $comments = Product::findOne($id)->comments;
+    $commentForm = new CommentForm();
+    /*
+      echo "<pre>";
+      print_r($comments);
+      echo "</pre>";
+    */
     /*
       $data = Yii::$app->cache->get('product-'.$id);  // пробуем извлечь данные продукта из кеша
       $ingredients = $product->ingredients;
@@ -167,19 +174,20 @@ class SiteController extends Controller{
 
     return $this->render(
       'product',
-      compact('product','ingredients')
+      compact('product','ingredients', 'comments', 'commentForm')
     );
   }
 
   //Registration page
   public $Password;
-  public function actionRegistration() {
-  if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
-    return $this->goHome();
-  }
 
-  $registration = new User(); //создаем модель из бд
-  $registration->scenario = 'registration'; //проводит по сценарию
+  public function actionRegistration() {
+    if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
+      return $this->goHome();
+    }
+
+    $registration = new User(); //создаем модель из бд
+    $registration->scenario = 'registration'; //проводит по сценарию
     /*
       $login = new User(); //создаем модель из бд
       $login->scenario = 'login'; //проводит по сценарию
@@ -252,6 +260,18 @@ class SiteController extends Controller{
   //administration panel
 	public function actionTables(){
     return $this->render('tables');
+  }
+
+
+  public function actionComment($id){
+    $model = new CommentForm();
+    if(Yii::$app->request->isPost)
+    {
+      $model->load(Yii::$app->request->post());
+      if($model->saveComment($id)){
+        return $this->redirect(['site/product','id'=> $id]);
+      }
+    }
   }
 
 
