@@ -4,7 +4,7 @@
 ?>
 	
 <!-- grow -->
-<section class="small-banner">
+<section class="small-banner-contact">
 	<div class="container">
 	  	<div  id="top" class="callbacks_container">
 			<li>
@@ -36,11 +36,10 @@
 					</div>
 					<div class="col-md-4 contact-in">
 						<div class="address-more">
-							<h4>Адрес</h4>
-							<p>ДГТУ</p>
-							<p>+7 (800) 100-19-30</p>
-							<p>Сайт: www.donstu.ru</p>
-							<p>площадь Гагарина, 1, Ростов-на-Дону</p>
+							<h4>Контактные данные</h4>
+							<p>BreadSoul@mail.ru</p>
+							<p>+7 (952) 163-07-38</p>
+							<p>Кузнечная ул., 8, Ростов-на-Дону</p>
 						</div>
 					</div>
 
@@ -48,7 +47,7 @@
 				</div>
 		
 				<div class="map">
-					<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A9e36973c89542bbeb6ecddc76039bdc5673fac85a1781130112d1015123710c3&amp;source=constructor" width="1145" height="455" frameborder="0"></iframe>
+					<iframe src="https://yandex.ru/map-widget/v1/?ll=39.624148%2C47.193784&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxOTM0ODE4MTMxEkrQoNC-0YHRgdC40Y8sINCg0L7RgdGC0L7Qsi3QvdCwLdCU0L7QvdGDLCDQmtGD0LfQvdC10YfQvdCw0Y8g0YPQu9C40YbQsCwgOCIKDSF_HkIVcMY8Qg%2C%2C&z=16.64" width="1145" height="455" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>

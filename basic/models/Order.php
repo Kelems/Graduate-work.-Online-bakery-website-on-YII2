@@ -52,7 +52,7 @@ class Order extends \yii\db\ActiveRecord
               'message' => 'Введите номер телефона для связи +7 1234567890'
             ],
 */
-            [['date_order', 'date_status','date_order', 'comment','address', 'date_status'], 'safe'],
+            [['date_order', 'date_status','date_order', 'comment','address', 'date_status', 'time_delivery', 'city', 'city_cost'], 'safe'],
             [['name', 'email', 'address', 'comment'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 20],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -84,12 +84,15 @@ class Order extends \yii\db\ActiveRecord
             'email' => 'Email',
             'phone' => 'Телефон',
             'address' => 'Адрес доставки',
-            'comment' => 'Комментарий заказа',
+            'comment' => 'Комментарий к заказу',
             'cost' => 'Итоговая цена',
             'date_order' => 'Дата заказа',
             'order_status' => 'Статус заказа',
             'date_status' => 'Время обновления заказа',
             'pickup' => 'Самовывоз?',
+            'city' => 'Город доставки',
+            'city_cost' => 'Стоимость доставки',
+            'time_delivery' => 'Часы приема доставки',
         ];
     }
 

@@ -5,11 +5,12 @@ use yii\web\IdentityInterface;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\helpers\Html;
-
+use yii2mod\cashier\Billable;
 use Yii;
 
 class User extends ActiveRecord implements IdentityInterface{
 
+  use Billable;
   /*
   public $id;
   public $role_id;

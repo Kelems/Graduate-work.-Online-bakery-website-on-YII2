@@ -26,10 +26,10 @@ use yii\imagine\Image;
 <!-- контент -->
 <section class="background" style="padding-bottom: 1em;">
   <div class="container"> <!-- center white -->
-    <div class="content-product row" style="border: 15px solid white"> <!-- white part -->
-      <div class="col-sm-12 row">
+    <div class="content-product row" style="border: 15px solid white; "> <!-- white part -->
+      <div class="col-sm-12 row ">
         <!-- контент -->
-        <div class="col-sm-7" >
+        <div class="col-sm-7" style="padding: 20px 0px 0px 20px">
           <!-- состав -->
           <div style="padding: 0px 0px 20px 0px;" >
             <p><b>Состав:</b></p>
@@ -70,13 +70,11 @@ use yii\imagine\Image;
           <p><b>Жиров в 100 граммах: </b><span><?= $product['fat'] ." гр."; ?></span> </p>
           <p><b>Углеводы в 100 граммах: </b><span><?= $product['carbohydrate'] ." гр."; ?></span> </p>
           <p><b>кКал в 100 граммах: </b><span><?= $product['calorific'] ." кДж."; ?></span> </p>
-        <!-- описание товара -->
+          <!-- описание товара -->
           <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>     
-
-
         </div>
         <!-- изображение -->
-        <div class="col-sm-5" style="padding: 0px 20px 0px 0px;">
+        <div class="col-sm-5" style="padding: 10px 0px 0px 0px;">
           <?=
           //          $image = Yii::getAlias('@web/img/products/medium/'.$product['image']);,
 
@@ -96,7 +94,7 @@ use yii\imagine\Image;
     <?php $query = (new Comment())->getCommentuser(Yii::$app->user->id, $product['id']); ?>
     <?php if (empty($query)): ?> <!-- писал ли он отзыв данному товару? -->
 
-      <div class="container" style=" padding: 0px 0% 0px 0%;  border: 10px inset grey;"> <!-- center white -->
+      <div class="container " style=" padding: 0px 0% 0px 0%;  border: 10px inset grey;"> <!-- center white -->
         <div class="content-product"> <!-- white part -->
 
             <!-- форма для комментариев-->
@@ -105,9 +103,9 @@ use yii\imagine\Image;
               'options' => [ 'role'=>'form']]) ?>
 
               <div class="form-group" style="padding: 5px 5px 0px 5px">
-                  <?= $form->field($commentForm, 'message')->textarea(['class'=>'form-control', 'style'=>'display:inlinflex','placeholder'=> 'Место под ваш комментарий!'])->label(false) ?>
+                  <?= $form->field($commentForm, 'message')->textarea(['class'=>'form-control', 'style'=>'display:inlinflex','placeholder'=> 'Место под ваш отзыв!'])->label(false) ?>
               </div>
-            <button type="submit" class="btn btn-warning" style='margin-left:40%; margin-bottom: 1em;'>Сохранить комментарий</button>
+            <button type="submit" class="btn btn-warning" style='margin-left:40%; margin-bottom: 1em;'>Сохранить отзыв</button>
             <?php \yii\widgets\ActiveForm::end() ?>
 
         </div>

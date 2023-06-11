@@ -91,7 +91,7 @@ class SiteController extends Controller{
     ];
   }
 
-  //поиск по модели
+  //поиск почты
   protected function findModel($email){
     if (($model = User::findOne(['email' => $email])) !== null) {
       return $model;
@@ -101,17 +101,8 @@ class SiteController extends Controller{
 
   //base page
   public function actionIndex(){
-    $discounts = (new Product())->getSale(); // модель продукта
-  // $searchModel = new ProductSearch();
-    /*
-      // проверка вывода данных о товаре
-      echo "<pre>";
-      print_r($temp);
-      echo "</pre>";
-      //    echo "эх.. = $ingredients";
-    */    
+    $discounts = (new Product())->getSale(); // модель продукта 
     return $this->render('index', 
-  //    ['searchModel' => $searchModel],
       compact('discounts'));
   }
 
@@ -137,9 +128,9 @@ class SiteController extends Controller{
       compact('category', 'products', 'pages'));
     }
   
+  //поиск по названию товара
   public function actionSearch($query = '', $page = 1) {
     $page = (int)$page;
-
     // получаем результаты поиска с постраничной навигацией
     list($products, $pages) = (new Product())->getSearchResult($query, $page);
 
@@ -180,7 +171,6 @@ class SiteController extends Controller{
 
   //Registration page
   public $Password;
-
   public function actionRegistration() {
     if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
       return $this->goHome();
@@ -188,32 +178,29 @@ class SiteController extends Controller{
 
     $registration = new User(); //создаем модель из бд
     $registration->scenario = 'registration'; //проводит по сценарию
-    /*
-      $login = new User(); //создаем модель из бд
-      $login->scenario = 'login'; //проводит по сценарию
-      if ($login->load(Yii::$app->request->post()) && $login->login() ) {
-        return $this->goHome();
-      }
-    */
+
     if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
-      //        if(!find()->where(['email'=>$registration->email])->limit(1)->all()){
-      $this->Password = $registration->password;
-      $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
-      if ($registration->save()) {
-        Yii::$app->session->setFlash('success','Вы внесены в систему');
-        return $this->goHome();
-      }
-      else {
-        $registration->password = $this->password;
-        //  Yii::$app->session->setFlash('dismissible','Произошла ошибка');
-        return $this->render('regist', compact('registration'));
-      }
-        /*
+
+      $query = User::findOne($registration->email); //ищем такого пользователя в бд
+      if(!empty($query))
+      {
+        $this->Password = $registration->password;
+        $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
+        if ($registration->save()) {
+          Yii::$app->session->setFlash('success','Вы внесены в систему');
+          return $this->render('login', ['model' => $model,]);
+        }
+        else {
+          $registration->password = $this->password;
+          Yii::$app->session->setFlash('dismissible','Произошла ошибка');
+          return $this->render('regist', compact('registration'));
+        }
+        
       }else {
         Yii::$app->session->setFlash('info','Такой пользователь существует!');
-        return $this->goHome();
+        return $this->render('login', ['model' => $model,]);
       }
-      */
+      
     }
     return $this->render('regist', compact('registration'));
   }
@@ -221,10 +208,12 @@ class SiteController extends Controller{
   //страница авторизации
   public function actionLogin(){
     if (!Yii::$app->user->isGuest) {
+      Yii::$app->session->setFlash('info', "Вы и так вошли!");
       return $this->goHome();
     }
     $model = new SignupForm();
     if ($model->load(Yii::$app->request->post()) && $model->login()) {
+      Yii::$app->session->setFlash('success', "С возвращением!");
       return $this->goBack();
     }
     $model->password = '';
@@ -233,9 +222,10 @@ class SiteController extends Controller{
 
   //страница профиля
   public function actionProfileView($email){
-    if (Yii::$app->user->identity->role_id >0) {
+    if (Yii::$app->user->identity->role_id > 0) {
       return $this->render('profile', ['model' => $this->findModel($email)]);
     }else {
+      Yii::$app->session->setFlash('info', "Сначала войдите в аккаунт!");
       return $this->render('index', compact('saleProducts'));
     }
   }
@@ -245,13 +235,15 @@ class SiteController extends Controller{
     if (Yii::$app->user->identity->role_id >0) {
       $model = $this->findModel($email);
       if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        Yii::$app->session->setFlash('success', "Данные успешно обновленны");
+
         return $this->redirect(['profile-view', 'email' => $model->email]);
       }
       return $this->render('update', ['model' => $model,]);
     }
   }
 
-
+  //выход из профиля
   public function actionLogout(){
     Yii::$app->user->logout();
     return $this->goHome();
@@ -262,17 +254,18 @@ class SiteController extends Controller{
     return $this->render('tables');
   }
 
-
+  //добавление комментариев
   public function actionComment($id){
     $model = new CommentForm();
     if(Yii::$app->request->isPost)
     {
       $model->load(Yii::$app->request->post());
       if($model->saveComment($id)){
+        Yii::$app->session->setFlash('success', "Ваш отзыв отправлен");
         return $this->redirect(['site/product','id'=> $id]);
+      }else{
+        Yii::$app->session->setFlash('dismissible', "Что-то пошло не так!");
       }
     }
   }
-
-
 }

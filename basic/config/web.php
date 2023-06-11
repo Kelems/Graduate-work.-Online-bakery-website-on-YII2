@@ -32,9 +32,16 @@ $config = [
     */
 
     'stripe' => [
-    'class' => 'ruskid\stripe\Stripe',
+      'class' => 'ruskid\stripe\Stripe',
+      'publicKey' => "pk_test_51ND7zAJ2JMK5WDIYG09pdRXxhkm1vZvEbZVL1uZVsPj7JpIOk1x8PMfIStFiYCQX1g1Pd8dfRbKrNSGgXJO9YiLu008QRwtQGp", //public key
+      'privateKey' => "sk_test_51ND7zAJ2JMK5WDIYamr0zFryvNpdR8pdjA7Bh5c8ltTNzh2oo4mOcvnNeHy0tl7lZBGRTBI63d7seWI0v2mO2aEm00O0JTmOHT", //private key
+    ],
+
+    'stripe' => [
+    'class' => 'alkurn\stripe\Stripe',
     'publicKey' => "pk_test_51ND7zAJ2JMK5WDIYG09pdRXxhkm1vZvEbZVL1uZVsPj7JpIOk1x8PMfIStFiYCQX1g1Pd8dfRbKrNSGgXJO9YiLu008QRwtQGp",
     'privateKey' => "sk_test_51ND7zAJ2JMK5WDIYamr0zFryvNpdR8pdjA7Bh5c8ltTNzh2oo4mOcvnNeHy0tl7lZBGRTBI63d7seWI0v2mO2aEm00O0JTmOHT",
+    //'ClientId' => "ca_xxxxxxxxxxxxxxxxxx", //Optional
     ],
     
     'request' => [
@@ -115,6 +122,13 @@ $config = [
     ],
   ],
 
+/*
+  'params' => [
+    'stripe' => [
+      'apiKey' => 'sk_test_51ND7zAJ2JMK5WDIYamr0zFryvNpdR8pdjA7Bh5c8ltTNzh2oo4mOcvnNeHy0tl7lZBGRTBI63d7seWI0v2mO2aEm00O0JTmOHT' //private key
+    ],
+  ],
+*/
   'params' => $params,
   'language' => 'ru-RU',
 ];

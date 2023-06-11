@@ -47,11 +47,11 @@
           <article class="content-top-bottom">
             <h2>О нас</h2>
             <!-- left block -->
-            <div class="col-md-6 men">
+            <div class="col-md-5 men">
               <a href="http://192.168.1.39/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
-                <img class="img-responsive" src="img/products/medium/t1.jpg" >
+                <img class="img-responsive" src="img/products/medium/5.png" >
                   <div class="b-wrapper">
-                    <h3 class="b-animate b-from-top top-in   b-delay03 ">
+                    <h3 class="b-animate b-from-top top-in ">
                       <span>
                         <b>Хлеба</b>
                         <br>Мы печем по старым рецептам на закваске, артезианской воде и грубой муке</br>
@@ -63,10 +63,10 @@
             </div>
 
             <!-- right block -->
-            <div class="col-md-6">
+            <div class="col-md-6 men">
 
               <!-- middle up image -->
-              <div class="col-md1">
+              <div class="col-md">
                 <a href="http://192.168.1.39/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
                   <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
                     <div class="b-wrapper">
@@ -82,11 +82,11 @@
               </div>
 
               <!-- two small down image -->
-              <div class="col-md2">
+              <div class="col-md2 men">
                 <!-- small left image -->
-                <div class="col-md-6 men1">
+                <div class="col-md-5 men1">
                   <a href="http://192.168.1.39/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/products/medium/t3.jpg" alt="">
+                    <img class="img-responsive" src="img/products/medium/33.png" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
                           <span><b>Десерты</b></span>
@@ -95,11 +95,11 @@
                     </img>
                   </a>
                 </div>
-
+                <div class="col-md-2"> </div>
                 <!-- small right image -->
-                <div class="col-md-6 men1">
+                <div class="col-md-5 men1">
                   <a href="http://192.168.1.39/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/products/medium/t4.jpg" alt="">
+                    <img class="img-responsive" src="img/products/medium/25.png" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
                           <span>Багеты</span>

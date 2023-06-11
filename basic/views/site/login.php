@@ -4,29 +4,22 @@
  ?>
 
 <section class="background"> <!-- orange back -->
-  <div class="container"> <!-- center -->
-    <div class="cont"> <!-- -->
-      <div class="content-down"> <!-- white back -->
-        <div class="container">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <h1 style="text-align:center;"> Авторизация</h1>
-            <h1><?= Html::encode($this->title) ?></h1>
-
-            <?php $form = ActiveForm::begin(); ?>
-
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true])->label('Почта') ?>
-            <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
-
-            <div class="form-group">
-              <div class="offset-lg-1 col-lg-11" style="text-align:center;">
-                <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-              </div>
-            </div>
-
-            <?php ActiveForm::end(); ?>
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down container"> <!-- white back -->
+      <div class="col-md-3"></div>
+      <div class="col-md-6" >
+        <h1> Авторизация</h1>
+        <?php $form = ActiveForm::begin(); ?>
+          <?= $form->field($model, 'email')->textInput(['autofocus' => true])->label('Почта') ?>
+          <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
+          <div class="form-group">
+            <?= Html::submitButton('Войти', ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
           </div>
-          <div class="col-md-3"></div>
+        <?php ActiveForm::end(); ?>
+      <div class="border-bottom pb-3 mb-3 text-center">
+        <a  href="http://192.168.1.39/basic/web/index.php/site/recovery">Восстановить доступ</a>
+      </div>
+        <a  href="http://192.168.1.39/basic/web/index.php/site/registration">Создать аккаунт</a>
       </div>
     </div>
   </div>

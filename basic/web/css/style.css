@@ -379,8 +379,26 @@ i.inst:hover{
 	position: relative;
 }
 
+.small-banner-category{
+	background: url(../img/products/banner/bread.png) no-repeat ;
+	background-size: cover;
+
+	width:100%;
+	position: relative;
+	min-height: 13em;
+}
+
 .small-banner{
 	background: url(../img/products/banner/main.jpg) no-repeat ;
+	background-size: cover;
+
+	width:100%;
+	position: relative;
+	min-height: 13em;
+}
+
+.small-banner-contact{
+	background: url(../img/products/banner/profile.png) no-repeat ;
 	background-size: cover;
 
 	width:100%;
@@ -957,10 +975,10 @@ ul.social li i:hover{
 }
 /*-- agileits --*/
 .send input[type="submit"]{
-	width: 18%;
+	width: 25%;
 	font-size: 1.2em;
 	background:#ffa500;
-	padding: 0.4em 0.8em;
+	padding: 0.8em 0.8em;
 	text-align: center;
 	color: #000;
 	border: none;
@@ -969,7 +987,8 @@ ul.social li i:hover{
 	font-weight: bold;
 }
 .send input[type="submit"]:hover{
-	background:#2d2d2d;
+	background:#000;
+	color: #ffa500;
 }
 .contact-form {
 	padding: 3em 0;
@@ -3088,16 +3107,17 @@ a.item_add p.number {
     width: 100%;
 }
 
-
-.container-comment
+.commenttable
 {
     margin: 0 3.39% 0 3.39%;
     padding: 0 15px 0 15px;
+
     border: 10px inset grey;
 }
 
 
-.stripe-button-el {
+
+.stripe {
   overflow: hidden;
   display: inline-block;
   visibility: visible !important;

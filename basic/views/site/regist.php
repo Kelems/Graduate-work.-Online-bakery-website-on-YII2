@@ -4,28 +4,20 @@
  ?>
 
 <section class="background"> <!-- orange back -->
-  <div class="container"> <!-- center -->
-    <div class="cont"> <!-- -->
-      <div class="content-down"> <!-- white back -->
-        <div class="col-md-12">
-          <div class="container">
-
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <h1> Регистрация</h1>
-              <?php $form=ActiveForm::begin()?>
-              <?= $form->field($registration, 'email')->textInput()->label('Почта');?>
-              <?= $form->field($registration, 'phone')->widget(\yii\widgets\MaskedInput::className(),['mask'=> '+7 (999) 999 99 99'])->label('Номер телефона');?>
-              <?= $form->field($registration, 'password')->passwordInput()->label('Пароль');?>
-
-              <div class ="form-group" style="text-align:center;">
-                <?= Html::submitButton('Регистрация', ['class' => 'btn btn-success']) ?>
-              </div>
-                <?php ActiveForm::end() ?>
-            </div>
-
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down container"> <!-- white back -->
+      <div class="col-md-3"></div>
+        <div class="col-md-6" >
+        <h1> Регистрация</h1>
+        <?php $form=ActiveForm::begin()?>
+          <?= $form->field($registration, 'email')->textInput()->label('Почта');?>
+          <?= $form->field($registration, 'phone')->widget(\yii\widgets\MaskedInput::className(),['mask'=> '+7 (999) 999 99 99'])->label('Номер телефона');?>
+          <?= $form->field($registration, 'password')->passwordInput()->label('Пароль');?>
+          <div class ="form-group" style="text-align:center;">
+            <?= Html::submitButton('Регистрация', ['class' => 'btn btn-success']) ?>
           </div>
-        </div>
+        <?php ActiveForm::end() ?>
+        <a  href="http://192.168.1.39/basic/web/index.php/site/login">уже зарегистрированы?</a>
       </div>
     </div>
   </div>

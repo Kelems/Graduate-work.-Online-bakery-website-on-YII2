@@ -10,7 +10,7 @@
   $this->title = $category['name'];
 ?>
 <!-- баннер -->
-<section class="small-banner">
+<section class="small-banner-category">
   <div class="container">
     <div  id="top" class="callbacks_container"> <!-- the banner goes up a little bit -->
         <div class="banner-text-center"> <!-- banner content -->

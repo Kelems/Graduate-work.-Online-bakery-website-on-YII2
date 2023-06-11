@@ -109,8 +109,26 @@
 
 		<!-- content Section -->
 		<section>
-		<?php /* echo */ Yii::$app->user->identity->role_id; ?>
+			<?php if( Yii::$app->session->hasFlash('success') ): ?>
+			    <div class="alert text-center alert-success " role="alert" style="margin: 0px; margin-bottom: 0px;">
+	        	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<?php echo Yii::$app->session->getFlash('success'); ?>
+	    		</div>
+			<?php endif;?>
 
+			<?php if( Yii::$app->session->hasFlash('info') ): ?>
+			    <div class="alert text-center alert-info" role="alert" style="margin: 0px; margin-bottom: 0px;">
+	        		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<?php echo Yii::$app->session->getFlash('info'); ?>
+	    		</div>
+			<?php endif;?>
+
+			<?php if( Yii::$app->session->hasFlash('dismissible') ): ?>
+			    <div class="alert text-center alert-dismissible" role="alert" style="margin: 0px; margin-bottom: 0px;">
+	        	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        	<?php echo Yii::$app->session->getFlash('dismissible'); ?>
+	    		</div>
+			<?php endif;?>
 			<?= $content ?>
 
 		</section>
