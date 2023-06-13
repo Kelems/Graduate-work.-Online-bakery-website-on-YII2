@@ -18,6 +18,7 @@ use app\components\AccessRule;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
+use app\models\QuestionForm;
 
 //use app\models\User;
 use app\models\Category;
@@ -205,10 +206,11 @@ class SiteController extends Controller{
     return $this->render('regist', compact('registration'));
   }
 
+
   //страница авторизации
   public function actionLogin(){
     if (!Yii::$app->user->isGuest) {
-      Yii::$app->session->setFlash('info', "Вы и так вошли!");
+      Yii::$app->session->setFlash('info', "Вы и так авторизованны!");
       return $this->goHome();
     }
     $model = new SignupForm();
@@ -220,12 +222,54 @@ class SiteController extends Controller{
     return $this->render('login', ['model' => $model,]);
   }
 
+
+  //страница секретного вопроса
+  public function actionRecovery(){
+    if (!Yii::$app->user->isGuest) { //пользователь в системе
+      Yii::$app->session->setFlash('info', "Вы и так авторизованны!");
+      return $this->goHome();
+    }
+
+    $model = new QuestionForm();
+    if ($model->load(Yii::$app->request->post())  && $model->check() ) {  
+      /*
+        echo "<pre>";
+        print_r($model->email);
+        echo "</pre>";
+      */
+      return $this->redirect(['answer', 'email' => $model->email]);
+    }
+
+    return $this->render('recovery', ['model' => $model]);
+  }
+
+    //страница ввода секретного вопроса
+  public function actionAnswer($email){
+    if (!Yii::$app->user->isGuest) { //пользователь в системе
+      Yii::$app->session->setFlash('info', "Вы и так авторизованны!");
+      return $this->goHome();
+    }
+      $model = new QuestionForm();
+      $query = (new User())->findByUsername($email);
+      $model->secret_question = $query->secret_question; 
+      $model->email = $query->email;; 
+
+    if ($model->load(Yii::$app->request->post()) && !empty($model->answer) && $model->login()  ) {
+      Yii::$app->session->setFlash('info', "Вы успешно смогли войти в свой профиль");
+
+      return $this->render('profile', ['model' => $this->findModel($email)]);
+
+    }
+
+    return $this->render('answer', ['model' => $model]);
+  }  
+
   //страница профиля
   public function actionProfileView($email){
     if (Yii::$app->user->identity->role_id > 0) {
       return $this->render('profile', ['model' => $this->findModel($email)]);
     }else {
-      Yii::$app->session->setFlash('info', "Сначала войдите в аккаунт!");
+      Yii::$app->session->setFlash('info', "Сначала войдите в профиль!");
       return $this->render('index', compact('saleProducts'));
     }
   }
@@ -236,7 +280,6 @@ class SiteController extends Controller{
       $model = $this->findModel($email);
       if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
         Yii::$app->session->setFlash('success', "Данные успешно обновленны");
-
         return $this->redirect(['profile-view', 'email' => $model->email]);
       }
       return $this->render('update', ['model' => $model,]);

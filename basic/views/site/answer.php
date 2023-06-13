@@ -9,15 +9,19 @@
       <div class="col-md-3"></div>
       <div class="col-md-6" >
 
-        <h1> Альтернативных вход</h1>
-          
+        <h1> Авторизация</h1>
         <?php $form = ActiveForm::begin(); ?>
-          <?= $form->field($model, 'email')->textInput(['autofocus' => true])->label('Введите вашу почту') ?>
+        <h3>Ваша почта:</h3>
+        <h4> <?php echo $model->email; ?> </h4>
+
+        <h3> <?php echo $model->secret_question; ?>: </h3>
+        <h4><?= $form->field($model, 'answer')->label("") ?></h4>
+
           <div class="form-group">
-            <?= Html::submitButton('Продолжить', ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('Войти', ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
           </div>
         <?php ActiveForm::end(); ?>
-        
+      
       </div>
     </div>
   </div>

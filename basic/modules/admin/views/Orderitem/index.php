@@ -12,11 +12,10 @@ use yii\grid\GridView;
 $this->title = 'Содержимое заказов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-item-index">
-
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
+<section class="background" style="min-height: 80em;"> <!-- orange back -->
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <div class="container">
       <?= Html::a('Внести связь', ['create'], ['class' => 'btn btn-success']) ?>
@@ -36,13 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
               'count',
               'price',
               'cost',
-              [
-                  'class' => ActionColumn::className(),
-                  'urlCreator' => function ($action, OrderItem $model, $key, $index, $column) {
-                      return Url::toRoute([$action, 'order_id' => $model->order_id, 'product_id' => $model->product_id]);
-                   }
-              ],
           ],
       ]); ?>
     </div>
 </div>
+</div>
+</section>

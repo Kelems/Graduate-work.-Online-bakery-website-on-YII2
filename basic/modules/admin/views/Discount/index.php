@@ -12,37 +12,25 @@ use yii\grid\GridView;
 $this->title = 'Скидки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
-<!-- grow --> 
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center;"> <!-- center -->
+        <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
-  <div class="container">
-        <?= Html::a('Создать скидку', ['create'], ['class' => 'btn btn-success']) ?>
-  </div>
+            <?= Html::a('Создать скидку', ['create'], ['class' => 'btn btn-success']) ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
- <div class="container">
-    <?= GridView::widget([ 
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-      //      ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'percent',
-            'required_value',
-            [
-                'class' => ActionColumn::className(),
-             /*
-                'urlCreator' => function ($action, Discount $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            */
-            ],
-        ],
+                <?= GridView::widget([ 
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                        'columns' => [
+                        'id',
+                        'percent',
+                        'required_value',
+                        [
+                            'class' => ActionColumn::className(),
+                        ],
+                    ],
     ]); ?>
-</div>
-
-
-</div>
+        </div>
+    </div>
+</section>

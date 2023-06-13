@@ -9,34 +9,26 @@
   $this->title = 'Категории';
 //  $this->params['breadcrumbs'][] = $this->title;
 ?>
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
-<!-- grow --> 
+<section class="background" section class="background" style="min-height: 80em;"> <!-- orange back -->
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
-  <div class="container">
-    <?= Html::a('Внести категорию', ['create'], ['class' => 'btn btn-success']) ?>
-  </div>
+      <?= Html::a('Внести категорию', ['create'], ['class' => 'btn btn-success']) ?>
+      <div class="container">
+        <?= GridView::widget([
+          'dataProvider' => $dataProvider,
+          'columns' => [
+          //            //['class' => 'yii\grid\SerialColumn'],
+          'id',
+          'name',
+          'description',
+          ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
+          ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
+          ],
+        ]); ?>
+      </div>
 
-  <div class="container">
-    <?= GridView::widget([
-      'dataProvider' => $dataProvider,
-      'columns' => [
-    //            //['class' => 'yii\grid\SerialColumn'],
-      'id',
-      'name',
-      'description',
-      ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
-      ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
-        /*
-        'image',
-        [
-          'class' => ActionColumn::className(),
-          'urlCreator' => function ($action, Category $model, $key, $index, $column) {
-            return Url::toRoute([$action, 'id' => $model->id]);
-          }
-        ],
-        */
-      ],
-    ]); ?>
+    </div>
   </div>
+</section>

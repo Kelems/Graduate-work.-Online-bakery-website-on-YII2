@@ -14,13 +14,12 @@ use app\modules\admin\models\Category;
 $this->title = 'Продукты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
+<section class="background" style="min-height: 80em;"> <!-- orange back -->
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
-
-  <div class="container">
+    <div class="container">
     <?= Html::a('Внести продукт', ['create'], ['class' => 'btn btn-success']) ?>
   </div>
 

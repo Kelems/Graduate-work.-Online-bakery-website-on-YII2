@@ -8,7 +8,10 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="ingredient-has-product-form">
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center; width: 40%; margin-left: auto; margin-right: auto;"> <!-- center -->
+        <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -17,9 +20,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'product_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-</div>
+        </div>
+    </div>
+</section>

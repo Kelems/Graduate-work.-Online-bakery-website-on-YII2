@@ -6,15 +6,15 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Discount */
 
-$this->title = $model->id;
+$this->title = $model->required_value;
 $this->params['breadcrumbs'][] = ['label' => 'Discounts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="discount-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center;"> <!-- center -->
+        <div class="content-down container" style="border-radius: 25px"> <!-- white back -->
+            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
@@ -36,3 +36,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+</div>
+</section>

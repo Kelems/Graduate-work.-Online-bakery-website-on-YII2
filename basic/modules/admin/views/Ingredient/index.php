@@ -12,11 +12,10 @@ use yii\grid\GridView;
 $this->title = 'Ингредиенты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ingredient-index">
-
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
+<section class="background" style="min-height: 80em;"> <!-- orange back -->
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <div class="container">
       <?= Html::a('Внести ингредиент', ['create'], ['class' => 'btn btn-success']) ?>
@@ -36,8 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
         ],
     ]); ?>
 
   </div>
-</div>
+</div></section>

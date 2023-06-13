@@ -11,7 +11,6 @@ $this->title = 'Профиль пользователя: '.$model->email;
 ?>
   
 <section class="background"> <!-- orange background -->
-
     <div class="container"> <!-- centering block and 50% for all site -->
         <div class="cont-index">  <!-- centering the block -->
             <div class="content-profile"> <!-- white part -->

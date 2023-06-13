@@ -11,9 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="category-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center;"> <!-- center -->
+        <div class="content-down container" style="border-radius: 25px"> <!-- white back -->
+            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -32,8 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description',
-            'image',
         ],
     ]) ?>
 
 </div>
+</div>
+</section>

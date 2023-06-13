@@ -11,29 +11,29 @@ $this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="comment-view">
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center;"> <!-- center -->
+        <div class="content-down container" style="border-radius: 25px"> <!-- white back -->
+            <p>
+                <?= Html::a('Удалить', ['delete', 'product_id' => $model->product_id, 'user_id' => $model->user_id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'product_id',
+                    'user_id',
+                    'message',
+                    'date_message',
+                ],
+            ]) ?>
 
-    <p>
-        <?= Html::a('Update', ['update', 'product_id' => $model->product_id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'product_id' => $model->product_id, 'user_id' => $model->user_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'product_id',
-            'user_id',
-            'message',
-            'date_message',
-        ],
-    ]) ?>
-
-</div>
+        </div>
+    </div>
+</section>

@@ -8,32 +8,20 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-form">
+<section class="background"> <!-- orange back -->
+    <div class="container cont" style="text-align:center; width: 25%; margin-left: auto; margin-right: auto;"> <!-- center -->
+        <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
+            
+            <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+            <div class="form-group">
+                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            </div>
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-
-    <fieldset>
-        <legend>Загрузить изображение</legend>
-        <?= $form->field($model, 'image')->fileInput(); ?>
-        <?php
-        if (!empty($model->image)) {
-            $img = Yii::getAlias('@webroot') . '/images/categories/source/' . $model->image;
-            if (is_file($img)) {
-                $url = Yii::getAlias('@web') . '/images/categories/source/' . $model->image;
-                echo 'Уже загружено ', Html::a('изображение', $url, ['target' => '_blank']);
-            }
-        }
-        ?>
-    </fieldset>
-
-    <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
+</section>
 
-    <?php ActiveForm::end(); ?>
-
-</div>

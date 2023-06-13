@@ -12,11 +12,10 @@ use yii\grid\GridView;
 $this->title = 'Ингредиенты в продукции';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ingredient-has-product-index">
-
-  <div class="container" style="text-align:center">
-    <h1><?= Html::encode($this->title) ?></h1>
-  </div>
+<section class="background" style="min-height: 80em;"> <!-- orange back -->
+  <div class="container cont" style="text-align:center;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <div class="container">
       <?= Html::a('Внести связь', ['create'], ['class' => 'btn btn-success']) ?>
@@ -33,13 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'ingredient_id',
             'product_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, IngredientHasProduct $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'ingredient_id' => $model->ingredient_id, 'product_id' => $model->product_id]);
-                 }
-            ],
+          ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
+
         ],
     ]); ?>
   </div>
-</div>
+</div></div></section>

@@ -57,7 +57,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'ID пользователя',
-            'name' => 'Название',
+            'name' => 'Имя',
             'email' => 'Email',
             'phone' => 'Телефон',
             'address' => 'Адресс',

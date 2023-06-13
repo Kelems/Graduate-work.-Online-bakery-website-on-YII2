@@ -22,6 +22,8 @@ class User extends ActiveRecord implements IdentityInterface{
   public $address;
   public $created_at;
   public $total_of_all_order;
+  public $secret_question;
+  public $unswer;
   */
 
 
@@ -39,7 +41,7 @@ class User extends ActiveRecord implements IdentityInterface{
   function rules(){
     return [
       [['email','phone','password',], 'required', 'on' => 'registration'],
-      [['id','auth_key','role_id','name','address','created_at','total_of_all_order'], 'safe','on' => 'registration'],
+      [['id','auth_key','role_id','name','address','created_at','total_of_all_order', 'secret_question', 'answer'], 'safe','on' => 'registration'],
 
       [['id','role_id', 'total_of_all_order'], 'integer'],
       [['email','auth_key', 'password', 'name', 'address'], 'string', 'max' => 255],
@@ -57,6 +59,9 @@ class User extends ActiveRecord implements IdentityInterface{
       'email' => 'Email',
       'password' => 'Пароль',
       'phone' => 'Номер телефона',
+
+      'secret_question' => 'Секретный вопрос',
+      'answer' => 'Ответ',
 
       'name' => 'Ваше имя',
       'address' => 'Адрес',
@@ -116,6 +121,7 @@ class User extends ActiveRecord implements IdentityInterface{
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
+
 
     public function generateAuthKey(){
       $this->auth_key = Yii::$app->security->generateRandomString();
