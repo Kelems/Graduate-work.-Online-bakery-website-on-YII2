@@ -182,14 +182,14 @@ class SiteController extends Controller{
 
     if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
 
-      $query = User::findOne($registration->email); //ищем такого пользователя в бд
-      if(!empty($query))
+      $query = (new User())->findByUsername($registration['email']); //ищем такого пользователя в бд
+      if(empty($query))
       {
         $this->Password = $registration->password;
         $registration->password = Yii::$app->security->generatePasswordHash($registration->password);
         if ($registration->save()) {
           Yii::$app->session->setFlash('success','Вы внесены в систему');
-          return $this->render('login', ['model' => $model,]);
+          return $this->goHome();
         }
         else {
           $registration->password = $this->password;
@@ -199,7 +199,7 @@ class SiteController extends Controller{
         
       }else {
         Yii::$app->session->setFlash('info','Такой пользователь существует!');
-        return $this->render('login', ['model' => $model,]);
+        return $this->refresh();
       }
       
     }

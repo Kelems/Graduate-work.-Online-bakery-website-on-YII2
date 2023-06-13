@@ -16,9 +16,11 @@
           <div class ="form-group" style="text-align:center;">
             <?= Html::submitButton('Регистрация', ['class' => 'btn btn-success']) ?>
           </div>
-        <?php ActiveForm::end() ?>
+        <?php 
+        ActiveForm::end() ?>
         <a  href="http://192.168.1.39/basic/web/index.php/site/login">уже зарегистрированы?</a>
       </div>
     </div>
   </div>
 </section>
+ 
