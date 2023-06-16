@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="background"> <!-- orange back -->
     <div class="container cont" style="text-align:center;"> <!-- center -->
         <div class="content-down container" style="border-radius: 25px"> <!-- white back -->
-            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
+            <h1 class=" border-bottom pb-3">От <?= Html::encode($this->title) ?> рублей</h1>
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [

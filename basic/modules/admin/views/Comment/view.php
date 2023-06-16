@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\modules\admin\models\Product;
+use app\modules\admin\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Comment */
@@ -27,8 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'product_id',
-                    'user_id',
+            //'product_id',
+
+            [
+              'attribute' => 'product_id',
+              'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->product->name;
+              },
+            ],
+
+            //'user_id',
+            [
+              'attribute' => 'user_id',
+              'filter' => User::find()->select(['email', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->user->email;
+              },
+            ],
                     'message',
                     'date_message',
                 ],

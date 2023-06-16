@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\User */
 
-$this->title = $model->name;
+$this->title = $model->email;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Обновить', ['update', 'email' => $model->email], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'email' => $model->email], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id, 'role_id' => $model->role_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id, 'role_id' => $model->role_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'role_id',
             'email:email',
-            'password',
+            //'password',
             'name',
             'phone',
             'address:ntext',

@@ -8,10 +8,10 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<section class="background"> <!-- orange back -->
-    <div class="container cont" style="text-align:center; width: 25%; margin-left: auto; margin-right: auto;"> <!-- center -->
-        <div class="content-down " style="border-radius: 25px"> <!-- white back -->
-            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
+<section class="background" style="min-height: 80em;"> <!-- orange back -->
+        <div class="container cont" style="text-align:center; width: 25%; margin-left: auto; margin-right: auto;"> <!-- center -->
+    <div class="content-down " style="border-radius: 25px"> <!-- white back -->
+      <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
             <?php $form = ActiveForm::begin(); ?>
 

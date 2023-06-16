@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="background"> <!-- orange back -->
     <div class="container cont" style="text-align:center;"> <!-- center -->
         <div class="content-down container" style="border-radius: 25px"> <!-- white back -->
-            <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
+            <h1 class=" border-bottom pb-3">Заказ №<?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
@@ -33,17 +33,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'name',
             'email:email',
+            'cost',
             'phone',
             'address',
             'comment',
-            'cost',
-            'date_order',
+            'date_order:datetime',
+
             'order_status',
-            'date_status',
+            /*
+            ['attribute' => 'order_status', 
+
+                'format' => 
+                [ ''
+                    '0' => 'Заказ принят',
+                    '1' => 'Заказ выполняется',
+                    '2' => 'Заказ ожидает покупателя/курьера',
+                    '3' => 'Заказ в пути',
+                    '4' => 'Заказ доставлен',
+                ],
+                'filterInputOptions' => ['prompt'=> 'all educations']
+            ],
+            */
+            'date_status:datetime',
             'pickup',
-            'time_delivery',
-            'city_cost',
             'city',
+            'city_cost',
+            'time_delivery',
         ],
     ]) ?>
 

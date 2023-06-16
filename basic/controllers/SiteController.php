@@ -176,12 +176,9 @@ class SiteController extends Controller{
     if (!Yii::$app->user->isGuest) { //авторизовался ли уже пользователь
       return $this->goHome();
     }
-
     $registration = new User(); //создаем модель из бд
     $registration->scenario = 'registration'; //проводит по сценарию
-
     if ($registration->load(Yii::$app->request->post())) { //проверка на отправку данных
-
       $query = (new User())->findByUsername($registration['email']); //ищем такого пользователя в бд
       if(empty($query))
       {
@@ -196,12 +193,10 @@ class SiteController extends Controller{
           Yii::$app->session->setFlash('dismissible','Произошла ошибка');
           return $this->render('regist', compact('registration'));
         }
-        
       }else {
         Yii::$app->session->setFlash('info','Такой пользователь существует!');
         return $this->refresh();
       }
-      
     }
     return $this->render('regist', compact('registration'));
   }
@@ -223,29 +218,20 @@ class SiteController extends Controller{
   }
 
 
-  //страница секретного вопроса
-  public function actionRecovery(){
-    if (!Yii::$app->user->isGuest) { //пользователь в системе
+  public function actionRecovery(){     //страница секретного вопроса
+    if (!Yii::$app->user->isGuest) {    //пользователь в системе
       Yii::$app->session->setFlash('info', "Вы и так авторизованны!");
       return $this->goHome();
     }
-
     $model = new QuestionForm();
     if ($model->load(Yii::$app->request->post())  && $model->check() ) {  
-      /*
-        echo "<pre>";
-        print_r($model->email);
-        echo "</pre>";
-      */
       return $this->redirect(['answer', 'email' => $model->email]);
     }
-
     return $this->render('recovery', ['model' => $model]);
   }
 
-    //страница ввода секретного вопроса
-  public function actionAnswer($email){
-    if (!Yii::$app->user->isGuest) { //пользователь в системе
+  public function actionAnswer($email){ //страница ввода секретного вопроса
+    if (!Yii::$app->user->isGuest) {    //пользователь в системе
       Yii::$app->session->setFlash('info', "Вы и так авторизованны!");
       return $this->goHome();
     }
@@ -253,14 +239,11 @@ class SiteController extends Controller{
       $query = (new User())->findByUsername($email);
       $model->secret_question = $query->secret_question; 
       $model->email = $query->email;; 
-
     if ($model->load(Yii::$app->request->post()) && !empty($model->answer) && $model->login()  ) {
       Yii::$app->session->setFlash('info', "Вы успешно смогли войти в свой профиль");
-
       return $this->render('profile', ['model' => $this->findModel($email)]);
 
     }
-
     return $this->render('answer', ['model' => $model]);
   }  
 

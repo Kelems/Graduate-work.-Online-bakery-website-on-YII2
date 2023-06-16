@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\User */
 
-$this->title = 'Обнновление данных аккаунта: ' . $model->email;
+$this->title = 'Обновление данных профиля: ' . $model->email;
 ?>
 
 <section class="background"> <!-- orange background -->
@@ -19,7 +19,7 @@ $this->title = 'Обнновление данных аккаунта: ' . $model
                 <h1><?= Html::encode($this->title) ?></h1>
 
                     <?php $form = ActiveForm::begin(); ?>
-                        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label("Имя обращения") ?>
                         <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
                         <?= $form->field($model, 'address')->textarea(['rows' => 2]) ?>
                         <?= $form->field($model, 'secret_question')->dropDownList(
@@ -33,7 +33,7 @@ $this->title = 'Обнновление данных аккаунта: ' . $model
                                 'Профессия вашего дедушки' => 'Профессия вашего дедушки
                                 ',
                             ]); ?>
-                        <?= $form->field($model, 'answer')->textarea(['rows' => 2]) ?>
+                        <?= $form->field($model, 'answer')->textarea(['rows' => 2])->label("Ответ на секретный вопрос") ?>
                         <div class="form-group" style="text-align: center;">
                             <?= Html::submitButton('Обновить', ['class' => 'btn btn-success']) ?>
                         </div>

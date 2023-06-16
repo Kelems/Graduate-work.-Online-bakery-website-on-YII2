@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-
+use app\modules\admin\models\Product;
+use app\modules\admin\models\Ingredient;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\searchs\IngredienthasproductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -30,8 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'ingredient_id',
-            'product_id',
+//            'ingredient_id',            
+            [
+              'attribute' => 'ingredient_id',
+              'filter' => Ingredient::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->ingredient->name;
+              },
+            ],
+//            'product_id',            
+            [
+              'attribute' => 'product_id',
+              'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->product->name;
+              },
+            ],
           ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
 
         ],

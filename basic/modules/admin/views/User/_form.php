@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\admin\models\Role;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\User */
@@ -15,11 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'role_id')->textInput() ?>
+    <?= $form->field($model, 'role_id')->textInput()->dropDownList(Role::find()->select(['name', 'id'])->indexBy('id')->column())->label("Роль") ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -27,12 +26,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
     <?= $form->field($model, 'total_of_all_order')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

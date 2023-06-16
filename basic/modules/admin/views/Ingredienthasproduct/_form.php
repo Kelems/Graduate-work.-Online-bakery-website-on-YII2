@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\admin\models\Product;
+use app\modules\admin\models\Ingredient;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\IngredientHasProduct */
@@ -15,9 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'ingredient_id')->textInput() ?>
+    <?= $form->field($model, 'ingredient_id')->textInput()->dropDownList(Ingredient::find()->select(['name', 'id'])->indexBy('id')->column())->label("Ингредиент") ?>
 
-    <?= $form->field($model, 'product_id')->textInput() ?>
+    <?= $form->field($model, 'product_id')->textInput()->dropDownList(Product::find()->select(['name', 'id'])->indexBy('id')->column())->label("Продукт") ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

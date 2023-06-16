@@ -14,7 +14,7 @@ use app\modules\admin\models\Category;
 $this->title = 'Продукты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<section class="background" style="min-height: 80em;"> <!-- orange back -->
+<section class="background" style="min-height: 90em;"> <!-- orange back -->
   <div class="container cont" style="text-align:center;"> <!-- center -->
     <div class="content-down " style="border-radius: 25px"> <!-- white back -->
       <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'calorific',
         ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
         ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
+        ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
       ],
     ]); ?>
 

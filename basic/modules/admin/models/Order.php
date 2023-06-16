@@ -55,18 +55,18 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'ID заказа',
             'user_id' => 'ID пользователя',
             'name' => 'Имя',
             'email' => 'Email',
             'phone' => 'Телефон',
-            'address' => 'Адресс',
-            'comment' => 'Комментарий для заказа',
+            'address' => 'Адрес',
+            'comment' => 'Комментарий заказа',
             'cost' => 'Цена',
             'date_order' => 'Дата заказа',
             'order_status' => 'Статус заказа',
             'date_status' => 'Время обновления заказа',
-            'pickup' => 'Самовывоз?',
+            'pickup' => 'Доставка',
         ];
     }
 

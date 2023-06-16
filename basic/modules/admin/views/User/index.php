@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\modules\admin\models\Role;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\searchs\UserSearch */
@@ -17,9 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="content-down " style="border-radius: 25px"> <!-- white back -->
       <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
-    <div class="container">
-        <?= Html::a('Внести пользователя', ['create'], ['class' => 'btn btn-success']) ?>
-      </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -31,16 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'role_id',
+            //'role_id',
+            [
+              'attribute' => 'role_id',
+              'filter' => Role::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->role->name;
+              },
+            ],
+            'phone',
             'email:email',
-            'password',
+            //'password',
             'name',
-            //'phone',
             //'address:ntext',
             //'created_at',
             //'total_of_all_order',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
         ],
     ]); ?>
   </div>

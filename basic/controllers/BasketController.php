@@ -12,39 +12,26 @@ use app\models\Basket;
 use app\models\Discount;
 
 class BasketController extends Controller {
-  //страница корзины
-  public function actionIndex() {
-    $basket = (new Basket())->getBasket();
-    //проверка пустая ли корзина
-    if(!empty($basket)){
 
-      if (!Yii::$app->user->isGuest) {
-        // раз в корзине что-то есть, то проверяем сколько у пользователя всего было потрачено
+  public function actionIndex() {         //страница корзины
+    $basket = (new Basket())->getBasket();
+    if(!empty($basket)){                  //проверка пустая ли корзина
+      if (!Yii::$app->user->isGuest) {    // раз в корзине что-то есть, то проверяем сколько у пользователя всего было потрачено
         $total = Yii::$app->user->identity->total_of_all_order;
-        //ищем наибольший процент
-        $query = (new yii\db\Query())
+        $query = (new yii\db\Query())     //ищем наибольший процент
           ->select('max(percent) AS perc')
           ->from('discount')
           ->where(['<=','required_value', $total])
-          ->all();
-      
+          ->all();  
         //сохраняем наибольший процент скидки пользователя в переменную
         $temp = $query[0];
         $disc = $temp['perc'];
-
         if ($disc > 0) {
           $value['amount'] = $basket['amount'] - ($basket['amount'] * $disc);
           $basket['amount'] = $value['amount'];
         }
       }
     }
-    
-    /*
-      echo "<pre>";
-        print_r($basket);
-      echo "</pre>";
-    */
-    
     return $this->render('index', [
       'basket' => $basket,
       'disc' => $disc
@@ -75,7 +62,8 @@ class BasketController extends Controller {
       $content = $basket->getBasket();
       return $this->render('modal', ['basket' => $content]);
     } else { // без использования AJAX
-            return $this->redirect(Yii::$app->request->referrer);
+        Yii::$app->session->setFlash('info', "Товар внесен в корзину");
+        return $this->redirect(Yii::$app->request->referrer);
       //      return $this->redirect(['basket/index']);
       }
     }

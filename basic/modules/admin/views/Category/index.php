@@ -25,6 +25,7 @@
           'description',
           ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
           ['class' => 'yii\grid\ActionColumn', 'template' => '{update}',],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{delete}',],
           ],
         ]); ?>
       </div>

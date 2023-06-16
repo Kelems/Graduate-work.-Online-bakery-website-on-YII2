@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\modules\admin\models\Product;
+use app\modules\admin\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\searchs\CommentSearch */
@@ -25,8 +27,24 @@ $this->title = 'Комментарии';
           'dataProvider' => $dataProvider,
           'filterModel' => $searchModel,
           'columns' => [
-            'product_id',
-            'user_id',
+            //'product_id',
+
+            [
+              'attribute' => 'product_id',
+              'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->product->name;
+              },
+            ],
+
+            //'user_id',
+            [
+              'attribute' => 'user_id',
+              'filter' => User::find()->select(['email', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->user->email;
+              },
+            ],
             'message',
             'date_message',
           ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],

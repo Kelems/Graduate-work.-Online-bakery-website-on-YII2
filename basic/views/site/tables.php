@@ -4,10 +4,12 @@
 use yii\helpers\Url;
 
 ?>
-<section class="background"> <!-- orange back -->
+<section class="background" style="min-height: 65em;"> <!-- orange back -->
 	<div class="container cont" style="text-align:center;"> <!-- center -->
     	<div class="content-down container" style="border-radius: 25px"> <!-- white back -->
 			<h1 class=" border-bottom pb-3">Таблицы</h1>
+			<h1 class="generator col-lg-4"></h1>
+			<h1 class="generator col-lg-4 btn btn-primary btn-lg" href = "Stripe.com/docs/payments">Stripe</h1>
 				<!-- grow -->
 				<div class="container row" style="text-align:center">
 					<div class="generator col-lg-4">
@@ -35,7 +37,7 @@ use yii\helpers\Url;
 					</div>
 
 					<div class="generator col-lg-4">
-						<h3>comment</h3>
+						<h3>Comment</h3>
 						<p>Таблица содержит данные о отзывах сделанных пользователями</p>
 						<p>
 							<a class="btn btn-warning" href="/admin/comment"> К таблице »</a>

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\modules\admin\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\searchs\OrderitemSearch */
@@ -17,9 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="content-down " style="border-radius: 25px"> <!-- white back -->
       <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
-    <div class="container">
-      <?= Html::a('Внести связь', ['create'], ['class' => 'btn btn-success']) ?>
-    </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -31,7 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
               //['class' => 'yii\grid\SerialColumn'],
 
               'order_id',
-              'product_id',
+//              'product_id',
+              [
+              'attribute' => 'product_id',
+              'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+              'value' => function($data){
+                return $data->product->name;
+              },
+              'label' => "Продукт"
+            ],
               'count',
               'price',
               'cost',
