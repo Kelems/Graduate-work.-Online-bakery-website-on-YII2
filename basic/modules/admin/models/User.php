@@ -37,10 +37,10 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['role_id', 'password', 'address', 'created_at'], 'required'],
-            [['role_id', 'total_of_all_order'], 'integer'],
+            [['role_id', 'total_of_all_order', 'city_cost',], 'integer'],
             [['address'], 'string'],
-            [['created_at'], 'safe'],
-            [['email', 'password', 'name'], 'string', 'max' => 255],
+            [['created_at', 'city', 'city_cost', 'time_delivery'], 'safe'],
+            [['email', 'password', 'name', 'city', 'time_delivery'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 20],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::className(), 'targetAttribute' => ['role_id' => 'id']],
         ];

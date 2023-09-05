@@ -18,6 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
       <h1 class=" border-bottom pb-3"><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="container">
+      <?= Html::a('Внести заказ', ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
 
     <div class="container">
     <?= GridView::widget([

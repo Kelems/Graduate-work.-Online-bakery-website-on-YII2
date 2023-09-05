@@ -23,8 +23,6 @@ use app\modules\admin\models\User;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cost')->textInput(['maxlength' => true]) ?>
@@ -45,6 +43,33 @@ use app\modules\admin\models\User;
                                 '0' => 'Нет',
                                 '1' => 'Да',
                             ]); ?>
+
+            <?= $form->field($model, 'city')->dropDownList(
+              [ 
+                'Ростов-на-Дону' => 'Ростов-на-Дону (бесплатная доставка)',
+                'Батайск' => 'Батайск (Доставка: 250 рублей)',
+                'Аксай' => 'Аксай (Доставка: 500 рублей)',
+                'Новочеркасск' => 'Новочеркасск (Доставка: 1000 рублей)',
+                'Новошахтинск' => 'Новошахтинск (Доставка: 1150 рублей)',
+                'Таганрог' => 'Таганрог (Доставка: 1250 рублей)',
+                'Шахты' => 'Шахты (Доставка: 1500 рублей)',
+              ])->label("Город (оплата доставки осуществляется по получению заказа)"); ?>
+    
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'city_cost')->textInput(['maxlength' => true])->label('Цена доставки') ?>
+
+            <?= $form->field($model, 'time_delivery')->dropDownList(
+              [ 
+                'С 9:00 до 10:30' => 'С 9:00 до 10:30',
+                'С 10:30 до 11:30' => 'С 10:30 до 12:00',
+                'С 12:00 до 13:15' => 'С 12:00 до 13:15',
+                'С 13:30 до 15:00' => 'С 13:30 до 15:00',
+                'С 15:00 до 16:30' => 'С 15:00 до 16:30',
+                'С 16:30 до 19:00' => 'С 16:30 до 19:00',
+                'С 19:00 до 20:30' => 'С 19:00 до 20:30',
+                'С 20:30 до 22:00' => 'С 20:30 до 22:00',
+              ])->label("Часы доставки"); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
