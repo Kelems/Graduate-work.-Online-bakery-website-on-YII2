@@ -9,6 +9,49 @@ body
     font-family: 'Roboto', sans-serif;
 }
 
+
+/* Стили для карусели */
+.carousel-inner .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel-inner .col-md-4 {
+    flex: 0 0 32%;
+    max-width: 32%;
+    text-align: center;
+}
+
+.carousel-inner img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel-inner h3 {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.carousel-inner p {
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+.carousel-inner a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.carousel-inner a:hover {
+    text-decoration: underline;
+}
+
+/* стили для блока content */
+
+.background {
+    padding: 20px 0;
+}
+
 .lux
 {
     margin: auto;
@@ -584,6 +627,7 @@ height: 35px;
 .cont-index {
     position: relative;
     min-height: 75em;
+    margin-top: 20px;
 }
 
 .content {
@@ -591,13 +635,16 @@ height: 35px;
     top: -5%;
     background-color: #fff;
     padding: 1%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .content-product {
     position: static;
-/*    top: -5%; */
+    top: -5%;
     background-color: #fff;
-/*    padding: 1%; */
+    padding: 1%;
 }
 
 .content-profile {
@@ -698,6 +745,7 @@ height: 35px;
   margin-bottom: 1em;
   text-align: center;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
 .b-link-stripe{
 	position:relative;
@@ -829,6 +877,8 @@ height: 35px;
 /*--footer--*/
 .footer{
 	background:#141414;
+  padding: 20px 0;
+  text-align: center;
 }
 .amet-sed h4{
 	font-size: 1.5em;
@@ -2705,6 +2755,7 @@ a.item_add p.number {
 }
 .content-top-bottom h2 {
     font-size: 1.5em;
+    margin-bottom: 20px;
 }
 .content {
     top: -47px;
@@ -2864,6 +2915,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 .content-top-bottom h2 {
     font-size: 1.2em;
     margin-bottom: 1em;
+    margin-bottom: 20px;
 }
 .men {
   margin-bottom: 1em;

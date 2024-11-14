@@ -102,9 +102,13 @@ class SiteController extends Controller{
 
   //base page
   public function actionIndex(){
-    $discounts = (new Product())->getSale(); // модель продукта 
-    return $this->render('index', 
-      compact('discounts'));
+      $discounts = (new Product())->getSale(); // модель продукта
+
+      // Получаем данные для карусели из модели Product
+      $carouselItems = (new Product())->getCarouselItems();
+
+      return $this->render('index',
+        compact('discounts', 'carouselItems'));
   }
 
   //contact page
@@ -121,14 +125,14 @@ class SiteController extends Controller{
   public function actionCategory($id) {
     $id = (int)$id; //получаем id категории
     $temp = new Category(); // модель категории
-    $category = $temp->getCategory($id); //получаем данные о категории для баннера   
+    $category = $temp->getCategory($id); //получаем данные о категории для баннера
     list($products, $pages) = $temp->getCategoryProduct($id);
 
     return $this->render(
       'category',
       compact('category', 'products', 'pages'));
     }
-  
+
   //поиск по названию товара
   public function actionSearch($query = '', $page = 1) {
     $page = (int)$page;
@@ -146,7 +150,7 @@ class SiteController extends Controller{
     $id = (int)$id; //получаем id товара
     $product = (new Product())->getProduct($id);  //данные о продукте
     $ingredients = Product::findOne($id)->items;  //данные о ингридентах товара
- 
+
     $comments = Product::findOne($id)->comments;
     $commentForm = new CommentForm();
     /*
@@ -224,7 +228,7 @@ class SiteController extends Controller{
       return $this->goHome();
     }
     $model = new QuestionForm();
-    if ($model->load(Yii::$app->request->post())  && $model->check() ) {  
+    if ($model->load(Yii::$app->request->post())  && $model->check() ) {
       return $this->redirect(['answer', 'email' => $model->email]);
     }
     return $this->render('recovery', ['model' => $model]);
@@ -237,15 +241,15 @@ class SiteController extends Controller{
     }
       $model = new QuestionForm();
       $query = (new User())->findByUsername($email);
-      $model->secret_question = $query->secret_question; 
-      $model->email = $query->email;; 
+      $model->secret_question = $query->secret_question;
+      $model->email = $query->email;;
     if ($model->load(Yii::$app->request->post()) && !empty($model->answer) && $model->login()  ) {
       Yii::$app->session->setFlash('info', "Вы успешно смогли войти в свой профиль");
       return $this->render('profile', ['model' => $this->findModel($email)]);
 
     }
     return $this->render('answer', ['model' => $model]);
-  }  
+  }
 
   //страница профиля
   public function actionProfileView($email){

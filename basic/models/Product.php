@@ -157,5 +157,34 @@ class Product extends \yii\db\ActiveRecord
         return $search;
     }
 
+    // Метод для получения данных для карусели
+    public function getCarouselItems()
+    {
+        $products = self::find()
+            ->select(['id', 'name', 'image'])
+            ->limit(6) // Предположим, что вам нужно 6 продуктов для карусели (2 строки по 3 продукта)
+            ->all();
 
+        $carouselItems = [];
+        $row = [];
+        foreach ($products as $index => $product) {
+            $row[] = '
+                <div class="col-md-6 text-center">
+                    <img src="' . \Yii::getAlias('@web') . '/img/products/medium/' . $product->image . '" alt="' . $product->name . '" class="img-fluid" style="max-width: 100%; height: auto;">
+                    <h3>' . $product->name . '</h3>
+                </div>
+            ';
+
+            if (($index + 1) % 2 == 0) {
+              $carouselItems[] = '<div class="row">' . implode('', $row) . '</div>';
+              $row = [];
+            }
+        }
+
+        if (!empty($row)) {
+            $carouselItems[] = '<div class="row">' . implode('', $row) . '</div>';
+        }
+
+        return $carouselItems;
+    }
 }

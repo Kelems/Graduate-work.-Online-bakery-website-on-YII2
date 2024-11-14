@@ -6,6 +6,7 @@
   use yii\widgets\LinkPager;
   use yii\bootstrap4\Modal;
   use yii\bootstrap4\BootstrapWidgetTrait;
+  use yii\bootstrap4\Carousel; // ДляКарусели
 ?>
 <!-- Intro Section end -->
 <section>
@@ -32,29 +33,60 @@
             <h3>Наша миссия</h3>
             <p>Возрождаем русские пекарные традиции, чтобы вы могли каждый день наслаждаться натуральным полезным вкусным хлебом</p>
           </div>
-        </div >
+        </div>
       </div>
     </div>
   </section>
 
   <!--content-->
   <section class="background"> <!-- orange background -->
-    <div class="container"> <!-- centering block and 50% for all site -->
+    <div class="container" style="margin-bottom: 40%;"> <!-- centering block and 50% for all site -->
       <div class="cont-index">  <!-- centering the block -->
-      
         <div class="content"> <!-- highlighting a block on top of a white backdrop -->
-
           <article class="content-top-bottom">
-            <h2>О нас</h2>
-            <!-- left block -->
-            <div class="col-md-5 men">
-              <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
-                <img class="img-responsive" src="img/products/medium/5.png" >
+
+            <!-- Карусель -->
+            <h2>Специально для вас!</h2>
+            <?php
+            echo Carousel::widget([
+                'items' => $carouselItems,
+                'options' => ['class' => 'carousel slide', 'data-interval' => '8000'],
+                'controls' => [
+                    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>',
+                    '<span class="carousel-control-next-icon" aria-hidden="true"></span>',
+                ],
+            ]);
+            ?>
+
+          <h2>О нас</h2>
+          <!-- left block -->
+          <div class="col-md-5 men">
+            <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
+              <img class="img-responsive" src="img/products/medium/5.png" >
+                <div class="b-wrapper">
+                  <h3 class="b-animate b-from-top top-in ">
+                    <span>
+                      <b>Хлеба</b>
+                      <br>Мы печем по старым рецептам на закваске, артезианской воде и грубой муке</br>
+                    </span>
+                  </h3>
+                </div>
+              </img>
+            </a>
+          </div>
+
+          <!-- right block -->
+          <div class="col-md-6 men">
+
+            <!-- middle up image -->
+            <div class="col-md">
+              <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
+                <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
                   <div class="b-wrapper">
-                    <h3 class="b-animate b-from-top top-in ">
+                    <h3 class="b-animate b-from-top top-in1   b-delay03 ">
                       <span>
-                        <b>Хлеба</b>
-                        <br>Мы печем по старым рецептам на закваске, артезианской воде и грубой муке</br>
+                        <b>Сладкие и сытные пироги</b>
+                        <br>В наших пирогах всегда много начинки</br>
                       </span>
                     </h3>
                   </div>
@@ -62,55 +94,36 @@
               </a>
             </div>
 
-            <!-- right block -->
-            <div class="col-md-6 men">
-
-              <!-- middle up image -->
-              <div class="col-md">
-                <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
-                  <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
+            <!-- two small down image -->
+            <div class="col-md2 men">
+              <!-- small left image -->
+              <div class="col-md-5 men1">
+                <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
+                  <img class="img-responsive" src="img/products/medium/33.png" alt="">
                     <div class="b-wrapper">
-                      <h3 class="b-animate b-from-top top-in1   b-delay03 ">
-                        <span>
-                          <b>Сладкие и сытные пироги</b>
-                          <br>В наших пирогах всегда много начинки</br>
-                        </span>
+                      <h3 class="b-animate b-from-top top-in2   b-delay03 ">
+                        <span><b>Десерты</b></span>
                       </h3>
                     </div>
                   </img>
                 </a>
               </div>
-
-              <!-- two small down image -->
-              <div class="col-md2 men">
-                <!-- small left image -->
-                <div class="col-md-5 men1">
-                  <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/products/medium/33.png" alt="">
-                      <div class="b-wrapper">
-                        <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                          <span><b>Десерты</b></span>
-                        </h3>
-                      </div>
-                    </img>
-                  </a>
-                </div>
-                <div class="col-md-2"> </div>
-                <!-- small right image -->
-                <div class="col-md-5 men1">
-                  <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="img/products/medium/25.png" alt="">
-                      <div class="b-wrapper">
-                        <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                          <span>Багеты</span>
-                        </h3>
-                      </div>
-                    </img>
-                  </a>
-                </div>
+              <div class="col-md-2"> </div>
+              <!-- small right image -->
+              <div class="col-md-5 men1">
+                <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
+                  <img class="img-responsive" src="img/products/medium/25.png" alt="">
+                    <div class="b-wrapper">
+                      <h3 class="b-animate b-from-top top-in2   b-delay03 ">
+                        <span>Багеты</span>
+                      </h3>
+                    </div>
+                  </img>
+                </a>
               </div>
-
             </div>
+
+          </div>
           </article>
 
           <div class="clearfix"> </div>

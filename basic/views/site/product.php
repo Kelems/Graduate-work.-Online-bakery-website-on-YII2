@@ -71,7 +71,7 @@ use yii\imagine\Image;
           <p><b>Углеводы в 100 граммах: </b><span><?= $product['carbohydrate'] ." гр."; ?></span> </p>
           <p><b>кКал в 100 граммах: </b><span><?= $product['calorific'] ." кДж."; ?></span> </p>
           <!-- описание товара -->
-          <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>     
+          <p><b> Описание: </b><span><?= $product['content']; ?></span> </p>
         </div>
         <!-- изображение -->
         <div class="col-sm-5" style="padding: 10px 0px 0px 0px;">
@@ -84,7 +84,7 @@ use yii\imagine\Image;
             );
           ?>
         </div>
-      
+
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@ use yii\imagine\Image;
     <?php foreach($comments as $comment): ?>
       <div class="content-product container" style=" padding: 0px 0% 0px 0%;  border: 10px inset grey;"> <!-- center white -->
         <p>
-          <h5 style="padding: 0px 0px 0px 10px"><b><?= $comment->user['name']; ?></b></h5> 
+          <h5 style="padding: 0px 0px 0px 10px"><b><?= $comment->user['name']; ?></b></h5>
             <span style="color: grey; padding: 0px 0px 0px 10px"><?= substr($comment['date_message'],0, 10); ?></span>
           </p>
         <p><span style="padding: 0px 0px 0px 30px"><?= $comment['message']; ?></span>  </p>
