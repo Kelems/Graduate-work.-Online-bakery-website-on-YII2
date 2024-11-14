@@ -56,51 +56,51 @@
 				<div id="w1-collapse">
 					<ul id="w2" class="navbar-right nav">
 						<li class="nav-item">
-							<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/contact">КОНТАКТЫ</a>
+							<a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/contact">КОНТАКТЫ</a>
 						</li>
 						<li class="dropdown nav-item">
 							<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ПРОДУКЦИЯ</a>
 							<div id="w3" class="dropdown-menu">
-								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=1">
+								<a class="dropdown-item" href="http://yii-2-bakery/basic/web/index.php/site/category?id=1">
 									ХЛЕБА
 								</a>
-								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=2">
+								<a class="dropdown-item" href="http://yii-2-bakery/basic/web/index.php/site/category?id=2">
 									БАГЕТЫ
 								</a>
-								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=3">
+								<a class="dropdown-item" href="http://yii-2-bakery/basic/web/index.php/site/category?id=3">
 									ПИРОГИ
 								</a>
-								<a class="dropdown-item" href="http://192.168.1.39/basic/web/index.php/site/category?id=4">
+								<a class="dropdown-item" href="http://yii-2-bakery/basic/web/index.php/site/category?id=4">
 									ДЕСЕРТЫ
 								</a>
 							</div>
 						</li>
 							<?php if (!Yii::$app->user->isGuest): ?> <!--!Yii::$app->user->isGuest не гость -->
 								<li class="nav-item">
-									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/profile-view?email=<?php echo "$user"?>">
+									<a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/profile-view?email=<?php echo "$user"?>">
 										КАБИНЕТ (<?php echo "$user"?>)
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/logout">
+									<a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/logout">
 										ВЫЙТИ
 									</a>
 								</li>
 							<?php else: ?>
 								<li class="nav-item">
-									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/login">
+									<a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/login">
 										ВОЙТИ
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/registration">
+									<a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/registration">
 										РЕГИСТРАЦИЯ
 									</a>
 								</li>
 							<?php endif; ?>
-						<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basket/index"><img src="/img/cart.png" alt=""></a></li>
+						<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basket/index"><img src="/img/cart.png" alt=""></a></li>
 						<?php if (Yii::$app->user->identity->role_id === 2): ?>
-							<li class="nav-item"><a class="nav-link" href="http://192.168.1.39/basic/web/index.php/site/tables"><img src="/img/tick1.png" alt=""></a></li>
+							<li class="nav-item"><a class="nav-link" href="http://yii-2-bakery/basic/web/index.php/site/tables"><img src="/img/tick1.png" alt=""></a></li>
 						<?php endif; ?>
 					</ul>
 				</div>

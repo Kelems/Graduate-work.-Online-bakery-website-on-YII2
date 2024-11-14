@@ -17,9 +17,9 @@
           </div>
         <?php ActiveForm::end(); ?>
       <div class="border-bottom pb-3 mb-3 text-center">
-        <a  href="http://192.168.1.39/basic/web/index.php/site/recovery">Восстановить доступ</a>
+        <a  href="http://yii-2-bakery/basic/web/index.php/site/recovery">Восстановить доступ</a>
       </div>
-        <a  href="http://192.168.1.39/basic/web/index.php/site/registration">Создать аккаунт</a>
+        <a  href="http://yii-2-bakery/basic/web/index.php/site/registration">Создать аккаунт</a>
       </div>
     </div>
   </div>

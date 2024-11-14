@@ -48,7 +48,7 @@
             <h2>О нас</h2>
             <!-- left block -->
             <div class="col-md-5 men">
-              <a href="http://192.168.1.39/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
+              <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=1" class="b-link-stripe b-animate-go thickbox">
                 <img class="img-responsive" src="img/products/medium/5.png" >
                   <div class="b-wrapper">
                     <h3 class="b-animate b-from-top top-in ">
@@ -67,7 +67,7 @@
 
               <!-- middle up image -->
               <div class="col-md">
-                <a href="http://192.168.1.39/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
+                <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=3" class="b-link-stripe b-animate-go  thickbox">
                   <img class="img-responsive" src="img/products/medium/t2.jpg" alt="">
                     <div class="b-wrapper">
                       <h3 class="b-animate b-from-top top-in1   b-delay03 ">
@@ -85,7 +85,7 @@
               <div class="col-md2 men">
                 <!-- small left image -->
                 <div class="col-md-5 men1">
-                  <a href="http://192.168.1.39/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
+                  <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=4" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="img/products/medium/33.png" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
@@ -98,7 +98,7 @@
                 <div class="col-md-2"> </div>
                 <!-- small right image -->
                 <div class="col-md-5 men1">
-                  <a href="http://192.168.1.39/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
+                  <a href="http://yii-2-bakery/basic/web/index.php/site/category?id=2" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="img/products/medium/25.png" alt="">
                       <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">

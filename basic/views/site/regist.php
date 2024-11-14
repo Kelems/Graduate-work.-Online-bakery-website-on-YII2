@@ -18,7 +18,7 @@
           </div>
         <?php 
         ActiveForm::end() ?>
-        <a  href="http://192.168.1.39/basic/web/index.php/site/login">уже зарегистрированы?</a>
+        <a  href="http://yii-2-bakery/basic/web/index.php/site/login">уже зарегистрированы?</a>
       </div>
     </div>
   </div>

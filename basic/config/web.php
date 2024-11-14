@@ -19,7 +19,7 @@ $config = [
   ],
 
   'components' => [
-    
+
     /*
       'mailer' => [ //для отправки на почту
         'class' => 'yii\swiftmailer\Mailer',
@@ -43,7 +43,7 @@ $config = [
     'privateKey' => "sk_test_51ND7zAJ2JMK5WDIYamr0zFryvNpdR8pdjA7Bh5c8ltTNzh2oo4mOcvnNeHy0tl7lZBGRTBI63d7seWI0v2mO2aEm00O0JTmOHT",
     //'ClientId' => "ca_xxxxxxxxxxxxxxxxxx", //Optional
     ],
-    
+
     'request' => [
     // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
       'cookieValidationKey' => '.....',
@@ -146,7 +146,7 @@ if (YII_ENV_DEV) {
   $config['modules']['gii'] = [
     'class' => 'yii\gii\Module',
     // uncomment the following to add your IP if you are not connecting from localhost.
-    'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.39'],
+    'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.43'],
   ];
 }
 
