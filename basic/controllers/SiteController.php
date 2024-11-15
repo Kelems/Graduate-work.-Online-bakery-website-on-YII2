@@ -253,13 +253,36 @@ class SiteController extends Controller{
 
   //страница профиля
   public function actionProfileView($email){
-    if (Yii::$app->user->identity->role_id > 0) {
-      return $this->render('profile', ['model' => $this->findModel($email)]);
-    }else {
-      Yii::$app->session->setFlash('info', "Сначала войдите в профиль!");
-      return $this->render('index', compact('saleProducts'));
-    }
-  }
+          if (Yii::$app->user->identity->role_id > 0) {
+              $model = $this->findModel($email);
+
+              // Получаем все заказы пользователя
+              $query = $model->getOrders();
+              $totalCost = $query->sum('cost'); // Общая стоимость всех заказов
+
+              // Пагинация
+              $pages = new Pagination([
+                  'totalCount' => $query->count(),
+                  'pageSize' => 5, // Показывать по 5 заказов на странице
+                  'forcePageParam' => false,
+                  'pageSizeParam' => false,
+              ]);
+
+              $orders = $query->offset($pages->offset)
+                              ->limit($pages->limit)
+                              ->all();
+
+              return $this->render('profile', [
+                  'model' => $model,
+                  'orders' => $orders,
+                  'pages' => $pages,
+                  'totalCost' => $totalCost,
+              ]);
+          } else {
+              Yii::$app->session->setFlash('info', "Сначала войдите в профиль!");
+              return $this->render('index', compact('saleProducts'));
+          }
+      }
 
   //страница обновления данных Профиля
   public function actionProfileUpdate($email){

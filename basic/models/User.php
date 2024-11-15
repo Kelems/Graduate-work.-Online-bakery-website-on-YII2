@@ -76,12 +76,10 @@ class User extends ActiveRecord implements IdentityInterface{
      *
      * @return \yii\db\ActiveQuery
      */
-
-    /*
       public function getOrders(){
           return $this->hasMany(Order::className(), ['user_id' => 'id']);
       }
-    */
+
 
     /**
      * Gets query for [[Role]].
