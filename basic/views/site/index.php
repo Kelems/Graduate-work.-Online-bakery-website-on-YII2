@@ -47,16 +47,38 @@
 
             <!-- Карусель -->
             <h2>Специально для вас!</h2>
-            <?php
-            echo Carousel::widget([
-                'items' => $carouselItems,
-                'options' => ['class' => 'carousel slide', 'data-interval' => '8000'],
-                'controls' => [
-                    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>',
-                    '<span class="carousel-control-next-icon" aria-hidden="true"></span>',
-                ],
-            ]);
-            ?>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <?php for ($i = 0; $i < count($carouselItems); $i++): ?>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" <?= $i == 0 ? 'class="active"' : '' ?>></li>
+                    <?php endfor; ?>
+                </ol>
+                <div class="carousel-inner">
+                    <?php foreach ($carouselItems as $index => $item): ?>
+                        <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
+                            <div class="row">
+                                <?php foreach ($item as $product): ?>
+                                    <div class="col-md-4 text-center">
+                                        <a href="<?= Url::to(['site/product', 'id' => $product['id']]) ?>">
+                                            <img src="<?= \Yii::getAlias('@web') . '/img/products/medium/' . $product['image'] ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-width: 100%; height: auto;">
+                                            <h3><?= $product['name'] ?></h3>
+                                            <p>Цена: <?= $product['price'] ?> р.</p>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
 
           <h2>О нас</h2>
           <!-- left block -->
