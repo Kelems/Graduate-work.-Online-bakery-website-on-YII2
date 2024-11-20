@@ -31,49 +31,6 @@
         <div class="content"> <!-- highlighting a block on top of a white backdrop -->
           <article class="content-top-bottom">
 
-            <!-- Карусель -->
-            <h2>Специально для вас!</h2>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <?php for ($i = 0; $i < count($carouselItems); $i++): ?>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" <?= $i == 0 ? 'class="active"' : '' ?>></li>
-                <?php endfor; ?>
-              </ol>
-              <div class="carousel-inner">
-                <?php foreach ($carouselItems as $index => $item): ?>
-                  <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
-                    <div class="row">
-                      <?php foreach ($item as $product): ?>
-                        <div class="col-md-4 text-center">
-                          <h3 style="padding: 0em">
-                            <a style="color: black;" href="<?= Url::to(['site/product', 'id' => $product['id']]) ?>">
-                              <img src="<?= \Yii::getAlias('@web') . '/img/products/medium/' . $product['image'] ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-width: 100%; height: auto;">
-                              <?= Html::encode($product['name']); ?>
-                            </a>
-                          </h3>
-                          <h3 style="color: black;" class="col-sm-15">
-                            <?= $product['price'];  ?> р. <!-- now price -->
-                            <?php
-                              if ($product['old_price'] > '1') { // old price
-                                echo Html::tag('s', $product['old_price'].' р.');
-                              }
-                            ?>
-                          </h3>
-                        </div>
-                      <?php endforeach; ?>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
 
           <h2>О нас</h2>
           <div> <!-- block "О нас" -->
@@ -144,6 +101,51 @@
           <div class="clearfix"> </div>
         </div>
         <!-- Конец блока "О нас"-->
+
+        <!-- Карусель -->
+        <h2>Специально для вас!</h2>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <?php for ($i = 0; $i < count($carouselItems); $i++): ?>
+              <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" <?= $i == 0 ? 'class="active"' : '' ?>></li>
+            <?php endfor; ?>
+          </ol>
+          <div class="carousel-inner">
+            <?php foreach ($carouselItems as $index => $item): ?>
+              <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
+                <div class="row">
+                  <?php foreach ($item as $product): ?>
+                    <div class="col-md-4 text-center">
+                      <h3 style="padding: 0em">
+                        <a style="color: black;" href="<?= Url::to(['site/product', 'id' => $product['id']]) ?>">
+                          <img src="<?= \Yii::getAlias('@web') . '/img/products/medium/' . $product['image'] ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-width: 100%; height: auto;">
+                          <?= Html::encode($product['name']); ?>
+                        </a>
+                      </h3>
+                      <h3 style="color: black;" class="col-sm-15">
+                        <?= $product['price'];  ?> р. <!-- now price -->
+                        <?php
+                          if ($product['old_price'] > '1') { // old price
+                            echo Html::tag('s', $product['old_price'].' р.');
+                          }
+                        ?>
+                      </h3>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Прошлая страница</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Следующая страница</span>
+          </a>
+        </div>
+
         <!-- discount block -->
         <h2>Акции</h2>
         <div class="col-sm-12 ">
